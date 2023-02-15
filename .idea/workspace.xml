@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a17fd35d-4e83-47e6-bfca-6a1e879eb002" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Increase.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Abschlussaufgabe1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/MCMarket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/Market.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/PriceRatio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/TSMarket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Barn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Field.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Forest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Garden.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/LandTiles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/LargeField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/LargeForest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Tiles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Carrot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Mushroom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Salat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Tomato.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Vegetable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Vegetables.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/exception/GameException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmBoard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/SetupGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Commands.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/ExeptionMessages.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/GameInitialiser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Messages.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/utility/Coordinates.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/utility/VegetablesOccurence.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LjBD3HCuqWjgKXGaymjhsfla6W" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "Errors"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a17fd35d-4e83-47e6-bfca-6a1e879eb002" name="Changes" comment="" />
+      <created>1676374491550</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676374491550</updated>
+      <workItem from="1676374495433" duration="1890000" />
+      <workItem from="1676387127046" duration="44388000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
