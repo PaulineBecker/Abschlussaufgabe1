@@ -4,7 +4,7 @@ package edu.kit.informatik.queensfarming.userinterface;
  * Messages enum that contains all input/output constants.
  *
  * @author uyxib
- * @verion 1.0
+ * @version 1.0
  */
 public enum Messages {
 
@@ -42,6 +42,24 @@ public enum Messages {
      *
      */
     SEED_TO_SHUFFLE("Please enter the seed used to shuffle the tiles:"),
+
+    /**
+     * The message printed if Gold is used in a sentence
+     *
+     */
+    GOLD("Gold: "),
+
+    /**
+     * The message printed if a Colon is used to print the marekt or the farm
+     *
+     */
+    COLON(": "),
+
+    /**
+     * The message printed if the Sum of der vegetables in the barn will be printed.
+     *
+     */
+    SUM("Sum: "),
 
     /**
      * The message printed at the beginning of a new player move.
@@ -102,13 +120,11 @@ public enum Messages {
      */
     PLAYER_WON("%s has won!");
 
-
-
     //TODO show market
-    //TODO show barn
     //TODO show board
 
     private final String message;
+
     private Messages(String message) {
         this.message = message;
     }

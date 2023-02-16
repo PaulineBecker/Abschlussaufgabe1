@@ -6,7 +6,7 @@ import edu.kit.informatik.queensfarming.entity.tiles.Garden;
 
 /**
  * @author uyxib
- * @verion 1.0
+ * @version 1.0
  */
 public class QueensFarmBoard {
 

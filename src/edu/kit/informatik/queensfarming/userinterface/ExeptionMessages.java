@@ -2,7 +2,7 @@ package edu.kit.informatik.queensfarming.userinterface;
 
 /**
  * @author uyxib
- * @verion 1.0
+ * @version 1.0
  */
 public enum ExeptionMessages {
 

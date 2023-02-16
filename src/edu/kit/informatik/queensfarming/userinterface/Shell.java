@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Javadoc inspired by Thomas Weber and Moritz Gstuer
  *
  * @author uyxib
- * @verion 1.0
+ * @version 1.0
  */
 public class Shell {
     /**
@@ -31,20 +31,20 @@ public class Shell {
     private boolean isReading = true;
     private boolean playerCheck = true;
     private boolean namesCheck = true;
+    private boolean quitName = true;
     private boolean goldCheck = true;
     private boolean goldCheckWin = true;
-    private static final String PIXEL_ART = "                           .-^-.    .--." + LINE_SEPARATOR +
-            "                        .-'   _   '-. |__|" + LINE_SEPARATOR +
-            "                       /     |_|     \\|  |" + LINE_SEPARATOR +
-            "                      /               \\  |" + LINE_SEPARATOR +
-            "                     /|     ___     |\\ |" + LINE_SEPARATOR +
-            "                      |    |==|==|    |  |" + LINE_SEPARATOR +
-            "  |---|---|---|---|---|    |--|--|    |  |" + LINE_SEPARATOR +
-            "  |---|---|---|---|---|    |==|==|    |  |" + LINE_SEPARATOR +
-            "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + LINE_SEPARATOR +
-            "^^^^^^^^^^^^^^^ QUEENS FARMING ^^^^^^^^^^^^^^^" + LINE_SEPARATOR +
-            "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^";
-
+    private static final String PIXEL_ART = "                           _.-^-._    .--." + LINE_SEPARATOR
+                + "                        .-'   _   '-. |__|" + LINE_SEPARATOR
+                + "                       /     |_|     \\|  |" + LINE_SEPARATOR
+                + "                      /               \\  |" + LINE_SEPARATOR
+                + "                     /|     _____     |\\ |" + LINE_SEPARATOR
+                + "                      |    |==|==|    |  |" + LINE_SEPARATOR
+                + "  |---|---|---|---|---|    |--|--|    |  |" + LINE_SEPARATOR
+                + "  |---|---|---|---|---|    |==|==|    |  |" + LINE_SEPARATOR
+                + "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + LINE_SEPARATOR
+                + "^^^^^^^^^^^^^^^ QUEENS FARMING ^^^^^^^^^^^^^^^" + LINE_SEPARATOR
+                + "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + LINE_SEPARATOR;
 
     public void startQueensFarmGame() {
 
@@ -57,9 +57,13 @@ public class Shell {
         while (isReading) {
             String input = inputScanner.nextLine();
             try {
+                if (input.matches("quit") && quitName) {
+                    return;
+                }
                 if (playerCheck) {
                     gameInitialiser.setNumberOfPlayers(gameInitialiser.enterNumberOfPlayers(input));
                     playerCheck = false;
+                    quitName = false;
                     System.out.println(Messages.NAME_OF_PLAYER.format(countPlayers));
                 } else if(namesCheck) {
                     gameInitialiser.getPlayerNames().add(enterPlayerNames(input));
@@ -70,6 +74,7 @@ public class Shell {
                     }
                     System.out.println(Messages.GOLD_TO_START.format());
                     namesCheck = false;
+                    quitName = true;
                 } else if (goldCheck) {
                     gameInitialiser.setGoldToStart(gameInitialiser.enterGoldToStart(input));
                     goldCheck = false;
@@ -89,8 +94,11 @@ public class Shell {
         inputScanner.close();
 
 
-        QueensFarmGame game = new QueensFarmGame();
+        QueensFarmGame game = new QueensFarmGame(gameInitialiser.getGoldToWin(), gameInitialiser.getGoldToStart(),
+                gameInitialiser.getNumberOfPlayers(), gameInitialiser.getSeed(), gameInitialiser.getPlayerNames());
+
         System.out.println(game.showMarket());
+        System.out.println(game.showBarn());
 
     }
 

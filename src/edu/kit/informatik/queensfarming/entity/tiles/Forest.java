@@ -3,20 +3,21 @@ package edu.kit.informatik.queensfarming.entity.tiles;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
 
 /**
+ * represents the Forest Tile on the game board with it's capacity, id, name and abbreviation
+ *
  * @author uyxib
- * @verion 1.0
+ * @version 1.0
  */
-public class Forest extends LandTiles {
+public class Forest extends Tile {
 
     private static final int CAPACITY = 4;
-    private static final int ID = 5;
+    private static final int ID = 4;
     private static final String NAME = "Forest";
     private static final String ABBREVIATION = "Fo";
-    public static final int COUNTDOWN = 0;
-    public static final int STARTCOORDINATES = -1;
 
 
-    public Forest(Coordinates coordinates){
-        super(ID, NAME, CAPACITY, COUNTDOWN, new Coordinates(STARTCOORDINATES, STARTCOORDINATES), ABBREVIATION);
+
+    public Forest(Coordinates coordinates) {
+        super(ID, NAME, CAPACITY, COUNTDOWN_START, coordinates, ABBREVIATION);
     }
 }

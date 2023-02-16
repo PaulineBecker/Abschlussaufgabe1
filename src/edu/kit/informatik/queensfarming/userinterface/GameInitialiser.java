@@ -7,14 +7,14 @@ import java.util.List;
 
 /**
  * @author uyxib
- * @verion 1.0
+ * @version 1.0
  */
 public class GameInitialiser {
 
     private int numberOfPlayers;
     private int goldToWin;
     private int goldToStart;
-    private int seed;
+    private long seed;
     private List<String> playerNames;
 
     public GameInitialiser(int numberOfPlayers, int goldToWin, int goldToStart, int seed) {
@@ -25,7 +25,7 @@ public class GameInitialiser {
         this.playerNames = new ArrayList<String>();
     }
 
-    public int enterNumberOfPlayers(String input){
+    public int enterNumberOfPlayers(String input) {
 
         if (input.matches("[1-9][0-9]*")) {
             try {
@@ -36,7 +36,7 @@ public class GameInitialiser {
         } else throw new GameException("Error: Please enter the right number of players");
     }
 
-    public int enterGoldToWin(String input){
+    public int enterGoldToWin(String input) {
         if (input.matches("[1-9][0-9]*")) {
             try {
                 return Integer.parseInt(input);
@@ -46,7 +46,7 @@ public class GameInitialiser {
         } else throw new GameException("Error: Please enter the right number of gold that needs a player to win");
     }
 
-    public int enterGoldToStart(String input){
+    public int enterGoldToStart(String input) {
         if (input.matches("[0-9]+")) {
             try {
                 return Integer.parseInt(input);
@@ -58,10 +58,10 @@ public class GameInitialiser {
 
 
 
-    public int enterSeed(String input){
+    public long enterSeed(String input) {
         if (input.matches("[0-9]+")) {
             try {
-                return Integer.parseInt(input);
+                return Long.parseLong(input);
             } catch (final NumberFormatException error) {
                 throw new GameException("Error: The number of seed is too high. Please enter a lower number of seed");
             }
@@ -92,11 +92,11 @@ public class GameInitialiser {
         this.goldToStart = goldToStart;
     }
 
-    public int getSeed() {
+    public long getSeed() {
         return seed;
     }
 
-    public void setSeed(int seed) {
+    public void setSeed(long seed) {
         this.seed = seed;
     }
 

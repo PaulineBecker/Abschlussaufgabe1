@@ -2,7 +2,7 @@ package edu.kit.informatik.queensfarming.game;
 
 /**
  * @author uyxib
- * @verion 1.0
+ * @version 1.0
  */
 public class SetupGame {
     private final int numberOfPlayers;
@@ -16,7 +16,7 @@ public class SetupGame {
      * @param numberOfPlayers number of Players that play the game
      * @param goldToWin amount of gold that needs a Player to win the game
      * @param goldToStart amnout of gold that each Player has from at the beinning of the game
-     * @param seed number that is used to shuffle the Harvest Tiles
+     * @param seed number that is used to shuffle the Harvest Tile
      */
     public SetupGame(int numberOfPlayers, int goldToWin, int goldToStart, int seed) {
         this.numberOfPlayers = numberOfPlayers;
@@ -25,5 +25,19 @@ public class SetupGame {
         this.seed = seed;
     }
 
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
 
+    public int getGoldToWin() {
+        return goldToWin;
+    }
+
+    public int getGoldToStart() {
+        return goldToStart;
+    }
+
+    public int getSeed() {
+        return seed;
+    }
 }

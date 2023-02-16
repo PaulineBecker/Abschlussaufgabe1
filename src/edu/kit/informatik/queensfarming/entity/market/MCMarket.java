@@ -2,22 +2,23 @@ package edu.kit.informatik.queensfarming.entity.market;
 
 
 import edu.kit.informatik.queensfarming.entity.vegetables.Vegetable;
+import edu.kit.informatik.queensfarming.userinterface.Messages;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author uyxib
- * @verion 1.0
+ * @version 1.0
  */
 public class MCMarket extends Market {
-
-    private int currentMushroomPrice;
-    private int currentCarrotPrice;
     private static final int MUSHROOM_INDEX = 0;
     private static final int CARROT_INDEX = 1;
+    private int currentMushroomPrice;
+    private int currentCarrotPrice;
 
-    public MCMarket(){
+
+    public MCMarket() {
         this.priceTable[4][0] = 12;
         this.priceTable[4][1] = 3;
         this.priceTable[3][0] = 15;
@@ -31,6 +32,7 @@ public class MCMarket extends Market {
         currentMushroomPrice = priceTable[this.currentPrice][MUSHROOM_INDEX];
         currentCarrotPrice = priceTable[this.currentPrice][CARROT_INDEX];
     }
+
     @Override
     public void changePrices(int soldMushrooms, int soldCarrots) {
         int difference = (soldMushrooms - soldCarrots) / 2;
@@ -42,8 +44,10 @@ public class MCMarket extends Market {
     @Override
     public List<PriceRatio> createPrizeTable() {
         List<PriceRatio> priceTable = new ArrayList<>(SIZE_OF_PRIZETABLE);
-        priceTable.add(new PriceRatio(Vegetable.MUSHROOM.format() + ": ", getCurrentMushroomPrice()));
-        priceTable.add(new PriceRatio(Vegetable.CARROT.format() + ": ",getCurrentCarrotPrice()));
+        priceTable.add(new PriceRatio(Vegetable.MUSHROOM.format()
+                + Messages.COLON.format(), getCurrentMushroomPrice()));
+        priceTable.add(new PriceRatio(Vegetable.CARROT.format()
+                + Messages.COLON.format(), getCurrentCarrotPrice()));
         return priceTable;
     }
 

@@ -2,14 +2,14 @@ package edu.kit.informatik.queensfarming.entity.vegetables;
 
 /**
  * @author uyxib
- * @verion 1.0
+ * @version 1.0
  */
 public enum Vegetable {
 
     MUSHROOM("mushroom"),
     CARROT("carrot"),
     TOMATO("tomato"),
-    SALAT("salat");
+    SALAT("salad");
 
     private final String vegetableName;
 
