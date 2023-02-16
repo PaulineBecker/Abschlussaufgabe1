@@ -10,7 +10,7 @@ public final class Main {
     /**
      * Error message in case of an illegal number of players.
      */
-    private static final String ERROR_ILLEGAL_COMMANDO_LINE_ARGUMENTS = "Commando Line Arguments are not allowed";
+    private static final String ERROR_ILLEGAL_COMMANDO_LINE_ARGUMENTS = "Error: Commando Line Arguments are not allowed";
 
     /**
      * Starts the Queens farm game.

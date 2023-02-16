@@ -24,43 +24,43 @@ public abstract class Tile {
     /**
      * id (int) of a specific tile
      */
-    public int id;
+    protected int id;
 
     /**
      * name of a specific tile
      */
-    public String name;
+    protected String name;
 
     /**
      * the capacity of a specific tile (how many vegetables can grow on a tile)
      */
-    public int capacity;
+    protected int capacity;
 
     /**
      * List with all allowed vegetables that can grow on a tile
      */
-    public List<String> allowedVegetables = new ArrayList<>();
+    protected List<Integer> allowedVegetables = new ArrayList<>();
 
     /**
      * countdown how long it takes till a specific vegetable has grown on the tile
      */
-    public int countdown;
+    protected int countdown;
 
     /**
      * coordinates where the specific tile is located on the game board
      */
-    public Coordinates coordinates;
+    protected Coordinates coordinates;
 
     /**
      * abbreviation of a specific tile how the tile is shown on the game board
      */
-    public String abbreviation;
+    protected String abbreviation;
 
     /**
      * list with all vegetables
      */
 
-    public List<Vegetables> vegetablesList = new ArrayList<>();
+    protected List<Vegetables> vegetablesList = new ArrayList<>();
 
     protected Tile(int id, String name, int capacity, int countdown, Coordinates coordinates, String abbreviation) {
         this.id = id;
@@ -69,5 +69,69 @@ public abstract class Tile {
         this.countdown = countdown;
         this.coordinates = coordinates;
         this.abbreviation = abbreviation;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public List<Integer> getAllowedVegetables() {
+        return allowedVegetables;
+    }
+
+    public int getCountdown() {
+        return countdown;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
+    }
+
+    public List<Vegetables> getVegetablesList() {
+        return vegetablesList;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setAllowedVegetables(List<Integer> allowedVegetables) {
+        this.allowedVegetables = allowedVegetables;
+    }
+
+    public void setCountdown(int countdown) {
+        this.countdown = countdown;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
+
+    public void setVegetablesList(List<Vegetables> vegetablesList) {
+        this.vegetablesList = vegetablesList;
     }
 }

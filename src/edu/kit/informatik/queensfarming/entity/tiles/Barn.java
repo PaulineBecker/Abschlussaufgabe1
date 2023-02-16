@@ -29,4 +29,6 @@ public class Barn extends Tile {
         super(BARN_ID, BARN_NAME, START_CAPACITY, COUNTDOWN_START,
                 new Coordinates(BARN_COORDINATES, BARN_COORDINATES), BARN_ABBREVIATION);
     }
+
+
 }

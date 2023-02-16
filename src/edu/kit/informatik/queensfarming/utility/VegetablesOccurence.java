@@ -6,10 +6,25 @@ package edu.kit.informatik.queensfarming.utility;
  */
 public enum VegetablesOccurence {
     
-    VEGETABLES("vegetables have"),
-    VEGETABLE("vegetable has");
+    VEGETABLES("vegetables"),
+    VEGETABLE("vegetable");
 
+    private final String vegetable;
 
-    VegetablesOccurence(String occurence) {
+    VegetablesOccurence(String message) {
+        this.vegetable = message;
     }
+
+    /**
+     * Formats this message with the specified arguments.
+     * <p>
+     * Calls {@link String#format(String, Object...)} internally.
+     *
+     * @param args arguments referenced by the format specifiers in the format string
+     * @return the formatted string
+     */
+    public String format(Object... args) {
+        return String.format(this.vegetable, args);
+    }
+
 }

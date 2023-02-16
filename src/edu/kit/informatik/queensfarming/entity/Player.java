@@ -20,11 +20,10 @@ import java.util.List;
  * @version 1.0
  */
 public class Player {
-
+    private static final int INDEX_OF_BARN = 0;
     private int gold;
-    private String name;
+    private final String name;
     private List<Tile> boardGame = new ArrayList<>();
-    public static final int INDEX_OF_BARN = 0;
 
     /**
      *
@@ -43,10 +42,10 @@ public class Player {
         boardGame.add(new Garden(new Coordinates(-1, 0)));
         boardGame.add(new Garden(new Coordinates(1,0)));
         boardGame.add(new Field (new Coordinates(0,1)));
-        boardGame.get(INDEX_OF_BARN).vegetablesList.add(new Mushroom());
-        boardGame.get(INDEX_OF_BARN).vegetablesList.add(new Carrot());
-        boardGame.get(INDEX_OF_BARN).vegetablesList.add(new Tomato());
-        boardGame.get(INDEX_OF_BARN).vegetablesList.add(new Salad());
+        boardGame.get(INDEX_OF_BARN).getVegetablesList().add(new Mushroom());
+        boardGame.get(INDEX_OF_BARN).getVegetablesList().add(new Carrot());
+        boardGame.get(INDEX_OF_BARN).getVegetablesList().add(new Tomato());
+        boardGame.get(INDEX_OF_BARN).getVegetablesList().add(new Salad());
 
         return boardGame;
     }
@@ -65,9 +64,6 @@ public class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public List<Tile> getBoardGame() {
         return boardGame;
