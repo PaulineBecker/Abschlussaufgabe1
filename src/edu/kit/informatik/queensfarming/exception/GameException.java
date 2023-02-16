@@ -1,6 +1,8 @@
 package edu.kit.informatik.queensfarming.exception;
 
 /**
+ * Encapsulates an exception that may occur during a QueensFarm Game
+ *
  * @author uyxib
  * @version 1.0
  */

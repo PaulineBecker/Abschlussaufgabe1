@@ -7,10 +7,6 @@ package edu.kit.informatik.queensfarming.userinterface;
  * @version 1.0
  */
 public final class Main {
-    /**
-     * Error message in case of an illegal number of players.
-     */
-    private static final String ERROR_ILLEGAL_COMMANDO_LINE_ARGUMENTS = "Error: Commando Line Arguments are not allowed";
 
     /**
      * Starts the Queens farm game.
@@ -18,7 +14,7 @@ public final class Main {
      */
     public static void main(String[] args) {
         if (args.length != 0) {
-            System.err.println(ERROR_ILLEGAL_COMMANDO_LINE_ARGUMENTS);
+            System.err.println(ExceptionMessages.ERROR_ILLEGAL_COMMANDO_LINE_ARGUMENTS.format());
             return;
         }
 

@@ -5,8 +5,13 @@ package edu.kit.informatik.queensfarming.utility;
  * @version 1.0
  */
 public enum VegetablesOccurence {
-    
+    /**
+     * plural of Vegetable
+     */
     VEGETABLES("vegetables"),
+    /**
+     * singular of Vegetable
+     */
     VEGETABLE("vegetable");
 
     private final String vegetable;

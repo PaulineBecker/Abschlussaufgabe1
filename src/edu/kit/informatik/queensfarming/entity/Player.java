@@ -40,8 +40,8 @@ public class Player {
     private List<Tile> addStartTiles() {
         boardGame.add(new Barn());
         boardGame.add(new Garden(new Coordinates(-1, 0)));
-        boardGame.add(new Garden(new Coordinates(1,0)));
-        boardGame.add(new Field (new Coordinates(0,1)));
+        boardGame.add(new Garden(new Coordinates(1, 0)));
+        boardGame.add(new Field(new Coordinates(0, 1)));
         boardGame.get(INDEX_OF_BARN).getVegetablesList().add(new Mushroom());
         boardGame.get(INDEX_OF_BARN).getVegetablesList().add(new Carrot());
         boardGame.get(INDEX_OF_BARN).getVegetablesList().add(new Tomato());
@@ -50,24 +50,47 @@ public class Player {
         return boardGame;
     }
 
-
+    /**
+     * the current amount of gold
+     * @return current amount of gold
+     */
 
     public int getGold() {
         return gold;
     }
 
+    /**
+     * sets the amount of gold for a player
+     * @param gold amount of gold a player has
+     */
+
     public void setGold(int gold) {
         this.gold = gold;
     }
+
+    /**
+     * gets the name of a player
+     * @return the name of a player
+     */
 
     public String getName() {
         return name;
     }
 
+    /**
+     * get the boardGarme of a player with all its tiles
+     * @return borad Game of a player
+     */
+
 
     public List<Tile> getBoardGame() {
         return boardGame;
     }
+
+    /**
+     * sets the boards game with all its tiles
+     * @param boardGame boardgame list with tiles
+     */
 
     public void setBoardGame(List<Tile> boardGame) {
         this.boardGame = boardGame;

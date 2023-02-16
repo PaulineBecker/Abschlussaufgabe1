@@ -6,7 +6,7 @@ import edu.kit.informatik.queensfarming.game.QueensFarmGame;
 import java.util.Scanner;
 
 /**
- *
+ * represents the user Interface with the players and the game itself
  * Javadoc inspired by Thomas Weber and Moritz Gstuer
  *
  * @author uyxib
@@ -29,19 +29,9 @@ public class Shell {
     public static final String COMMAND_SEPERATOR = " ";
 
     /**
-     * an empty string to initialize an string that is not null
+     * an empty string to initialize a string that is not null
      */
     public static final String EMPTY_STRING = "";
-
-    private boolean isReading = true;
-    private boolean rightPlayerInput = true;
-    private boolean namesCheck = true;
-    private boolean quitName = true;
-    private boolean goldCheck = true;
-    private boolean goldCheckWin = true;
-    private GameInitialiser gameInitialiser = new GameInitialiser(-1, -1, -1, -1);
-
-
     private static final String PIXEL_ART = "                           _.-^-._    .--." + LINE_SEPARATOR
             + "                        .-'   _   '-. |__|" + LINE_SEPARATOR
             + "                       /     |_|     \\|  |" + LINE_SEPARATOR
@@ -53,15 +43,33 @@ public class Shell {
             + "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + LINE_SEPARATOR
             + "^^^^^^^^^^^^^^^ QUEENS FARMING ^^^^^^^^^^^^^^^" + LINE_SEPARATOR
             + "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + LINE_SEPARATOR;
+    private boolean isReading = true;
+    private boolean rightPlayerInput = true;
+    private boolean namesCheck = true;
+    private boolean goldCheck = true;
+    private boolean goldCheckWin = true;
+    private boolean quitGame = false;
+    private GameInitialiser gameInitialiser = new GameInitialiser(-1, -1, -1, -1);
 
+
+
+
+    /**
+     * create and initializes the QueensFarmGame when the game is started
+     * so children of the queen decided to play and started the main method.
+     */
     public void startQueensFarmGame() {
 
         System.out.println(PIXEL_ART);
         System.out.println(Messages.NUMBER_OF_PLAYERS.format());
         instantiatesGame();
+        if (quitGame) {
+            return;
+        }
 
         QueensFarmGame game = new QueensFarmGame(gameInitialiser.getGoldToWin(), gameInitialiser.getGoldToStart(),
-                        gameInitialiser.getNumberOfPlayers(), gameInitialiser.getSeed(), gameInitialiser.getPlayerNames());
+                gameInitialiser.getNumberOfPlayers(),
+                gameInitialiser.getSeed(), gameInitialiser.getPlayerNames());
 
         System.out.println(game.showMarket());
         System.out.println(game.showBarn());
@@ -73,7 +81,7 @@ public class Shell {
 
     }
 
-    private String enterPlayerNames (String input) {
+    private String enterPlayerNames(String input) {
         if (input.matches("[A-Za-z]+")) {
             return input;
         } else throw new GameException("Please enter an valid name");
@@ -87,7 +95,8 @@ public class Shell {
         while (namesCheck) {
             String input = inputScanner.nextLine();
             try {
-                if (input.matches("quit") && quitName) {
+                if (input.matches("quit")) {
+                    quitGame = true;
                     return;
                 }
                 gameInitialiser.setNumberOfPlayers(gameInitialiser.enterNumberOfPlayers(input));
@@ -116,7 +125,8 @@ public class Shell {
         while (isReading) {
             String input = inputScanner.nextLine();
             try {
-                if (input.matches("quit") && quitName) {
+                if (input.matches("quit")) {
+                    quitGame = true;
                     return;
                 }
                 if (goldCheck) {

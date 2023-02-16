@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * represents the price table of the market with mushrooms and carrots
+ * the prizes of the two vegetables change when mushrooms or carrots are sold
+ *
  * @author uyxib
  * @version 1.0
  */
@@ -17,6 +20,9 @@ public class MCMarket extends Market {
     private int currentMushroomPrice;
     private int currentCarrotPrice;
 
+    /**
+     * instantiates a new markt of mushrooms and carrots with ist pricetable
+     */
 
     public MCMarket() {
         this.priceTable[4][0] = 12;
@@ -33,14 +39,25 @@ public class MCMarket extends Market {
         currentCarrotPrice = priceTable[this.currentPrice][CARROT_INDEX];
     }
 
+    /**
+     * change the prices of mushrooms and carrots depending on the amount of sold vegetables
+     * if no vegetables where sold, the prizes don't change
+     *
+     * @param soldMushrooms mushrooms that have been sold in the last turn
+     * @param soldCarrots carrots that have been sold in the last turn
+     */
     @Override
     public void changePrices(int soldMushrooms, int soldCarrots) {
-        int difference = (soldMushrooms - soldCarrots) / 2;
+        int difference = (soldMushrooms - soldCarrots) / Market.PRICE_CONVERSION;
         this.currentPrice = setPriceLevel(currentPrice, difference);
         this.currentCarrotPrice = this.priceTable[this.currentPrice][CARROT_INDEX];
         this.currentMushroomPrice = this.priceTable[this.currentPrice][MUSHROOM_INDEX];
     }
 
+    /**
+     * create a price table with the sort of vegetable and the corresponding current prize
+     * @return list of pairs (vegetables and the corresponding prize)
+     */
     @Override
     public List<PriceRatio> createPrizeTable() {
         List<PriceRatio> priceTable = new ArrayList<>(SIZE_OF_PRIZETABLE);
@@ -51,9 +68,18 @@ public class MCMarket extends Market {
         return priceTable;
     }
 
+    /**
+     * gets the current prize of mushrooms
+     * @return current prize of mushrooms
+     */
     public int getCurrentMushroomPrice() {
         return currentMushroomPrice;
     }
+
+    /**
+     * gets the current prize of carrots
+     * @return current prize of carrots
+     */
 
     public int getCurrentCarrotPrice() {
         return currentCarrotPrice;
