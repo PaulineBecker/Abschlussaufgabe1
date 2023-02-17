@@ -37,7 +37,27 @@ public enum ExceptionMessages {
     /**
      * Error message if the seed to shuffle the tiles is not in the range of a long.
      */
-    SEED_TO_HIGH("Error: The number of seed is too high. Please enter a lower number of seed");
+    SEED_TO_HIGH("Error: The number of seed is too high. Please enter a lower number of seed"),
+    /**
+     * Error message if the vegetable on the specific tile is not allowed to plant.
+     */
+    UNALLOWED_VEGETABLE("Error: It is not allowed to plant a %s on this tile."),
+    /**
+     * Error message if the vegetable on the specific tile is not allowed to plant.
+     */
+    VEGETABLE_NOT_IN_BARN("Error: The %s you want to plant is not in your barn."),
+    /**
+     * Error message if the player try to buy or harvest on a tile that doesn't exist on his / her game board.
+     */
+    TILE_NOT_ON_BOARD("Error: You can not plant or harvest on a area in your board game that you haven't bought"),
+    /**
+     * Error message if the player tries to plant or harvest on a barn tile.
+     */
+    ILLEGAL_PLANT_ON_BARN("Error: Your barn is the tile for only storing your vegetables."),
+    /**
+     * Error message if the player tries to harvest more vegetables than they are planted.
+     */
+    TOO_MUCH_HARVESTING("Error: You can't harvest more vegetables than grown on the tile.");
 
     private final String message;
 

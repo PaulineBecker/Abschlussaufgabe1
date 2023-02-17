@@ -2,7 +2,6 @@ package edu.kit.informatik.queensfarming.userinterface;
 
 import edu.kit.informatik.queensfarming.exception.GameException;
 import edu.kit.informatik.queensfarming.game.QueensFarmGame;
-
 import java.util.Scanner;
 
 /**
@@ -73,11 +72,46 @@ public class Shell {
 
         System.out.println(game.showMarket());
         System.out.println(game.showBarn());
-        //System.out.println(game.buyVegetables("buy vegetable tomato"));
+
+        game.plant("plant -1 0 carrot");
+        game.nextTurn();
+        System.out.println(game.startTurn());
+        game.nextTurn();
+        game.nextTurn();
+        game.nextTurn();
+        game.nextTurn();
         System.out.println(game.showBarn());
-        //System.out.println(game.sellVegetables("sell all"));
+        game.nextTurn();
         System.out.println(game.showBarn());
-        System.out.println(game.endGame());
+        System.out.println(game.sellVegetables("sell tomato"));
+
+        /*System.out.println(game.showBarn());
+        System.out.println(game.currentPlayer.getBoardGame().get(1).getVegetablesList());
+        game.nextTurn();
+        System.out.println(game.showBarn());
+        game.plant("plant -1 0 tomato");
+        System.out.println(game.showBarn());
+        game.nextTurn();
+        game.nextTurn();
+        game.nextTurn();
+        System.out.println(game.showBarn());
+        System.out.println(game.currentPlayer.getBoardGame().get(1).getVegetablesList());
+        System.out.println(game.harvest("harvest -1 0 2"));
+        System.out.println(game.showBarn());*/
+
+        /*game.currentPlayer.getBoardGame().get(1).getVegetablesList().add(new Carrot());
+        game.currentPlayer.getBoardGame().get(1).getVegetablesList().add(new Carrot());
+        System.out.println(game.currentPlayer.getBoardGame().get(1).getVegetablesList());
+        System.out.println(game.harvest("harvest -1 0 2"));
+        System.out.println(game.currentPlayer.getBoardGame().get(1).getVegetablesList());
+        System.out.println(game.showBarn());*/
+        /*System.out.println(game.currentPlayer.getGold());
+        System.out.println(game.buyVegetables("buy vegetable tomato"));
+        System.out.println(game.showMarket());
+        System.out.println(game.showBarn());
+        System.out.println(game.buyLand("buy land 2 0"));
+        System.out.println(game.showBarn());
+        System.out.println(game.endGame());*/
 
     }
 

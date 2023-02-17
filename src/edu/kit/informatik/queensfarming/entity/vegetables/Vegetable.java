@@ -6,10 +6,10 @@ package edu.kit.informatik.queensfarming.entity.vegetables;
  */
 public enum Vegetable {
 
-    MUSHROOM("mushroom"),
-    CARROT("carrot"),
-    TOMATO("tomato"),
-    SALAT("salad");
+    MUSHROOM("mushrooms"),
+    CARROT("carrots"),
+    TOMATO("tomatoes"),
+    SALAT("salads");
 
     private final String vegetableName;
 

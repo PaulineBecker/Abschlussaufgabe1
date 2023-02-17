@@ -1,5 +1,8 @@
 package edu.kit.informatik.queensfarming.entity.tiles;
 
+import edu.kit.informatik.queensfarming.entity.vegetables.Carrot;
+import edu.kit.informatik.queensfarming.entity.vegetables.Salad;
+import edu.kit.informatik.queensfarming.entity.vegetables.Tomato;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
 
 /**
@@ -10,12 +13,21 @@ import edu.kit.informatik.queensfarming.utility.Coordinates;
  */
 public class LargeField extends Tile {
 
-    private static final int CAPACITY = 8;
-    private static final int ID = 3;
-    private static final String NAME = "Large Field";
-    private static final String ABBREVIATION = "LFi";
+    private static final int LARGE_FIELD_CAPACITY = 8;
+    private static final int LARGE_FIELD_ID = 3;
+    private static final String LARGE_FIELD_NAME = "Large Field";
+    private static final String LARGE_FIELD_ABBREVIATION = "LFi";
 
+    /**
+     * instantiates a new large field with its new coordinates
+     * @param coordinates coordinates where the large filed is located on the game board of a player
+     */
     public LargeField(Coordinates coordinates) {
-        super(ID, NAME, CAPACITY, COUNTDOWN_START, coordinates, ABBREVIATION);
+        super(LARGE_FIELD_ID, LARGE_FIELD_NAME, LARGE_FIELD_CAPACITY, COUNTDOWN_START,
+                coordinates, LARGE_FIELD_ABBREVIATION);
+        this.allowedVegetables.add(new Carrot());
+        this.allowedVegetables.add(new Salad());
+        this.allowedVegetables.add(new Tomato());
+
     }
 }

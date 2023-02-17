@@ -39,7 +39,7 @@ public abstract class Tile {
     /**
      * List with all allowed vegetables that can grow on a tile
      */
-    protected List<Integer> allowedVegetables = new ArrayList<>();
+    protected List<Vegetables> allowedVegetables = new ArrayList<>();
 
     /**
      * countdown how long it takes till a specific vegetable has grown on the tile
@@ -57,7 +57,7 @@ public abstract class Tile {
     protected String abbreviation;
 
     /**
-     * list with all vegetables
+     * list with all vegetables that are already planted on the tile (at the beginning list is empty)
      */
 
     protected List<Vegetables> vegetablesList = new ArrayList<>();
@@ -83,7 +83,7 @@ public abstract class Tile {
         return capacity;
     }
 
-    public List<Integer> getAllowedVegetables() {
+    public List<Vegetables> getAllowedVegetables() {
         return allowedVegetables;
     }
 
@@ -115,7 +115,7 @@ public abstract class Tile {
         this.capacity = capacity;
     }
 
-    public void setAllowedVegetables(List<Integer> allowedVegetables) {
+    public void setAllowedVegetables(List<Vegetables> allowedVegetables) {
         this.allowedVegetables = allowedVegetables;
     }
 

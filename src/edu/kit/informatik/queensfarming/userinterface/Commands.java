@@ -14,46 +14,73 @@ import java.util.regex.Pattern;
  * @version 1.0
  */
 public enum Commands {
+    /**
+     * Buys a vegetable if possible
+     */
     BUY_VEGETABLE("buy vegetable (tomato|salad|mushroom|carrot)") {
         @Override public String execute(Matcher input, QueensFarmGame game) {
             return null;
         }
     },
+    /**
+     * buy a random land tile if possible
+     */
     BUY_LAND("buy land [0-9]* [0-9]*") {
         @Override public String execute(Matcher input, QueensFarmGame game) {
             return null;
         }
     },
+    /**
+     * plants a new vegetable of a empty field if possible
+     */
     PLANT("plant") {
         @Override public String execute(Matcher input, QueensFarmGame game) {
             return null;
         }
     },
+    /**
+     * harvest the whole or a part of a tile that is not the barn if possible
+     */
     HARVEST("harvest -?[0-9]* [0-9]* [0-8]") {
         @Override public String execute(Matcher input, QueensFarmGame game) {
             return null;
         }
     },
+    /**
+     * sell some or all vegetables from the barn if possible
+     */
     SELL("^sell(?: (?:salad|tomato|mushroom|carrot))+$|sell all") {
         @Override public String execute(Matcher input, QueensFarmGame game) {
             return null;
         }
     },
+    /**
+     * shows the barn and the amount of gold
+     */
     SHOW_BARN("show barn") {
         @Override public String execute(Matcher input, QueensFarmGame game) {
             return game.showBarn();
         }
     },
+    /**
+     * shows the board of a player
+     */
     SHOW_BOARD("show board") {
         @Override public String execute(Matcher input, QueensFarmGame game) {
             return null;
         }
     },
+    /**
+     * shows the market with the current prizes
+     */
     SHOW_MARKET("show market") {
         @Override public String execute(Matcher input, QueensFarmGame game) {
             return game.showMarket();
         }
     },
+    /**
+     * ends directly a turn without any other new actions
+     */
     END_TURN("end turn") {
         @Override public String execute(Matcher input, QueensFarmGame game) {
             return null;

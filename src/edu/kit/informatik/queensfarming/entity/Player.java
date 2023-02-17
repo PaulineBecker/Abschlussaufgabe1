@@ -20,13 +20,19 @@ import java.util.List;
  * @version 1.0
  */
 public class Player {
+    /**
+     * the number when no vegetables have grown since the last turn
+     */
+
+    public static final int NO_GROWN_VEGETABLES = 0;
     private static final int INDEX_OF_BARN = 0;
     private int gold;
     private final String name;
     private List<Tile> boardGame = new ArrayList<>();
+    private int grownVegetables = 0;
 
     /**
-     *
+     * Instantiates a new player who is playing the Queens Farm Game
      * @param gold the amount of gold that a player have to buy land or vegetables
      * @param name the name of the player
      */
@@ -37,7 +43,7 @@ public class Player {
         addStartTiles();
     }
 
-    private List<Tile> addStartTiles() {
+    private void addStartTiles() {
         boardGame.add(new Barn());
         boardGame.add(new Garden(new Coordinates(-1, 0)));
         boardGame.add(new Garden(new Coordinates(1, 0)));
@@ -46,8 +52,6 @@ public class Player {
         boardGame.get(INDEX_OF_BARN).getVegetablesList().add(new Carrot());
         boardGame.get(INDEX_OF_BARN).getVegetablesList().add(new Tomato());
         boardGame.get(INDEX_OF_BARN).getVegetablesList().add(new Salad());
-
-        return boardGame;
     }
 
     /**
@@ -94,5 +98,13 @@ public class Player {
 
     public void setBoardGame(List<Tile> boardGame) {
         this.boardGame = boardGame;
+    }
+
+    public int getGrownVegetables() {
+        return grownVegetables;
+    }
+
+    public void setGrownVegetables(int grownVegetables) {
+        this.grownVegetables = grownVegetables;
     }
 }

@@ -1,5 +1,7 @@
 package edu.kit.informatik.queensfarming.entity.tiles;
 
+import edu.kit.informatik.queensfarming.entity.vegetables.Carrot;
+import edu.kit.informatik.queensfarming.entity.vegetables.Mushroom;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
 
 /**
@@ -10,12 +12,19 @@ import edu.kit.informatik.queensfarming.utility.Coordinates;
  */
 public class LargeForest extends Tile {
 
-    private static final int CAPACITY = 8;
-    private static final int ID = 5;
-    private static final String NAME = "Large Forest";
-    private static final String ABBREVIATION = "LFo";
+    private static final int LARGE_FOREST_CAPACITY = 8;
+    private static final int LARGER_FOREST_ID = 5;
+    private static final String LARGE_FOREST_NAME = "Large Forest";
+    private static final String LARGE_FOREST_ABBREVIATION = "LFo";
 
+    /**
+     * instantiates a new large forest with its new coordinates
+     * @param coordinates coordinates where the larger forest is located on the game board of a player
+     */
     public LargeForest(Coordinates coordinates) {
-        super(ID, NAME, CAPACITY, COUNTDOWN_START, coordinates, ABBREVIATION);
+        super(LARGER_FOREST_ID, LARGE_FOREST_NAME, LARGE_FOREST_CAPACITY, COUNTDOWN_START, coordinates,
+                LARGE_FOREST_ABBREVIATION);
+        this.allowedVegetables.add(new Carrot());
+        this.allowedVegetables.add(new Mushroom());
     }
 }

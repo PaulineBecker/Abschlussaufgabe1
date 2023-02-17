@@ -47,6 +47,11 @@ public enum Messages {
      * The message printed if Gold is used in a sentence
      *
      */
+    HYPHEN("-"),
+    /**
+     * The message printed if Gold is used in a sentence
+     *
+     */
     GOLD("Gold: "),
 
     /**
@@ -72,16 +77,19 @@ public enum Messages {
      * Expects one format argument:
      * The name of the player (string).
      */
-    TURN_OF_PLAYER("It is %s turn!"),
+    TURN_OF_PLAYER("It is %s's turn!"),
 
     /**
      * The message printed at the beginning of a new player move after the turn.
-     * <p>
-     * Expects the format arguments in the following order:
-     * The amount of vegetables (int).
-     * Plural or singular of vegetable and has or have depending on singular or plural of vegetable (String enum)
      */
-    GROWN_VEGETABLES("%d %s grown since your last turn."),
+    GROWN_VEGETABLE("1 vegetable has grown since your last turn."),
+    /**
+     * The message printed at the beginning of a new player move after the turn.
+     * <p>
+     * Expects the format argument:
+     * The amount of vegetables (int).
+     */
+    GROWN_VEGETABLES("%d vegetables have grown since your last turn."),
 
     /**
      * The message printed at the beginning if a player want to see vegetables in the barn
