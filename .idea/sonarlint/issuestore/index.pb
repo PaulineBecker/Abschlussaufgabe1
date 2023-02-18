@@ -18,8 +18,6 @@ q
 Asrc/edu/kit/informatik/queensfarming/entity/vegetables/Salad.java,0/1/01c2928ca1b9e9518ac4a033882ada53c142f324
 t
 Dsrc/edu/kit/informatik/queensfarming/entity/vegetables/Mushroom.java,e/9/e97884c5ea2e5b4bc61023f3be4d7c329a0ac52d
-r
-Bsrc/edu/kit/informatik/queensfarming/entity/market/PriceRatio.java,d/4/d4da6726d8109c1b82a6a542781d8d916ef74130
 p
 @src/edu/kit/informatik/queensfarming/entity/market/TSMarket.java,3/4/34bcd8fd5e0f47922e9064673052501ab80fc22d
 r
@@ -46,7 +44,5 @@ q
 Asrc/edu/kit/informatik/queensfarming/entity/tiles/LargeField.java,7/3/7304c9b507bcf767df6150316b3073a9199b8d23
 u
 Esrc/edu/kit/informatik/queensfarming/entity/vegetables/Vegetable.java,9/6/963966dc318e6f64641a9696eec486f382455e90
-g
-7src/edu/kit/informatik/queensfarming/entity/Player.java,a/b/ab24473aabae1ed17988f5b58bac96bb0a43cb89
 r
 Bsrc/edu/kit/informatik/queensfarming/entity/tiles/LargeForest.java,4/5/4525e616b71ac322e4d970b6f2dbc36d7414d53d

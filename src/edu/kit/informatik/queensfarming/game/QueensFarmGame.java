@@ -14,7 +14,6 @@ import edu.kit.informatik.queensfarming.entity.vegetables.Mushroom;
 import edu.kit.informatik.queensfarming.entity.vegetables.Tomato;
 import edu.kit.informatik.queensfarming.entity.vegetables.Carrot;
 import edu.kit.informatik.queensfarming.entity.vegetables.Salad;
-import edu.kit.informatik.queensfarming.entity.vegetables.Vegetables;
 import edu.kit.informatik.queensfarming.entity.vegetables.Vegetable;
 import edu.kit.informatik.queensfarming.exception.GameException;
 import edu.kit.informatik.queensfarming.userinterface.*;
@@ -40,7 +39,7 @@ public class QueensFarmGame {
     private static final int AREA_IS_NOT_BOUGHT = -1;
     private static final int START_PLAYER = 0;
     private static final int BARN_INDEX = 0;
-    private static final int VEGETABLE_SPOIL = 6;
+    public static final int VEGETABLE_SPOIL = 6;
     private static final int INDEX_OF_NEXT_PLAYER = 1;
     private static final String CREATE_FLUSH_RIGHT1 = "%-";
     private static final String CREATE_FLUSH_RIGHT2 = "s%";
@@ -101,6 +100,9 @@ public class QueensFarmGame {
         createPlayers();
         this.currentPlayer = playerList.get(START_PLAYER);
         shuffleCards();
+        if (this.goldToStart - this.goldToWin >= 0) {
+            this.executionState = ExecutionState.EXITED;
+        }
     }
 
     public boolean isActive() {
@@ -130,7 +132,7 @@ public class QueensFarmGame {
      */
 
     public String showBarn() {
-        return barnToString(createVegetableList());
+        return currentPlayer.barnToString();
     }
 
     /**
@@ -424,7 +426,7 @@ public class QueensFarmGame {
     /**
      * introduces a new Round in the game and has consequences for all players
      * if the countdown of a barn is full, all vegetables in the barn will be deleted
-     * if the countdown on a tile if full, the vegetables will be duplicated and if then the capactiy of the tile
+     * if the countdown on a tile if full, the vegetables will be duplicated and if then the capacity of the tile
      * is full, the countdown of the tile will be deleted.
      */
 
@@ -484,56 +486,6 @@ public class QueensFarmGame {
         return movesInTurn;
     }
 
-    private String barnToString(List<PriceRatio> vegetablesInBarn) {
-        Tile barn = currentPlayer.getBoardGame().get(BARN_INDEX);
-        if (barn.getVegetablesList().size() == 0) {
-            return (barn.getName().concat(Shell.LINE_SEPARATOR)
-                    .concat(Messages.GOLD.format()).concat(String.valueOf(currentPlayer.getGold())));
-        } else {
-            if (VEGETABLE_SPOIL - barn.getCountdown() == 1) {
-                stringBuilder.append(Messages.BARN_SPOILS_TOMORROW.format()).append(Shell.LINE_SEPARATOR);
-            } else if (VEGETABLE_SPOIL - barn.getCountdown() > 1) {
-                stringBuilder.append((Messages.BARN_SPOILS.format(VEGETABLE_SPOIL - barn.getCountdown())))
-                        .append(Shell.LINE_SEPARATOR);
-            }
-        }
-
-        int sum = barn.getVegetablesList().size();
-        int sumLength = String.valueOf(sum).length();
-        int goldLength = String.valueOf(currentPlayer.getGold()).length();
-        int lengthOfStringMax = 0;
-        int lengthOfIntMax = 0;
-
-        for (PriceRatio listValue : vegetablesInBarn) {
-            if (listValue.getVegetable().length() > lengthOfStringMax) {
-                lengthOfStringMax = listValue.getVegetable().length();
-            }
-            int lengthOfPrize = String.valueOf(listValue.getNumber()).length();
-            if (lengthOfPrize > lengthOfIntMax) {
-                lengthOfIntMax = lengthOfPrize;
-            }
-        }
-
-        if (sumLength > lengthOfIntMax) { lengthOfIntMax = sumLength; }
-        if (goldLength > lengthOfIntMax) { lengthOfIntMax = goldLength; }
-
-        String formatBarn = CREATE_FLUSH_RIGHT1 + lengthOfStringMax + CREATE_FLUSH_RIGHT2 + lengthOfIntMax
-                + CREATE_FLUSH_RIGHT3 + Shell.LINE_SEPARATOR;
-        for (PriceRatio listValue : vegetablesInBarn) {
-            stringBuilder.append(String.format(formatBarn, listValue.getVegetable(), listValue.getNumber()));
-        }
-
-        stringBuilder.append(Messages.HYPHEN.format().repeat(lengthOfIntMax + lengthOfStringMax))
-                .append(Shell.LINE_SEPARATOR);
-        stringBuilder.append(String.format(formatBarn, Messages.SUM.format(), sum)).append(Shell.LINE_SEPARATOR);
-        stringBuilder.append(String.format(formatBarn, Messages.GOLD.format(), currentPlayer.getGold()));
-
-
-        String barnToString = stringBuilder.toString();
-        stringBuilder.delete(0, stringBuilder.length());
-        return barnToString;
-    }
-
     private List<PriceRatio> getFinalPrizeTable() {
         List<PriceRatio> finalPriceTable = new ArrayList<>(SIZE_OF_PRICETABLE);
         finalPriceTable.addAll(mcMarket.createPrizeTable());
@@ -562,31 +514,6 @@ public class QueensFarmGame {
         String marketToString = stringBuilder.toString();
         stringBuilder.delete(0, stringBuilder.length());
         return marketToString;
-    }
-
-    private int countVegetables(int id) {
-        int count = 0;
-        for (Vegetables vegetable : currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList()) {
-            if (id == vegetable.getId()) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    private List<PriceRatio> createVegetableList() {
-        List<PriceRatio> vegetablesInBarn = new ArrayList<>();
-        vegetablesInBarn.add(new PriceRatio(Vegetable.CARROT.format()
-                + Messages.COLON.format(), countVegetables(1)));
-        vegetablesInBarn.add(new PriceRatio(Vegetable.MUSHROOM.format()
-                + Messages.COLON.format(), countVegetables(0)));
-        vegetablesInBarn.add(new PriceRatio(Vegetable.SALAT.format()
-                + Messages.COLON.format(), countVegetables(3)));
-        vegetablesInBarn.add(new PriceRatio(Vegetable.TOMATO.format()
-                + Messages.COLON.format(), countVegetables(2)));
-        vegetablesInBarn.removeIf(vegetablesCount -> vegetablesCount.getNumber() == 0);
-        vegetablesInBarn.sort((o1, o2) -> Integer.compare(o1.getNumber(), o2.getNumber()));
-        return vegetablesInBarn;
     }
 
     private void createPlayers() {

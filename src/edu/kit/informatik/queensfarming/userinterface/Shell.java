@@ -71,12 +71,10 @@ public class Shell {
                 gameInitialiser.getNumberOfPlayers(),
                 gameInitialiser.getSeed(), gameInitialiser.getPlayerNames());
 
-        // bevor einlesen einbauen dass player schon gewonnen haben können am anfange weil grold > gold to win
-
         Scanner inputScanner = new Scanner(System.in);
         while (game.isActive()) {
             System.out.println(game.startTurn());
-            while (game.playerIsTurning() && (game.getMovesInTurn() < MAX_MOVES)) {
+            while (game.playerIsTurning() && (game.getMovesInTurn() < MAX_MOVES) && game.isActive()) {
                 String input = inputScanner.nextLine();
                 try {
                     String output = Commands.executeCommand(input, game);

@@ -5,10 +5,8 @@ import edu.kit.informatik.queensfarming.entity.tiles.Barn;
 import edu.kit.informatik.queensfarming.entity.tiles.Garden;
 import edu.kit.informatik.queensfarming.entity.tiles.Tile;
 import edu.kit.informatik.queensfarming.entity.tiles.Field;
-import edu.kit.informatik.queensfarming.entity.vegetables.Carrot;
-import edu.kit.informatik.queensfarming.entity.vegetables.Mushroom;
-import edu.kit.informatik.queensfarming.entity.vegetables.Salad;
-import edu.kit.informatik.queensfarming.entity.vegetables.Tomato;
+import edu.kit.informatik.queensfarming.entity.vegetables.*;
+import edu.kit.informatik.queensfarming.game.QueensFarmGame;
 import edu.kit.informatik.queensfarming.userinterface.Messages;
 import edu.kit.informatik.queensfarming.userinterface.Shell;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
@@ -28,6 +26,9 @@ public class Player {
      */
 
     public static final int NO_GROWN_VEGETABLES = 0;
+    private static final String CREATE_FLUSH_RIGHT1 = "%-";
+    private static final String CREATE_FLUSH_RIGHT2 = "s%";
+    private static final String CREATE_FLUSH_RIGHT3 = "d";
     private static final int INDEX_OF_BARN = 0;
     private int gold;
     private final String name;
@@ -113,23 +114,24 @@ public class Player {
     }
 
 
-    /*private String barnToString(List<PriceRatio> vegetablesInBarn) {
+    public String barnToString() {
+        List<PriceRatio> vegetablesInBarn = createVegetableList();
         Tile barn = boardGame.get(INDEX_OF_BARN);
         if (barn.getVegetablesList().size() == 0) {
             return (barn.getName().concat(Shell.LINE_SEPARATOR)
-                    .concat(Messages.GOLD.format()).concat(String.valueOf(currentPlayer.getGold())));
+                    .concat(Messages.GOLD.format()).concat(String.valueOf(gold)));
         } else {
-            if (VEGETABLE_SPOIL - barn.getCountdown() == 1) {
+            if (QueensFarmGame.VEGETABLE_SPOIL - barn.getCountdown() == 1) {
                 stringBuilder.append(Messages.BARN_SPOILS_TOMORROW.format()).append(Shell.LINE_SEPARATOR);
-            } else if (VEGETABLE_SPOIL - barn.getCountdown() > 1) {
-                stringBuilder.append((Messages.BARN_SPOILS.format(VEGETABLE_SPOIL - barn.getCountdown())))
+            } else if (QueensFarmGame.VEGETABLE_SPOIL - barn.getCountdown() > 1) {
+                stringBuilder.append((Messages.BARN_SPOILS.format(QueensFarmGame.VEGETABLE_SPOIL - barn.getCountdown())))
                         .append(Shell.LINE_SEPARATOR);
             }
         }
 
         int sum = barn.getVegetablesList().size();
         int sumLength = String.valueOf(sum).length();
-        int goldLength = String.valueOf(currentPlayer.getGold()).length();
+        int goldLength = String.valueOf(gold).length();
         int lengthOfStringMax = 0;
         int lengthOfIntMax = 0;
 
@@ -155,11 +157,36 @@ public class Player {
         stringBuilder.append(Messages.HYPHEN.format().repeat(lengthOfIntMax + lengthOfStringMax))
                 .append(Shell.LINE_SEPARATOR);
         stringBuilder.append(String.format(formatBarn, Messages.SUM.format(), sum)).append(Shell.LINE_SEPARATOR);
-        stringBuilder.append(String.format(formatBarn, Messages.GOLD.format(), currentPlayer.getGold()));
+        stringBuilder.append(String.format(formatBarn, Messages.GOLD.format(), gold));
 
 
         String barnToString = stringBuilder.toString();
         stringBuilder.delete(0, stringBuilder.length());
         return barnToString;
-    }*/
+    }
+
+    private int countVegetables(int id) {
+        int count = 0;
+        for (Vegetables vegetable : boardGame.get(INDEX_OF_BARN).getVegetablesList()) {
+            if (id == vegetable.getId()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private List<PriceRatio> createVegetableList() {
+        List<PriceRatio> vegetablesInBarn = new ArrayList<>();
+        vegetablesInBarn.add(new PriceRatio(Vegetable.CARROT.format()
+                + Messages.COLON.format(), countVegetables(1)));
+        vegetablesInBarn.add(new PriceRatio(Vegetable.MUSHROOM.format()
+                + Messages.COLON.format(), countVegetables(0)));
+        vegetablesInBarn.add(new PriceRatio(Vegetable.SALAT.format()
+                + Messages.COLON.format(), countVegetables(3)));
+        vegetablesInBarn.add(new PriceRatio(Vegetable.TOMATO.format()
+                + Messages.COLON.format(), countVegetables(2)));
+        vegetablesInBarn.removeIf(vegetablesCount -> vegetablesCount.getNumber() == 0);
+        vegetablesInBarn.sort((o1, o2) -> Integer.compare(o1.getNumber(), o2.getNumber()));
+        return vegetablesInBarn;
+    }
 }
