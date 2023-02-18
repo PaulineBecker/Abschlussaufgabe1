@@ -51,9 +51,7 @@ public enum Commands {
     PLANT("^plant " + Commands.ALL_INPUT) {
         @Override public String execute(String input, QueensFarmGame game) {
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
-            if (inputList.length != 3) {
-                throw new GameException("Error: Exact three arguments expected.");
-            }
+            Commands.checkArgumentsLength(inputList);
             final List<Integer> coordinates = new ArrayList<>();
             for (int i = 0; i < TWO_DIMENSIONAL; i++) {
                 coordinates.add(GameInitialiser.checkNumeric(inputList[i]));
@@ -67,9 +65,16 @@ public enum Commands {
     /**
      * harvest the whole or a part of a tile that is not the barn if possible
      */
-    HARVEST("harvest -?[0-9]* [0-9]* [0-8]") {
+    HARVEST("^harvest " + Commands.ALL_INPUT) {
         @Override public String execute(String input, QueensFarmGame game) {
-            return null;
+            String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
+            Commands.checkArgumentsLength(inputList);
+            final int[] harvestArguments = new int[3];
+            for (int i = 0; i < inputList.length; i++) {
+                harvestArguments[i] = GameInitialiser.checkNumeric(inputList[i]);
+            }
+            Commands.checkNumberOnGameBoard(harvestArguments[1]);
+            return game.harvest(harvestArguments);
         }
     },
     /**
@@ -222,6 +227,12 @@ public enum Commands {
     private static void checkOnlyOneVegetable(String[] vegetables) {
         if (vegetables.length != 1) {
             throw new GameException("Error: You can only buy or plant one vegetable");
+        }
+    }
+
+    private static void checkArgumentsLength(String[] inputList) {
+        if (inputList.length != 3) {
+            throw new GameException("Error: Exact three arguments expected.");
         }
     }
 }

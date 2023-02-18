@@ -69,7 +69,7 @@ public class Shell {
         QueensFarmGame game = new QueensFarmGame(gameInitialiser.getGoldToWin(), gameInitialiser.getGoldToStart(),
                 gameInitialiser.getNumberOfPlayers(),
                 gameInitialiser.getSeed(), gameInitialiser.getPlayerNames());
-
+        
 
         Scanner inputScanner = new Scanner(System.in);
         while (game.isActive()) {
@@ -83,6 +83,7 @@ public class Shell {
                 System.err.println(exception.getMessage());
             }
         }
+        System.out.println(game.endGame());
 
         /*System.out.println(game.showMarket());
         System.out.println(game.showBarn());

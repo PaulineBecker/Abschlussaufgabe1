@@ -178,8 +178,18 @@ public class QueensFarmGame {
     public String buyLand(List<Integer> coordinates) {
         int xCoordinate = coordinates.get(0);
         int yCoordinate = coordinates.get(1);
+        boolean buyable = false;
         if (unassignedTiles.size() == 0) {
             throw new GameException("Error: all Tiles are already used on the player's game board"); //TODO try und catch nicht vergessen
+        }
+        Tile boughtTile = unassignedTiles.get(0);
+        for (Tile tile : currentPlayer.getBoardGame()) {
+            if (tile.getCoordinates().compareTo(new Coordinates(xCoordinate, yCoordinate)) == 1) {
+                buyable = true;
+            }
+        }
+        if (!buyable) {
+            throw new GameException("Error: you are trying to buy a piece of land that is not adjacent to your property");
         }
         int prize = 10 * (Math.abs(xCoordinate) + Math.abs(yCoordinate) - 1);
         if (currentPlayer.getGold() - prize < 0) {
@@ -188,7 +198,6 @@ public class QueensFarmGame {
         if (getBoardGameIndexFromCoordinates(xCoordinate, yCoordinate) != AREA_IS_NOT_BOUGHT) {
             throw new GameException("Error: the field where you want to buy land is already bought");
         }
-        Tile boughtTile = unassignedTiles.get(0);
         boughtTile.setCoordinates(new Coordinates(xCoordinate, yCoordinate));
         unassignedTiles.remove(0);
         currentPlayer.getBoardGame().add(boughtTile);
@@ -205,11 +214,10 @@ public class QueensFarmGame {
      * @param input the given input command to harvest a tile
      * @return the string how many vegetables where successfully harvested and which vegetable excactly
      */
-    public String harvest(String input) {
-        String[] splittedString = input.split(Shell.COMMAND_SEPERATOR);
-        int xCoordinate = Integer.parseInt(splittedString[1]);
-        int yCoordinate = Integer.parseInt(splittedString[2]);
-        int numberOfVeggies = Integer.parseInt(splittedString[3]);
+    public String harvest(int[] input) {
+        int xCoordinate = input[0];
+        int yCoordinate = input[1];
+        int numberOfVeggies = input[2];
         int indexToHarvestOn = isTileBought(xCoordinate, yCoordinate); //TODO try catch
         Tile currentTile = currentPlayer.getBoardGame().get(indexToHarvestOn);
         if (currentPlayer.getBoardGame().get(indexToHarvestOn).getVegetablesList().size() < numberOfVeggies) {
@@ -237,7 +245,7 @@ public class QueensFarmGame {
         }
 
         if (currentTile.getVegetablesList().size() == 0) {
-            tilesInCountdown.remove(currentTile); //TODO ELija
+            tilesInCountdown.remove(currentTile);
         } else if ((currentTile.getVegetablesList().size() + numberOfVeggies) == currentTile.getCapacity()) {
             tilesInCountdown.add(currentTile);
         }
@@ -442,8 +450,7 @@ public class QueensFarmGame {
                 resetCountdown();
             }
             if (player.getGold() >= goldToWin) {
-                endGame();
-                return;
+                executionState = ExecutionState.EXITED;
             }
         }
         // TODO state pattern einbauen weil Spiel dann zu Ende

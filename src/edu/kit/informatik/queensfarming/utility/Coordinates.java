@@ -6,7 +6,7 @@ package edu.kit.informatik.queensfarming.utility;
  * @author uyxib
  * @version 1.0
  */
-public class Coordinates {
+public class Coordinates implements Comparable<Coordinates>{
 
     private int xCoordinate;
     private int yCoordinate;
@@ -38,4 +38,13 @@ public class Coordinates {
         return yCoordinate;
     }
 
+    @Override
+    public int compareTo(Coordinates coordinates) {
+        return getDistances(coordinates);
+    }
+
+    private int getDistances(Coordinates coordinates) {
+        return (Math.abs(this.xCoordinate - coordinates.getxCoordinate())
+                + Math.abs(this.yCoordinate - coordinates.getyCoordinate()));
+    }
 }
