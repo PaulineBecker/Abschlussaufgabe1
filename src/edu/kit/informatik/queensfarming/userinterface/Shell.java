@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 /**
  * represents the user Interface with the players and the game itself
- * Javadoc inspired by Thomas Weber and Moritz Gstuer
- *
+ * @author Thomas Weber
+ * @author Moritz Gstuer
  * @author uyxib
  * @version 1.0
  */
@@ -70,7 +70,21 @@ public class Shell {
                 gameInitialiser.getNumberOfPlayers(),
                 gameInitialiser.getSeed(), gameInitialiser.getPlayerNames());
 
-        System.out.println(game.showMarket());
+
+        Scanner inputScanner = new Scanner(System.in);
+        while (game.isActive()) {
+            String input = inputScanner.nextLine();
+            try {
+                String output = Commands.executeCommand(input, game);
+                if (output != null) {
+                    System.out.println(output);
+                }
+            } catch (final GameException exception) {
+                System.err.println(exception.getMessage());
+            }
+        }
+
+        /*System.out.println(game.showMarket());
         System.out.println(game.showBarn());
 
         game.plant("plant -1 0 carrot");
@@ -83,7 +97,7 @@ public class Shell {
         System.out.println(game.showBarn());
         game.nextTurn();
         System.out.println(game.showBarn());
-        System.out.println(game.sellVegetables("sell tomato"));
+        System.out.println(game.sellVegetables("sell tomato"));*/
 
         /*System.out.println(game.showBarn());
         System.out.println(game.currentPlayer.getBoardGame().get(1).getVegetablesList());
@@ -179,7 +193,6 @@ public class Shell {
                 System.err.println(exception.getMessage());
             }
         }
-        inputScanner.close();
     }
 
 }

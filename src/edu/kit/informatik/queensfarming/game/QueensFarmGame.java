@@ -18,6 +18,7 @@ import edu.kit.informatik.queensfarming.entity.vegetables.Vegetables;
 import edu.kit.informatik.queensfarming.entity.vegetables.Vegetable;
 import edu.kit.informatik.queensfarming.exception.GameException;
 import edu.kit.informatik.queensfarming.userinterface.ExceptionMessages;
+import edu.kit.informatik.queensfarming.userinterface.ExecutionState;
 import edu.kit.informatik.queensfarming.userinterface.Messages;
 import edu.kit.informatik.queensfarming.userinterface.Shell;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
@@ -52,6 +53,10 @@ public class QueensFarmGame {
     private static final String SALAD = "salad";
     private static final String TOMATO = "tomato";
 
+    /**
+     * The execution state of this database.
+     */
+    private ExecutionState executionState;
 
     private final TSMarket tsMarket = new TSMarket();
     private final MCMarket mcMarket = new MCMarket();
@@ -83,6 +88,7 @@ public class QueensFarmGame {
 
     public QueensFarmGame(int goldToWin, int goldToStart, int playerNumber,
                           long seedToShuffle, List<String> playerNames) {
+        this.executionState = ExecutionState.RUNNING;
         this.goldToWin = goldToWin;
         this.goldToStart = goldToStart;
         this.numberOfPlayers = playerNumber;
@@ -91,6 +97,14 @@ public class QueensFarmGame {
         createPlayers();
         this.currentPlayer = playerList.get(START_PLAYER);
         shuffleCards();
+    }
+
+    public boolean isActive() {
+        return executionState == ExecutionState.RUNNING;
+    }
+
+    public void quit() {
+        executionState = ExecutionState.EXITED;
     }
 
     /**

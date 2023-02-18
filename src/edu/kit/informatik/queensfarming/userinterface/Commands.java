@@ -25,7 +25,7 @@ public enum Commands {
     /**
      * buy a random land tile if possible
      */
-    BUY_LAND("buy land [0-9]* [0-9]*") {
+    BUY_LAND("^buy land .*") { //buy land [0-9]* [0-9]*
         @Override public String execute(Matcher input, QueensFarmGame game) {
             return null;
         }
@@ -49,9 +49,11 @@ public enum Commands {
     /**
      * sell some or all vegetables from the barn if possible
      */
-    SELL("^sell(?: (?:salad|tomato|mushroom|carrot))+$|sell all") {
+    SELL("^sell .*") {
         @Override public String execute(Matcher input, QueensFarmGame game) {
-            return null;
+
+
+            return game.sellVegetables(SELL.uiCommand);
         }
     },
     /**
@@ -93,9 +95,15 @@ public enum Commands {
     QUIT("quit") {
 
         @Override public String execute(Matcher input, QueensFarmGame game) {
-            return null;
+            game.quit();
+            return game.endGame();
         }
     };
+
+    /**
+     * Regex that every input is allowed after a specific input command
+     */
+    private static final String ALL_INPUT = ".*";
 
     /**
      * String constant containing an error message for the case that no command
@@ -109,12 +117,18 @@ public enum Commands {
     private final Pattern pattern;
 
     /**
+     * one of the allowed uiCommands
+     */
+    private final String uiCommand;
+
+    /**
      * Instantiates a new command with the given String. The given String must be a
      * compilable {@link Pattern}.
      *
      * @param pattern the pattern of this command
      */
     Commands(final String pattern) {
+        this.uiCommand = pattern;
         this.pattern = Pattern.compile(pattern);
     }
 
@@ -149,4 +163,12 @@ public enum Commands {
      *         null if there is no output
      */
     abstract String execute(Matcher input, QueensFarmGame game);
+
+    private String replaceAllInput(Commands command, String input) {
+        return input.replaceAll(command.uiCommand.replace(ALL_INPUT, Shell.EMPTY_STRING), Shell.EMPTY_STRING);
+    }
+
+    private String[] getSplittedString(String input) {
+        return input.split(Shell.COMMAND_SEPERATOR);
+    }
 }

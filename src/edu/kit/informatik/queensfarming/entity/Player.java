@@ -1,5 +1,6 @@
 package edu.kit.informatik.queensfarming.entity;
 
+import edu.kit.informatik.queensfarming.entity.market.PriceRatio;
 import edu.kit.informatik.queensfarming.entity.tiles.Barn;
 import edu.kit.informatik.queensfarming.entity.tiles.Garden;
 import edu.kit.informatik.queensfarming.entity.tiles.Tile;
@@ -8,6 +9,8 @@ import edu.kit.informatik.queensfarming.entity.vegetables.Carrot;
 import edu.kit.informatik.queensfarming.entity.vegetables.Mushroom;
 import edu.kit.informatik.queensfarming.entity.vegetables.Salad;
 import edu.kit.informatik.queensfarming.entity.vegetables.Tomato;
+import edu.kit.informatik.queensfarming.userinterface.Messages;
+import edu.kit.informatik.queensfarming.userinterface.Shell;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
 
 import java.util.ArrayList;
@@ -30,6 +33,7 @@ public class Player {
     private final String name;
     private List<Tile> boardGame = new ArrayList<>();
     private int grownVegetables = 0;
+    private StringBuilder stringBuilder = new StringBuilder();
 
     /**
      * Instantiates a new player who is playing the Queens Farm Game
@@ -107,4 +111,55 @@ public class Player {
     public void setGrownVegetables(int grownVegetables) {
         this.grownVegetables = grownVegetables;
     }
+
+
+    /*private String barnToString(List<PriceRatio> vegetablesInBarn) {
+        Tile barn = boardGame.get(INDEX_OF_BARN);
+        if (barn.getVegetablesList().size() == 0) {
+            return (barn.getName().concat(Shell.LINE_SEPARATOR)
+                    .concat(Messages.GOLD.format()).concat(String.valueOf(currentPlayer.getGold())));
+        } else {
+            if (VEGETABLE_SPOIL - barn.getCountdown() == 1) {
+                stringBuilder.append(Messages.BARN_SPOILS_TOMORROW.format()).append(Shell.LINE_SEPARATOR);
+            } else if (VEGETABLE_SPOIL - barn.getCountdown() > 1) {
+                stringBuilder.append((Messages.BARN_SPOILS.format(VEGETABLE_SPOIL - barn.getCountdown())))
+                        .append(Shell.LINE_SEPARATOR);
+            }
+        }
+
+        int sum = barn.getVegetablesList().size();
+        int sumLength = String.valueOf(sum).length();
+        int goldLength = String.valueOf(currentPlayer.getGold()).length();
+        int lengthOfStringMax = 0;
+        int lengthOfIntMax = 0;
+
+        for (PriceRatio listValue : vegetablesInBarn) {
+            if (listValue.getVegetable().length() > lengthOfStringMax) {
+                lengthOfStringMax = listValue.getVegetable().length();
+            }
+            int lengthOfPrize = String.valueOf(listValue.getNumber()).length();
+            if (lengthOfPrize > lengthOfIntMax) {
+                lengthOfIntMax = lengthOfPrize;
+            }
+        }
+
+        if (sumLength > lengthOfIntMax) { lengthOfIntMax = sumLength; }
+        if (goldLength > lengthOfIntMax) { lengthOfIntMax = goldLength; }
+
+        String formatBarn = CREATE_FLUSH_RIGHT1 + lengthOfStringMax + CREATE_FLUSH_RIGHT2 + lengthOfIntMax
+                + CREATE_FLUSH_RIGHT3 + Shell.LINE_SEPARATOR;
+        for (PriceRatio listValue : vegetablesInBarn) {
+            stringBuilder.append(String.format(formatBarn, listValue.getVegetable(), listValue.getNumber()));
+        }
+
+        stringBuilder.append(Messages.HYPHEN.format().repeat(lengthOfIntMax + lengthOfStringMax))
+                .append(Shell.LINE_SEPARATOR);
+        stringBuilder.append(String.format(formatBarn, Messages.SUM.format(), sum)).append(Shell.LINE_SEPARATOR);
+        stringBuilder.append(String.format(formatBarn, Messages.GOLD.format(), currentPlayer.getGold()));
+
+
+        String barnToString = stringBuilder.toString();
+        stringBuilder.delete(0, stringBuilder.length());
+        return barnToString;
+    }*/
 }
