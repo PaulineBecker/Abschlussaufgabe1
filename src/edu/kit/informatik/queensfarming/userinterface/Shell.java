@@ -48,6 +48,7 @@ public class Shell {
     private boolean goldCheck = true;
     private boolean goldCheckWin = true;
     private boolean quitGame = false;
+    private static final int MAX_MOVES = 2;
     private GameInitialiser gameInitialiser = new GameInitialiser(-1, -1, -1, -1);
 
 
@@ -69,65 +70,27 @@ public class Shell {
         QueensFarmGame game = new QueensFarmGame(gameInitialiser.getGoldToWin(), gameInitialiser.getGoldToStart(),
                 gameInitialiser.getNumberOfPlayers(),
                 gameInitialiser.getSeed(), gameInitialiser.getPlayerNames());
-        
+
+        // bevor einlesen einbauen dass player schon gewonnen haben können am anfange weil grold > gold to win
 
         Scanner inputScanner = new Scanner(System.in);
         while (game.isActive()) {
-            String input = inputScanner.nextLine();
-            try {
-                String output = Commands.executeCommand(input, game);
-                if (output != null) {
-                    System.out.println(output);
+            System.out.println(game.startTurn());
+            while (game.playerIsTurning() && (game.getMovesInTurn() < MAX_MOVES)) {
+                String input = inputScanner.nextLine();
+                try {
+                    String output = Commands.executeCommand(input, game);
+                    if (output != null) {
+                        System.out.println(output);
+                    }
+                } catch (final GameException exception) {
+                    System.err.println(exception.getMessage());
                 }
-            } catch (final GameException exception) {
-                System.err.println(exception.getMessage());
             }
+            game.endTurn();
+            game.nextTurn();
         }
         System.out.println(game.endGame());
-
-        /*System.out.println(game.showMarket());
-        System.out.println(game.showBarn());
-
-        game.plant("plant -1 0 carrot");
-        game.nextTurn();
-        System.out.println(game.startTurn());
-        game.nextTurn();
-        game.nextTurn();
-        game.nextTurn();
-        game.nextTurn();
-        System.out.println(game.showBarn());
-        game.nextTurn();
-        System.out.println(game.showBarn());
-        System.out.println(game.sellVegetables("sell tomato"));*/
-
-        /*System.out.println(game.showBarn());
-        System.out.println(game.currentPlayer.getBoardGame().get(1).getVegetablesList());
-        game.nextTurn();
-        System.out.println(game.showBarn());
-        game.plant("plant -1 0 tomato");
-        System.out.println(game.showBarn());
-        game.nextTurn();
-        game.nextTurn();
-        game.nextTurn();
-        System.out.println(game.showBarn());
-        System.out.println(game.currentPlayer.getBoardGame().get(1).getVegetablesList());
-        System.out.println(game.harvest("harvest -1 0 2"));
-        System.out.println(game.showBarn());*/
-
-        /*game.currentPlayer.getBoardGame().get(1).getVegetablesList().add(new Carrot());
-        game.currentPlayer.getBoardGame().get(1).getVegetablesList().add(new Carrot());
-        System.out.println(game.currentPlayer.getBoardGame().get(1).getVegetablesList());
-        System.out.println(game.harvest("harvest -1 0 2"));
-        System.out.println(game.currentPlayer.getBoardGame().get(1).getVegetablesList());
-        System.out.println(game.showBarn());*/
-        /*System.out.println(game.currentPlayer.getGold());
-        System.out.println(game.buyVegetables("buy vegetable tomato"));
-        System.out.println(game.showMarket());
-        System.out.println(game.showBarn());
-        System.out.println(game.buyLand("buy land 2 0"));
-        System.out.println(game.showBarn());
-        System.out.println(game.endGame());*/
-
     }
 
     private String enterPlayerNames(String input) {

@@ -13,6 +13,10 @@ public enum GameState {
      */
     START_TURN,
     /**
+     * ends the turn of a player
+     */
+    END_TURN,
+    /**
      * The game starts a new round.
      * The countdown for vegetable and the barn increases.
      * Vegetables can spoil in the barn.

@@ -121,6 +121,7 @@ public enum Commands {
      */
     END_TURN("end turn") {
         @Override public String execute(String input, QueensFarmGame game) {
+            game.endTurn();
             return null;
         }
     },
@@ -132,7 +133,7 @@ public enum Commands {
 
         @Override public String execute(String input, QueensFarmGame game) {
             game.quit();
-            return game.endGame();
+            return null;
         }
     };
 
@@ -219,7 +220,7 @@ public enum Commands {
     private static void checksVegetableMatch(String vegetable) {
         if (!(vegetable.equals("mushroom") || vegetable.equals("carrot") || vegetable.equals("salad")
                 || vegetable.equals("tomato"))) {
-            throw new GameException("This vegetable is invalid.");
+            throw new GameException("Error: This vegetable is invalid.");
         }
 
     }

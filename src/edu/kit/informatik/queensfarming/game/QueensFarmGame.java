@@ -17,10 +17,7 @@ import edu.kit.informatik.queensfarming.entity.vegetables.Salad;
 import edu.kit.informatik.queensfarming.entity.vegetables.Vegetables;
 import edu.kit.informatik.queensfarming.entity.vegetables.Vegetable;
 import edu.kit.informatik.queensfarming.exception.GameException;
-import edu.kit.informatik.queensfarming.userinterface.ExceptionMessages;
-import edu.kit.informatik.queensfarming.userinterface.ExecutionState;
-import edu.kit.informatik.queensfarming.userinterface.Messages;
-import edu.kit.informatik.queensfarming.userinterface.Shell;
+import edu.kit.informatik.queensfarming.userinterface.*;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
 import edu.kit.informatik.queensfarming.utility.VegetablesOccurence;
 import java.util.Collections;
@@ -58,6 +55,12 @@ public class QueensFarmGame {
      */
     private ExecutionState executionState;
 
+    /**
+     * THe game state of this game
+     */
+    private GameState gameState;
+    private int movesInTurn = 0;
+
     private final TSMarket tsMarket = new TSMarket();
     private final MCMarket mcMarket = new MCMarket();
     private final StringBuilder stringBuilder = new StringBuilder();
@@ -89,6 +92,7 @@ public class QueensFarmGame {
     public QueensFarmGame(int goldToWin, int goldToStart, int playerNumber,
                           long seedToShuffle, List<String> playerNames) {
         this.executionState = ExecutionState.RUNNING;
+        this.gameState = GameState.START_TURN;
         this.goldToWin = goldToWin;
         this.goldToStart = goldToStart;
         this.numberOfPlayers = playerNumber;
@@ -106,6 +110,11 @@ public class QueensFarmGame {
     public void quit() {
         executionState = ExecutionState.EXITED;
     }
+
+    public void endTurn() {
+        gameState = GameState.END_TURN;
+    }
+    public boolean playerIsTurning() { return gameState == GameState.START_TURN; }
 
     /**
      * shows the market with all the different prizes of the vegetables
@@ -163,6 +172,7 @@ public class QueensFarmGame {
                 currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().add(new Tomato());
             }
         }
+        movesInTurn++;
         return Messages.BOUGHT_OBJECT.format(veggie, price);
     }
 
@@ -202,7 +212,7 @@ public class QueensFarmGame {
         unassignedTiles.remove(0);
         currentPlayer.getBoardGame().add(boughtTile);
         currentPlayer.setGold(currentPlayer.getGold() - prize);
-
+        movesInTurn++;
         return Messages.BOUGHT_OBJECT.format(boughtTile.getName(), prize);
     }
 
@@ -234,6 +244,12 @@ public class QueensFarmGame {
             }
             currentTile.getVegetablesList().remove(numberOfVeggies - i);
         }
+        if (currentTile.getVegetablesList().size() == 0) { //TODO vorher return statement problem???
+            tilesInCountdown.remove(currentTile);
+        } else if ((currentTile.getVegetablesList().size() + numberOfVeggies) == currentTile.getCapacity()) {
+            tilesInCountdown.add(currentTile);
+        }
+        movesInTurn++;
         if (numberOfVeggies == 1) {
             return Messages.HARVESTED_LAND.format(numberOfVeggies, veggieName);
         }
@@ -242,12 +258,6 @@ public class QueensFarmGame {
             case(TOMATO) -> veggieName = Vegetable.TOMATO.format();
             case(SALAD) -> veggieName = Vegetable.SALAT.format();
             case(CARROT) -> veggieName = Vegetable.CARROT.format();
-        }
-
-        if (currentTile.getVegetablesList().size() == 0) {
-            tilesInCountdown.remove(currentTile);
-        } else if ((currentTile.getVegetablesList().size() + numberOfVeggies) == currentTile.getCapacity()) {
-            tilesInCountdown.add(currentTile);
         }
         return Messages.HARVESTED_LAND.format(numberOfVeggies, veggieName);
     }
@@ -287,6 +297,7 @@ public class QueensFarmGame {
             }
         }
         resetCountdown();
+        movesInTurn++;
         tilesInCountdown.add(currentPlayer.getBoardGame().get(indexToPlantOn));
     }
 
@@ -319,7 +330,7 @@ public class QueensFarmGame {
         }
         int newGold = currentPlayer.getGold() - goldBeforeMove;
         resetCountdown();
-
+        movesInTurn++;
         if (soldVeggies == 1) {
             return Messages.SELL_VEGETABLES.format(soldVeggies, VegetablesOccurence.VEGETABLE.format(), newGold);
         }
@@ -372,6 +383,7 @@ public class QueensFarmGame {
      */
 
     public String startTurn() {
+        gameState = GameState.START_TURN;
         stringBuilder.append(Shell.LINE_SEPARATOR);
         stringBuilder.append(Messages.TURN_OF_PLAYER.format(currentPlayer.getName())).append(Shell.LINE_SEPARATOR);
         if (currentPlayer.getGrownVegetables() == 1) {
@@ -403,6 +415,9 @@ public class QueensFarmGame {
         } else {
             currentPlayer = playerList.get(playerList.indexOf(currentPlayer) + INDEX_OF_NEXT_PLAYER);
         }
+        movesInTurn = 0;
+        gameState = gameState.START_TURN;
+
 
     }
 
@@ -463,6 +478,10 @@ public class QueensFarmGame {
         if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().isEmpty()) {
             currentPlayer.getBoardGame().get(BARN_INDEX).setCountdown(Tile.COUNTDOWN_START);
         }
+    }
+
+    public int getMovesInTurn() {
+        return movesInTurn;
     }
 
     private String barnToString(List<PriceRatio> vegetablesInBarn) {
