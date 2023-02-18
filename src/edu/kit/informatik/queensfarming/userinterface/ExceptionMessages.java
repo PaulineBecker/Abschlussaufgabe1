@@ -10,18 +10,9 @@ public enum ExceptionMessages {
      */
     ERROR_ILLEGAL_COMMANDO_LINE_ARGUMENTS("Error: Commando Line Arguments are not allowed"),
     /**
-     * Error message in case of the number of players is a too high to parse to an int.
-     */
-    TOO_HIGH_THAN_INT("Error: The number of players is too high. Please enter a lower number of players"),
-
-    /**
      * Error message if the number of players is not valid.
      */
     NUMBER_OF_PLAYERS_INVALID("Error: Please enter the right number of players"),
-    /**
-     * Error message in case of the amount of gold is a too high to parse to an int.
-     */
-    GOLD_TOO_HIGH("Error: The amount of gold is too high. Please enter a lower amount of gold"),
     /**
      * Error message in case of the amount of gold is not a valid number.
      */
@@ -37,11 +28,15 @@ public enum ExceptionMessages {
     /**
      * Error message if the seed to shuffle the tiles is not in the range of a long.
      */
-    SEED_TO_HIGH("Error: The number of seed is too high. Please enter a lower number of seed"),
+    TO_HIGH_NOT_NUMERIC("Error: The %s too high or not numeric to parse to an int."),
     /**
      * Error message if the vegetable on the specific tile is not allowed to plant.
      */
     UNALLOWED_VEGETABLE("Error: It is not allowed to plant a %s on this tile."),
+    /**
+     * Error message if the player tries to plant on a negativ yCoordinate that is not part of the gameboard.
+     */
+    NEGATIVE_COORDINATE("Error: The tile is not part of the game board."),
     /**
      * Error message if the vegetable on the specific tile is not allowed to plant.
      */

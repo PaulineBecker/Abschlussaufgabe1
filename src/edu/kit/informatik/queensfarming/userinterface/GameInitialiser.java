@@ -46,11 +46,7 @@ public class GameInitialiser {
     public int enterNumberOfPlayers(String input) {
 
         if (input.matches("[1-9][0-9]*")) {
-            try {
-                return Integer.parseInt(input);
-            } catch (final NumberFormatException error) {
-                throw new GameException(ExceptionMessages.TOO_HIGH_THAN_INT.format());
-            }
+            return checkNumeric(input);
         } else throw new GameException(ExceptionMessages.NUMBER_OF_PLAYERS_INVALID.format());
     }
 
@@ -61,11 +57,7 @@ public class GameInitialiser {
      */
     public int enterGoldToWin(String input) {
         if (input.matches("[1-9][0-9]*")) {
-            try {
-                return Integer.parseInt(input);
-            } catch (final NumberFormatException error) {
-                throw new GameException(ExceptionMessages.GOLD_TOO_HIGH.format());
-            }
+            return checkNumeric(input);
         } else throw new GameException(ExceptionMessages.GOLDWIN_INVALID.format());
     }
 
@@ -76,11 +68,7 @@ public class GameInitialiser {
      */
     public int enterGoldToStart(String input) {
         if (input.matches("[0-9]+")) {
-            try {
-                return Integer.parseInt(input);
-            } catch (final NumberFormatException error) {
-                throw new GameException(ExceptionMessages.GOLD_TOO_HIGH.format());
-            }
+            return checkNumeric(input);
         } else throw new GameException(ExceptionMessages.GOLDSTART_INVALID.format());
     }
 
@@ -91,12 +79,22 @@ public class GameInitialiser {
      */
     public long enterSeed(String input) {
         if (input.matches("[0-9]+")) {
-            try {
-                return Long.parseLong(input);
-            } catch (final NumberFormatException error) {
-                throw new GameException(ExceptionMessages.SEED_TO_HIGH.format());
-            }
+            return checkNumeric(input);
         } else throw new GameException(ExceptionMessages.SEED_INVALID.format());
+    }
+
+    /**
+     * checks if the given input is a valid number to parse to an int
+     * @throws GameException if you can't parse it to an int
+     * @param inputNumber the given input of a player
+     * @return the input in form of an int
+     */
+    public static int checkNumeric(String inputNumber) {
+        try {
+            return Integer.parseInt(inputNumber);
+        } catch (NumberFormatException exception) {
+            throw new GameException(ExceptionMessages.TO_HIGH_NOT_NUMERIC.format(inputNumber));
+        }
     }
 
     /**

@@ -130,11 +130,10 @@ public class QueensFarmGame {
      * @return the String with the prize for the bought vegetable and the name of the vegetable
      */
 
-    public String buyVegetables(String input) {
-        String[] splittedString = input.split(Shell.COMMAND_SEPERATOR);
+    public String buyVegetable(String input) {
         int price = 0;
         String veggie = Shell.COMMAND_SEPERATOR;
-        switch(splittedString[2]) {
+        switch(input) {
             case (MUSHROOM) -> {
                 price = mcMarket.getCurrentMushroomPrice();
                 isVegetableBuyAllowed(price); //TODO try catch for each case
@@ -173,13 +172,12 @@ public class QueensFarmGame {
      * the players gets the first tile of the shuffled cards and has to pay the prize for gold
      * @throws GameException if player doesn't have enough gold, if the place on the game board is already used or
      * if there are no cards to buy left
-     * @param input input from player that matches the buy command
+     * @param coordinates input from player that matches the buy command
      * @return the prize of the land and which tile the player has bought
      */
-    public String buyLand(String input) {
-        String[] splittedString = input.split(Shell.COMMAND_SEPERATOR);
-        int xCoordinate = Integer.parseInt(splittedString[2]);
-        int yCoordinate = Integer.parseInt(splittedString[3]);
+    public String buyLand(List<Integer> coordinates) {
+        int xCoordinate = coordinates.get(0);
+        int yCoordinate = coordinates.get(1);
         if (unassignedTiles.size() == 0) {
             throw new GameException("Error: all Tiles are already used on the player's game board"); //TODO try und catch nicht vergessen
         }
@@ -253,12 +251,11 @@ public class QueensFarmGame {
      *
      * @param input the give input from the player
      */
-    public void plant(String input) {
-        String[] splittedString = input.split(Shell.COMMAND_SEPERATOR);
-        int xCoordinate = Integer.parseInt(splittedString[1]);
-        int yCoordinate = Integer.parseInt(splittedString[2]);
+    public void plant(String[] input) {
+        int xCoordinate = Integer.parseInt(input[0]);
+        int yCoordinate = Integer.parseInt(input[1]);
         int indexToPlantOn = isTileBought(xCoordinate, yCoordinate); //TODO Try and catch
-        String veggieToPlant = splittedString[3];
+        String veggieToPlant = input[2];
         checksIllegalBarnMove(xCoordinate, yCoordinate); //TODO try catch
         if (!currentPlayer.getBoardGame().get(indexToPlantOn).getVegetablesList().isEmpty()) {
             throw new GameException("Error: The tile you want to plant on is not empty.");
@@ -287,26 +284,25 @@ public class QueensFarmGame {
 
     /**
      * sells all the vegetables the player want to. He can say sell all (whole barn) or concrets vegetables from barn
-     * @param input input that machtes to the sell action in the game
+     * @param input input that matches to the sell action in the game
      * @return the String with the amount of sold vegetable and the gold prize a player gets for the vegetables
      */
 
-    public String sellVegetables(String input) { //TODO was tun wenn nur ein Teil der veggies vorhanden ist in Barn
+    public String sellVegetables(String[] input) { //TODO was tun wenn nur ein Teil der veggies vorhanden ist in Barn
         int goldBeforeMove = currentPlayer.getGold();
         int soldVeggies = 0;
-        String[] splittedString = input.split(Shell.COMMAND_SEPERATOR);
-        if (splittedString.length == 1) {
+        if (input.length == 0) {
             return Messages.SELL_VEGETABLES.format(0, VegetablesOccurence.VEGETABLES.format(), 0);
-        } else if (splittedString[1].equals("all")) {
+        } else if (input[0].equals("all")) {
             for (int i = currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size() - 1; i >= 0; i--) {
                 sellOneVegetable(i);
                 soldVeggies++;
             }
-        } else if (!splittedString[1].equals("all")) {
-            for (int i = 1; i < splittedString.length; i++) {
+        } else {
+            for (int i = 0; i < input.length; i++) {
                 for (int j = currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size() - 1; j >= 0; j--) {
                     if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().
-                            get(j).getName().equals(splittedString[i])) {
+                            get(j).getName().equals(input[i])) {
                         sellOneVegetable(j);
                         soldVeggies++;
                     }
