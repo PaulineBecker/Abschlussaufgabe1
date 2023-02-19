@@ -5,28 +5,17 @@ import edu.kit.informatik.queensfarming.userinterface.Shell;
 import java.util.List;
 
 /**
- * represents the marekt where players can buy vegetables.
+ * represents the market where players can buy vegetables.
  * Prices will adapt if a player has sold vegetables.
  *
  * @author uyxib
  * @version 1.0
  */
 public abstract class Market {
-    private static final String CREATE_FLUSH_RIGHT1 = "%-";
-    private static final String CREATE_FLUSH_RIGHT2 = "s%";
-    private static final String CREATE_FLUSH_RIGHT3 = "d";
-    private StringBuilder stringBuilder = new StringBuilder();
-
-    /**
-     * instantiates the market with its priceTables and the currentPrizes
-     */
-    protected Market() {
-        this.priceTable = new int[5][2];
-    }
     /**
      * the price conversion to change prices on the market
      */
-    protected static final int SIZE_OF_PRIZETABLE = 2;
+    protected static final int SIZE_OF_PRICETABLE = 2;
 
     /**
      * maximal index of a price table
@@ -41,6 +30,10 @@ public abstract class Market {
      * conversion factor to calculate the index change of a price table
      */
     protected static final int PRICE_CONVERSION = 2;
+    private static final String CREATE_FLUSH_RIGHT1 = "%-";
+    private static final String CREATE_FLUSH_RIGHT2 = "s%";
+    private static final String CREATE_FLUSH_RIGHT3 = "d";
+
     /**
      * current index of the price table
      */
@@ -51,8 +44,15 @@ public abstract class Market {
     protected final int[][] priceTable;
 
 
+    private final StringBuilder stringBuilder = new StringBuilder();
 
 
+    /**
+     * instantiates the market with its priceTables and the currentPrizes
+     */
+    protected Market() {
+        this.priceTable = new int[5][2];
+    }
 
     /**
      * sets the new price level after vegetables where sold on the different markets

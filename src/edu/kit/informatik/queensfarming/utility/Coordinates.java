@@ -6,7 +6,7 @@ package edu.kit.informatik.queensfarming.utility;
  * @author uyxib
  * @version 1.0
  */
-public class Coordinates implements Comparable<Coordinates>{
+public class Coordinates implements Comparable<Coordinates> {
 
     private int xCoordinate;
     private int yCoordinate;

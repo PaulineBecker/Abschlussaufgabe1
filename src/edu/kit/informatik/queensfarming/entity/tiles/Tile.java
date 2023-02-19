@@ -62,6 +62,16 @@ public abstract class Tile {
 
     protected List<Vegetables> vegetablesList = new ArrayList<>();
 
+    /**
+     * Instantiates a new Tile with its id, name , capacity, countdown, coordinates and the abbreviation of the tile
+     * @param id int value of the tile
+     * @param name name representation of the tile
+     * @param capacity capacity of the tile how much vegetable can plant there
+     * @param countdown how long it takes till vegetables are grown on the tile
+     * @param coordinates coordinates where the tile is located on the board game of a player
+     * @param abbreviation abbreviation / short representation of the Tile
+     */
+
     protected Tile(int id, String name, int capacity, int countdown, Coordinates coordinates, String abbreviation) {
         this.id = id;
         this.name = name;
@@ -71,67 +81,89 @@ public abstract class Tile {
         this.abbreviation = abbreviation;
     }
 
+    /**
+     * gets the ID of a tile
+     * @return ID of a tile
+     */
     public int getId() {
         return id;
     }
+
+    /**
+     * gets the name of a tile
+     * @return name of a tile
+     */
 
     public String getName() {
         return name;
     }
 
+    /**
+     * gets the capacity of a tile
+     * @return capacity of a tile
+     */
+
     public int getCapacity() {
         return capacity;
     }
+
+    /**
+     * gets the list of vegetables that are allowed to grow on the tile
+     * @return list of vegetables that can grown on the tile
+     */
 
     public List<Vegetables> getAllowedVegetables() {
         return allowedVegetables;
     }
 
+    /**
+     * gets the countdown of a tile
+     * @return countdown of a tile
+     */
     public int getCountdown() {
         return countdown;
     }
+
+    /**
+     * gets the coordinates of a tile where the tile is located on the board game of a player
+     * @return coordinates of a tile
+     */
 
     public Coordinates getCoordinates() {
         return coordinates;
     }
 
+    /**
+     * gets the abbreviation of a tile, the way the tile is represented on the board game
+     * @return abbreviation of a tile
+     */
+
     public String getAbbreviation() {
         return abbreviation;
     }
+
+    /**
+     * gets the list of vegetables that are in the given moment planted on a tile
+     * @return the list of vegetables growing on the tile
+     */
 
     public List<Vegetables> getVegetablesList() {
         return vegetablesList;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public void setAllowedVegetables(List<Vegetables> allowedVegetables) {
-        this.allowedVegetables = allowedVegetables;
-    }
-
+    /**
+     * sets the countdown of a tile how long it takes till vegetables are grown or spoiled (if tile is the barn)
+     * @param countdown countdown of a tile
+     */
     public void setCountdown(int countdown) {
         this.countdown = countdown;
     }
 
+    /**
+     * sets the coordinates of a tile
+     * @param coordinates new coordinates of the tile
+     */
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
-    }
-
-    public void setAbbreviation(String abbreviation) {
-        this.abbreviation = abbreviation;
-    }
-
-    public void setVegetablesList(List<Vegetables> vegetablesList) {
-        this.vegetablesList = vegetablesList;
     }
 }

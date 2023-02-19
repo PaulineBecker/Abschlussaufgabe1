@@ -1,7 +1,7 @@
 package edu.kit.informatik.queensfarming.entity.vegetables;
 
 /**
- * represents a specific vegetable: carrot that is a vegetable (hereditiy).
+ * represents a specific vegetable: carrot that is a vegetable (heredity).
  * Carrots are part of the game that you can harvest, sell or store in the barn.
  *
  * @author uyxib
@@ -9,9 +9,9 @@ package edu.kit.informatik.queensfarming.entity.vegetables;
  */
 public class Carrot extends Vegetables {
     private static final int GROW_TIME = 1;
-    private static final String NAME = "carrot";
-    private static final String ABBREVIATION = "C";
-    private static final int ID = 1;
+    private static final String C_NAME = "carrot";
+    private static final String C_ABBREVIATION = "C";
+    private static final int C_ID = 1;
 
     /**
      * instantiates the vegetable carrot with its name, an abbreviation, an ID and the time it takes till the
@@ -19,7 +19,7 @@ public class Carrot extends Vegetables {
      */
 
     public Carrot() {
-        super(GROW_TIME, ABBREVIATION, NAME, ID);
+        super(GROW_TIME, C_ABBREVIATION, C_NAME, C_ID);
     }
 
 

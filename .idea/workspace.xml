@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a17fd35d-4e83-47e6-bfca-6a1e879eb002" name="Changes" comment="done for today - barn spoil is not working!">
+    <list default="true" id="a17fd35d-4e83-47e6-bfca-6a1e879eb002" name="Changes" comment="first time beispielinteraktion läuft - game klasse noch verkleindern todo">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/MCMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/MCMarket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/Market.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/TSMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/TSMarket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Forest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Forest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/LargeField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/LargeField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/LargeForest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/LargeForest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Carrot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Carrot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Mushroom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Mushroom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Salad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Salad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Tomato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Tomato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Vegetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Vegetable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Vegetables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Vegetables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Commands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/ExceptionMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/ExceptionMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/GameInitialiser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/GameInitialiser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Messages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/utility/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/utility/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/utility/VegetablesOccurence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/utility/VegetablesOccurence.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -70,7 +81,7 @@
       <workItem from="1676374495433" duration="1890000" />
       <workItem from="1676387127046" duration="44468000" />
       <workItem from="1676475343188" duration="119236000" />
-      <workItem from="1676736827420" duration="41187000" />
+      <workItem from="1676736827420" duration="51359000" />
     </task>
     <task id="LOCAL-00001" summary="firstVersion">
       <created>1676475243431</created>
@@ -142,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676752539454</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="first time beispielinteraktion läuft - game klasse noch verkleindern todo">
+      <created>1676827491023</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1676827491023</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,7 +188,8 @@
     <MESSAGE value="evening save" />
     <MESSAGE value="first try all functionality without barn" />
     <MESSAGE value="done for today - barn spoil is not working!" />
-    <option name="LAST_COMMIT_MESSAGE" value="done for today - barn spoil is not working!" />
+    <MESSAGE value="first time beispielinteraktion läuft - game klasse noch verkleindern todo" />
+    <option name="LAST_COMMIT_MESSAGE" value="first time beispielinteraktion läuft - game klasse noch verkleindern todo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -184,45 +203,24 @@
           </properties>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java</url>
+          <line>225</line>
+          <properties class="edu.kit.informatik.queensfarming.game.QueensFarmGame" method="harvest">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java</url>
-          <line>460</line>
+          <line>468</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java</url>
-          <line>395</line>
+          <line>403</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
-          <line>109</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
-          <line>110</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
-          <line>112</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
-          <line>111</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
-          <line>113</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
-          <line>148</line>
-          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

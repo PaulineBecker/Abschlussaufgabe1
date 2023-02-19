@@ -6,13 +6,12 @@ import edu.kit.informatik.queensfarming.entity.tiles.Garden;
 import edu.kit.informatik.queensfarming.entity.tiles.Tile;
 import edu.kit.informatik.queensfarming.entity.tiles.Field;
 import edu.kit.informatik.queensfarming.entity.vegetables.*;
-import edu.kit.informatik.queensfarming.exception.GameException;
-import edu.kit.informatik.queensfarming.userinterface.ExceptionMessages;
 import edu.kit.informatik.queensfarming.userinterface.Messages;
 import edu.kit.informatik.queensfarming.userinterface.Shell;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -43,7 +42,7 @@ public class Player {
     private final String name;
     private List<Tile> boardGame = new ArrayList<>();
     private int grownVegetables = 0;
-    private StringBuilder stringBuilder = new StringBuilder();
+    private final StringBuilder stringBuilder = new StringBuilder();
 
     /**
      * Instantiates a new player who is playing the Queens Farm Game
@@ -96,8 +95,8 @@ public class Player {
     }
 
     /**
-     * get the boardGarme of a player with all its tiles
-     * @return borad Game of a player
+     * get the board Game of a player with all its tiles
+     * @return board Game of a player
      */
 
 
@@ -106,18 +105,17 @@ public class Player {
     }
 
     /**
-     * sets the boards game with all its tiles
-     * @param boardGame boardgame list with tiles
+     * return the amount of vegetables that are grown during the last round
+     * @return the amount of vegetables that are grown during the last round
      */
-
-    public void setBoardGame(List<Tile> boardGame) {
-        this.boardGame = boardGame;
-    }
-
     public int getGrownVegetables() {
         return grownVegetables;
     }
 
+    /**
+     * sets the amount of vegetables that are grown during the last round
+     * @param grownVegetables the amount of vegetables that are grown during the last round
+     */
     public void setGrownVegetables(int grownVegetables) {
         this.grownVegetables = grownVegetables;
     }
@@ -129,11 +127,11 @@ public class Player {
      * @return the visual representation of the game board of a player
      */
     public String boardToString() {
-        int maxiumHeight = getBoardHeight();
+        int maximumHeight = getBoardHeight();
         int leftBoardCoordinate = getLeftBoardElement();
         int rightBoardCoordinate = getRightBoardElement();
 
-        for (int y = maxiumHeight; y >= 0; y--) {
+        for (int y = maximumHeight; y >= 0; y--) {
             stringBuilder.append(getLeftBoardSide(leftBoardCoordinate, y));
             for (int x = leftBoardCoordinate; x <= rightBoardCoordinate; x++) {
                 if (x == 0 && y == 0) {
@@ -160,7 +158,7 @@ public class Player {
                 } else if (getCurrentTile(i, y) != null) {
                     stringBuilder.append(secondTileLine(getCurrentTile(i, y))).append(PIPE);
                 } else {
-                stringBuilder.append(notBoardTileToString(i, y));
+                    stringBuilder.append(notBoardTileToString(i, y));
                 }
             }
             stringBuilder.append(Shell.LINE_SEPARATOR).append(getLeftBoardSide(leftBoardCoordinate, y));
@@ -170,7 +168,7 @@ public class Player {
                 } else if (getCurrentTile(j, y) != null) {
                     stringBuilder.append(thirdTileLine(getCurrentTile(j, y))).append(PIPE);
                 } else {
-                stringBuilder.append(notBoardTileToString(j, y));
+                    stringBuilder.append(notBoardTileToString(j, y));
                 }
             }
             stringBuilder.append(Shell.LINE_SEPARATOR);
@@ -180,7 +178,12 @@ public class Player {
         return visualBoard;
     }
 
-
+    /**
+     * creates the String representation of players barn. Checks if the barn is empty, then just prints the amount
+     * of gold that a player has.
+     * The barn string includes as well the calculated sum of the vegetables in the barn
+     * @return the String representation of the barn of the player
+     */
     public String barnToString() {
         List<PriceRatio> vegetablesInBarn = createVegetableList();
         Tile barn = boardGame.get(INDEX_OF_BARN);
@@ -231,34 +234,6 @@ public class Player {
         return barnToString;
     }
 
-    /*public void plant(String[] input) {
-        int xCoordinate = Integer.parseInt(input[0]);
-        int yCoordinate = Integer.parseInt(input[1]);
-        int indexToPlantOn = isTileBought(xCoordinate, yCoordinate);
-        String veggieToPlant = input[2];
-        checksIllegalBarnMove(xCoordinate, yCoordinate);
-        if (!currentPlayer.getBoardGame().get(indexToPlantOn).getVegetablesList().isEmpty()) {
-            throw new GameException("Error: The tile you want to plant on is not empty.");
-        }
-
-        checkAllowedVeggies(veggieToPlant, indexToPlantOn);
-        checkVeggiesInBarn(veggieToPlant);
-
-        switch (veggieToPlant) {
-            case (MUSHROOM) -> currentPlayer.getBoardGame().get(indexToPlantOn).getVegetablesList().add(new Mushroom());
-            case (CARROT) -> currentPlayer.getBoardGame().get(indexToPlantOn).getVegetablesList().add(new Carrot());
-            case (SALAD) -> currentPlayer.getBoardGame().get(indexToPlantOn).getVegetablesList().add(new Salad());
-            case (TOMATO) -> currentPlayer.getBoardGame().get(indexToPlantOn).getVegetablesList().add(new Tomato());
-        }
-
-        for (int i = 0; i < currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size(); i++) {
-            if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().
-                    get(i).getName().equals(veggieToPlant)) {
-                currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().remove(i);
-                break;
-            }
-        }
-    }*/
 
     private int countVegetables(int id) {
         int count = 0;
@@ -281,15 +256,15 @@ public class Player {
         vegetablesInBarn.add(new PriceRatio(Vegetable.TOMATO.format()
                 + Messages.COLON.format(), countVegetables(2)));
         vegetablesInBarn.removeIf(vegetablesCount -> vegetablesCount.getNumber() == 0);
-        vegetablesInBarn.sort((o1, o2) -> Integer.compare(o1.getNumber(), o2.getNumber()));
+        vegetablesInBarn.sort(Comparator.comparingInt(PriceRatio::getNumber));
         return vegetablesInBarn;
     }
 
     private int getBoardHeight() {
         int maximumHeight = 0;
-        for (int i = 0; i < boardGame.size(); i++) {
-            if (boardGame.get(i).getCoordinates().getyCoordinate() > maximumHeight) {
-                maximumHeight = boardGame.get(i).getCoordinates().getyCoordinate();
+        for (Tile tile : boardGame) {
+            if (tile.getCoordinates().getyCoordinate() > maximumHeight) {
+                maximumHeight = tile.getCoordinates().getyCoordinate();
             }
         }
         return maximumHeight;
@@ -297,9 +272,9 @@ public class Player {
 
     private int getLeftBoardElement() {
         int leftestBoardCoordinate = 0;
-        for (int i = 0; i < boardGame.size(); i++) {
-            if (boardGame.get(i).getCoordinates().getxCoordinate() < leftestBoardCoordinate) {
-                leftestBoardCoordinate = boardGame.get(i).getCoordinates().getxCoordinate();
+        for (Tile tile : boardGame) {
+            if (tile.getCoordinates().getxCoordinate() < leftestBoardCoordinate) {
+                leftestBoardCoordinate = tile.getCoordinates().getxCoordinate();
             }
         }
         return leftestBoardCoordinate;
@@ -307,15 +282,15 @@ public class Player {
 
     private int getRightBoardElement() {
         int rightestBoardCoordinate = 0;
-        for (int i = 0; i < boardGame.size(); i++) {
-            if (boardGame.get(i).getCoordinates().getxCoordinate() > rightestBoardCoordinate) {
-                rightestBoardCoordinate = boardGame.get(i).getCoordinates().getxCoordinate();
+        for (Tile tile : boardGame) {
+            if (tile.getCoordinates().getxCoordinate() > rightestBoardCoordinate) {
+                rightestBoardCoordinate = tile.getCoordinates().getxCoordinate();
             }
         }
         return rightestBoardCoordinate;
     }
 
-    private String firstTileLine (Tile tile) {
+    private String firstTileLine(Tile tile) {
         int lengthOfAbbreviation = tile.getAbbreviation().length();
         if (lengthOfAbbreviation == 1) {
             stringBuilder.append(Shell.COMMAND_SEPERATOR).append(tile.getAbbreviation())
@@ -337,7 +312,7 @@ public class Player {
      * creates the second line of the representation of a tile, the abbreviation of the vegetable that is grown
      * of a tile,
      * @param tile the given tile of a game board
-     * @return the representation string of the second Line of a tile if theres no vegetable on a string with spaces
+     * @return the representation string of the second Line of a tile if there's no vegetable on a string with spaces
      */
     private String secondTileLine(Tile tile) {
         if (tile.getVegetablesList().isEmpty()) {
@@ -369,7 +344,7 @@ public class Player {
     /**
      * get the current tile from the list of board tiles to represent the tile on the right position of the game board
      * @param xCoordinate x-Coordinate of the tile the method is looking for
-     * @param yCoordinate y-Coordinate of the tile the mehtod is looking for
+     * @param yCoordinate y-Coordinate of the tile the method is looking for
      * @return the tile the method is looking for with the given coordinates, if tile is not found return null
      */
     private Tile getCurrentTile(int xCoordinate, int yCoordinate) {

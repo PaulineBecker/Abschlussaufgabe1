@@ -5,7 +5,7 @@ import edu.kit.informatik.queensfarming.entity.vegetables.Mushroom;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
 
 /**
- * represents the Large Forest Tile on the game board with it's capacity, id, name and abbreviation
+ * represents the Large Forest Tile on the game board with its capacity, id, name and abbreviation
  *
  * @author uyxib
  * @version 1.0

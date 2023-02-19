@@ -21,7 +21,7 @@ public class MCMarket extends Market {
     private int currentCarrotPrice;
 
     /**
-     * instantiates a new markt of mushrooms and carrots with ist pricetable
+     * instantiates a new markt of mushrooms and carrots with ist price table
      */
 
     public MCMarket() {
@@ -60,7 +60,7 @@ public class MCMarket extends Market {
      */
     @Override
     public List<PriceRatio> createPrizeTable() {
-        List<PriceRatio> priceTable = new ArrayList<>(SIZE_OF_PRIZETABLE);
+        List<PriceRatio> priceTable = new ArrayList<>(SIZE_OF_PRICETABLE);
         priceTable.add(new PriceRatio(Vegetable.MUSHROOM.format()
                 + Messages.COLON.format(), getCurrentMushroomPrice()));
         priceTable.add(new PriceRatio(Vegetable.CARROT.format()

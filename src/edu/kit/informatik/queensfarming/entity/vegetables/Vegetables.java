@@ -1,8 +1,8 @@
 package edu.kit.informatik.queensfarming.entity.vegetables;
 
 /**
- * represents the abstract supercalls vegetable (hereditiy).
- * There are four types of vegetables (Carrots, Mushrooms, Salad, Tomatos),
+ * represents the abstract supercalls vegetable (heredity).
+ * There are four types of vegetables (Carrots, Mushrooms, Salad, Tomatoes),
  * they are part of the game that you can harvest, sell or store in the barn.
  *
  * @author uyxib
@@ -15,7 +15,7 @@ public abstract class Vegetables {
      */
     protected int timeToGrow;
     /**
-     * the abbreviation of a vegetable that is visible on the gameboard
+     * the abbreviation of a vegetable that is visible on the game board
      */
     protected String abbreviation;
     /**
@@ -73,7 +73,7 @@ public abstract class Vegetables {
 
     /**
      * return the ID of a specific vegetable
-     * @return ID of a specifitc vegetable
+     * @return ID of a specific vegetable
      */
     public int getId() {
         return id;

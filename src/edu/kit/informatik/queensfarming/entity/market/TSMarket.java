@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * represents the price table of the market with tomatos and salad
- * the prizes of the two vegetables change when tomatos or salad is sold
+ * represents the price table of the market with tomatoes and salad
+ * the prizes of the two vegetables change when tomatoes or salad is sold
  *
  * @author uyxib
  * @version 1.0
@@ -21,7 +21,7 @@ public class TSMarket extends Market {
     private int currentSalatPrice;
 
     /**
-     * instantiates a new markt of salad and tomatos with ist pricetable
+     * instantiates a new markt of salad and tomatoes with ist price table
      */
 
     public TSMarket() {
@@ -40,15 +40,15 @@ public class TSMarket extends Market {
     }
 
     /**
-     * change the prices of tomatos and salad depending on the amount of sold vegetables
+     * change the prices of tomatoes and salad depending on the amount of sold vegetables
      * if no vegetables where sold, the prizes don't change
      *
-     * @param soldTomatos tomatos that have been sold in the last turn
+     * @param soldTomatoes tomatoes that have been sold in the last turn
      * @param soldSalats salad that have been sold in the last turn
      */
     @Override
-    public void changePrices(int soldTomatos, int soldSalats) {
-        int difference = (soldTomatos - soldSalats) / Market.PRICE_CONVERSION;
+    public void changePrices(int soldTomatoes, int soldSalats) {
+        int difference = (soldTomatoes - soldSalats) / Market.PRICE_CONVERSION;
         this.currentPrice = setPriceLevel(currentPrice, difference);
         this.currentSalatPrice = this.priceTable[this.currentPrice][SALAT_INDEX];
         this.currentTomatoPrice = this.priceTable[this.currentPrice][TOMATO_INDEX];
@@ -60,7 +60,7 @@ public class TSMarket extends Market {
      */
     @Override
     public List<PriceRatio> createPrizeTable() {
-        List<PriceRatio> priceTable = new ArrayList<>(SIZE_OF_PRIZETABLE);
+        List<PriceRatio> priceTable = new ArrayList<>(SIZE_OF_PRICETABLE);
         priceTable.add(new PriceRatio(Vegetable.TOMATO.format()
                 + Messages.COLON.format(), getCurrentTomatoPrice()));
         priceTable.add(new PriceRatio(Vegetable.SALAT.format()

@@ -6,7 +6,7 @@ import edu.kit.informatik.queensfarming.entity.vegetables.Tomato;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
 
 /**
- * represents the Field Tile on the game board with it's capacity, id, name and abbreviation
+ * represents the Field Tile on the game board with its capacity, id, name and abbreviation
  *
  * @author uyxib
  * @version 1.0

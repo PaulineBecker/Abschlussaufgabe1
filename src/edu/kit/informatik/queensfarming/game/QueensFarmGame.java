@@ -14,7 +14,6 @@ import edu.kit.informatik.queensfarming.entity.vegetables.Mushroom;
 import edu.kit.informatik.queensfarming.entity.vegetables.Tomato;
 import edu.kit.informatik.queensfarming.entity.vegetables.Carrot;
 import edu.kit.informatik.queensfarming.entity.vegetables.Salad;
-import edu.kit.informatik.queensfarming.entity.vegetables.Vegetable;
 import edu.kit.informatik.queensfarming.exception.GameException;
 import edu.kit.informatik.queensfarming.userinterface.*;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
@@ -74,6 +73,7 @@ public class QueensFarmGame {
     private int soldTomato = 0;
     private final List<String> nameList;
     private final List<Tile> unassignedTiles = new ArrayList<>();
+    private final QueensFarmBoard board = new QueensFarmBoard();
 
     /**
      * instantiates a new Queens Farm Game with the start gold, gold to win, number of players, player names and seed
@@ -224,7 +224,16 @@ public class QueensFarmGame {
      * @return the string how many vegetables where successfully harvested and which vegetable exactly
      */
     public String harvest(int[] input) {
-        int xCoordinate = input[0];
+        String harvestOutput = board.harvest(input, currentPlayer);
+        if (board.getCurrentTile(input, currentPlayer).getVegetablesList().size() == 0) { //TODO vorher return statement problem???
+            tilesInCountdown.remove(board.getCurrentTile(input, currentPlayer));
+        } else if ((board.getCurrentTile(input, currentPlayer).getVegetablesList().size()
+                + board.getNumberOfHarvestVeggies(input)) == board.getCurrentTile(input, currentPlayer).getCapacity()) {
+            tilesInCountdown.add(board.getCurrentTile(input, currentPlayer));
+        }
+        movesInTurn++;
+        return harvestOutput;
+        /*int xCoordinate = input[0];
         int yCoordinate = input[1];
         int numberOfVeggies = input[2];
         int indexToHarvestOn = isTileBought(xCoordinate, yCoordinate);
@@ -258,18 +267,17 @@ public class QueensFarmGame {
             case(SALAD) -> veggieName = Vegetable.SALAT.format();
             case(CARROT) -> veggieName = Vegetable.CARROT.format();
         }
-        return Messages.HARVESTED_LAND.format(numberOfVeggies, veggieName).concat(Shell.LINE_SEPARATOR);
+        return Messages.HARVESTED_LAND.format(numberOfVeggies, veggieName).concat(Shell.LINE_SEPARATOR);*/
     }
 
     /**
      * plant 1 vegetable that the player want to plant on a specific field
      * @throws GameException if area of land was not bought before, or if the tile to plant is not empty,
      * or if the given vegetable can not be planted on the tile, or if the veggie to plant doesn't exist in the barn
-     *
      * @param input the give input from the player
      */
     public void plant(String[] input) {
-        int xCoordinate = Integer.parseInt(input[0]);
+        /*int xCoordinate = Integer.parseInt(input[0]);
         int yCoordinate = Integer.parseInt(input[1]);
         int indexToPlantOn = isTileBought(xCoordinate, yCoordinate);
         String veggieToPlant = input[2];
@@ -294,10 +302,10 @@ public class QueensFarmGame {
                 currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().remove(i);
                 break;
             }
-        }
+        }*/
+        tilesInCountdown.add(currentPlayer.getBoardGame().get(board.plant(input, currentPlayer)));
         resetCountdown();
         movesInTurn++;
-        tilesInCountdown.add(currentPlayer.getBoardGame().get(indexToPlantOn));
     }
 
     /**

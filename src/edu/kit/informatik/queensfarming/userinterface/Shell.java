@@ -31,6 +31,7 @@ public class Shell {
      * an empty string to initialize a string that is not null
      */
     public static final String EMPTY_STRING = "";
+    private static final int MAX_MOVES = 2;
     private static final String PIXEL_ART = "                           _.-^-._    .--." + LINE_SEPARATOR
             + "                        .-'   _   '-. |__|" + LINE_SEPARATOR
             + "                       /     |_|     \\|  |" + LINE_SEPARATOR
@@ -48,10 +49,13 @@ public class Shell {
     private boolean goldCheck = true;
     private boolean goldCheckWin = true;
     private boolean quitGame = false;
-    private static final int MAX_MOVES = 2;
+
     private GameInitialiser gameInitialiser;
 
 
+    /**
+     * instantiates the shell class with the in and ouput of the players who are playing the Queens Farm Game
+     */
     public Shell() {
         gameInitialiser = new GameInitialiser(-1 , -1, -1, -1);
     }

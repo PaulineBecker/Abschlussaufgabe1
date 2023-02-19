@@ -1,6 +1,8 @@
 package edu.kit.informatik.queensfarming.utility;
 
 /**
+ * ennumeration of the occurence of vegetables (singular of plural)
+ *
  * @author uyxib
  * @version 1.0
  */
@@ -15,6 +17,11 @@ public enum VegetablesOccurence {
     VEGETABLE("vegetable");
 
     private final String vegetable;
+
+    /**
+     * Instantiates a new {@link VegetablesOccurence} with the given string representation
+     * @param message
+     */
 
     VegetablesOccurence(String message) {
         this.vegetable = message;
