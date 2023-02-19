@@ -1,9 +1,13 @@
 package edu.kit.informatik.queensfarming.userinterface;
 
+import edu.kit.informatik.queensfarming.entity.tiles.*;
 import edu.kit.informatik.queensfarming.exception.GameException;
+import edu.kit.informatik.queensfarming.utility.Coordinates;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * represents the object to initialise the game
@@ -19,6 +23,7 @@ public class GameInitialiser {
     private int goldToStart;
     private long seed;
     private List<String> playerNames;
+
 
     /**
      * instantiates all the variables to start the game: number of player, amount of gold to win, gold to start with,
@@ -174,5 +179,4 @@ public class GameInitialiser {
     public List<String> getPlayerNames() {
         return playerNames;
     }
-
 }

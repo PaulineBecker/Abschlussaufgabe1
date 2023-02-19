@@ -52,6 +52,22 @@ public enum ExceptionMessages {
     /**
      * Error message if the player tries to harvest more vegetables than they are planted.
      */
+    /**
+     * Error message if the player tries to plant or to harvest on a board that it's not two dimensional.
+     */
+    BOARD_2D("Error: The game board is two dimensional"),
+    /**
+     * Error message if the player tries to buy more than one vegetable
+     */
+    ONE_VEGETABLE_ALLOWED("Error: You can only buy or plant one vegetable"),
+    /**
+     * Error message if the player tries to enter not the expected amount of three arguments.
+     */
+    THREE_EXPECTED_ARGUMENTS("Error: Exact three arguments expected."),
+    /**
+     * Error message if the player enters an invald vegetable
+     */
+    INVALID_VEGETABLE("Error: This vegetable is invalid."),
     TOO_MUCH_HARVESTING("Error: You can't harvest more vegetables than grown on the tile.");
 
     private final String message;

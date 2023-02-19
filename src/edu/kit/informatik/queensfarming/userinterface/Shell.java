@@ -49,9 +49,12 @@ public class Shell {
     private boolean goldCheckWin = true;
     private boolean quitGame = false;
     private static final int MAX_MOVES = 2;
-    private GameInitialiser gameInitialiser = new GameInitialiser(-1, -1, -1, -1);
+    private GameInitialiser gameInitialiser;
 
 
+    public Shell() {
+        gameInitialiser = new GameInitialiser(-1 , -1, -1, -1);
+    }
 
 
     /**
@@ -79,7 +82,7 @@ public class Shell {
                 try {
                     String output = Commands.executeCommand(input, game);
                     if (output != null) {
-                        System.out.println(output);
+                        System.out.print(output);
                     }
                 } catch (final GameException exception) {
                     System.err.println(exception.getMessage());

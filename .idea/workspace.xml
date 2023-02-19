@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a17fd35d-4e83-47e6-bfca-6a1e879eb002" name="Changes" comment="first try all functionality without barn">
+    <list default="true" id="a17fd35d-4e83-47e6-bfca-6a1e879eb002" name="Changes" comment="done for today - barn spoil is not working!">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/market/Market.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Tomato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/vegetables/Tomato.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Commands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/ExceptionMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/ExceptionMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/GameInitialiser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/GameInitialiser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Messages.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +70,7 @@
       <workItem from="1676374495433" duration="1890000" />
       <workItem from="1676387127046" duration="44468000" />
       <workItem from="1676475343188" duration="119236000" />
-      <workItem from="1676736827420" duration="14999000" />
+      <workItem from="1676736827420" duration="41187000" />
     </task>
     <task id="LOCAL-00001" summary="firstVersion">
       <created>1676475243431</created>
@@ -128,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676748580026</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="done for today - barn spoil is not working!">
+      <created>1676752539454</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1676752539454</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,14 +169,15 @@
     <MESSAGE value="morning saturday check" />
     <MESSAGE value="evening save" />
     <MESSAGE value="first try all functionality without barn" />
-    <option name="LAST_COMMIT_MESSAGE" value="first try all functionality without barn" />
+    <MESSAGE value="done for today - barn spoil is not working!" />
+    <option name="LAST_COMMIT_MESSAGE" value="done for today - barn spoil is not working!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java</url>
-          <line>111</line>
+          <line>108</line>
           <properties class="edu.kit.informatik.queensfarming.game.QueensFarmGame" method="quit">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -178,6 +193,36 @@
           <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java</url>
           <line>395</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
+          <line>109</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
+          <line>110</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
+          <line>111</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
+          <line>113</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java</url>
+          <line>148</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

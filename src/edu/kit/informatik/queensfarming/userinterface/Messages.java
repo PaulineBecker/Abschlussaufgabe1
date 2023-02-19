@@ -44,10 +44,14 @@ public enum Messages {
     SEED_TO_SHUFFLE("Please enter the seed used to shuffle the tiles:"),
 
     /**
-     * The message printed if Gold is used in a sentence
+     * The message printed as a seperator between the vegetables in the barn of a player and the amount of gold
      *
      */
     HYPHEN("-"),
+    /**
+     * the symbol used whenever a space is needed in a String
+     */
+    SPACE(" "),
     /**
      * The message printed if Gold is used in a sentence
      *

@@ -10,8 +10,8 @@ package edu.kit.informatik.queensfarming.entity.vegetables;
 public class Tomato extends Vegetables {
 
     private static final int GROW_TIME = 3;
-    private static final String NAME = "tomato";
-    private static final String ABBREVIATION = "T";
+    private static final String T_NAME = "tomato";
+    private static final String T_ABBREVIATION = "T";
     private static final int ID = 2;
 
     /**
@@ -19,6 +19,6 @@ public class Tomato extends Vegetables {
      * vegetable has grown.
      */
     public Tomato() {
-        super(GROW_TIME, ABBREVIATION, NAME, ID);
+        super(GROW_TIME, T_ABBREVIATION, T_NAME, ID);
     }
 }

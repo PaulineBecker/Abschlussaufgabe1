@@ -21,7 +21,8 @@ public enum Commands {
      * Buys a vegetable if possible
      */
     BUY_VEGETABLE("^buy vegetable " + Commands.ALL_INPUT) {
-        @Override public String execute(String input, QueensFarmGame game) {
+        @Override
+        public String execute(String input, QueensFarmGame game) {
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             Commands.checkOnlyOneVegetable(inputList);
             Commands.checksVegetableMatch(inputList[0]);
@@ -32,14 +33,15 @@ public enum Commands {
      * buy a random land tile if possible
      */
     BUY_LAND("^buy land " + Commands.ALL_INPUT) {
-        @Override public String execute(String input, QueensFarmGame game) {
+        @Override
+        public String execute(String input, QueensFarmGame game) {
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             final List<Integer> coordinates = new ArrayList<>();
             for (String inputNumber : inputList) {
                 coordinates.add(GameInitialiser.checkNumeric(inputNumber));
             }
             if (coordinates.size() != 2) {
-                throw new GameException("Error: The game board is two dimensional");
+                throw new GameException(ExceptionMessages.BOARD_2D.format());
             }
             Commands.checkNumberOnGameBoard(coordinates.get(1));
             return game.buyLand(coordinates);
@@ -49,7 +51,8 @@ public enum Commands {
      * plants a new vegetable of an empty field if possible
      */
     PLANT("^plant " + Commands.ALL_INPUT) {
-        @Override public String execute(String input, QueensFarmGame game) {
+        @Override
+        public String execute(String input, QueensFarmGame game) {
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             Commands.checkArgumentsLength(inputList);
             final List<Integer> coordinates = new ArrayList<>();
@@ -66,7 +69,8 @@ public enum Commands {
      * harvest the whole or a part of a tile that is not the barn if possible
      */
     HARVEST("^harvest " + Commands.ALL_INPUT) {
-        @Override public String execute(String input, QueensFarmGame game) {
+        @Override
+        public String execute(String input, QueensFarmGame game) {
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             Commands.checkArgumentsLength(inputList);
             final int[] harvestArguments = new int[3];
@@ -81,9 +85,13 @@ public enum Commands {
      * sell some or all vegetables from the barn if possible
      */
     SELL("^sell " + Commands.ALL_INPUT) {
-        @Override public String execute(String input, QueensFarmGame game) {
+        @Override
+        public String execute(String input, QueensFarmGame game) {
             String[] vegetablesList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
-            if ((vegetablesList.length == 1) && vegetablesList[0].equals("all")) {
+            if (String.valueOf(input.charAt(input.length() - 1)).equals(Shell.COMMAND_SEPERATOR)) {
+                throw new GameException(COMMAND_NOT_FOUND);
+            }
+            if ((vegetablesList.length == 1) && vegetablesList[0].equals(ALL_VEGETABLES)) {
                 return game.sellVegetables(vegetablesList);
             }
             for (String vegetables : vegetablesList) {
@@ -96,7 +104,8 @@ public enum Commands {
      * shows the barn and the amount of gold
      */
     SHOW_BARN("show barn") {
-        @Override public String execute(String input, QueensFarmGame game) {
+        @Override
+        public String execute(String input, QueensFarmGame game) {
             return game.showBarn();
         }
     },
@@ -104,8 +113,9 @@ public enum Commands {
      * shows the board of a player
      */
     SHOW_BOARD("show board") {
-        @Override public String execute(String input, QueensFarmGame game) {
-            return null;
+        @Override
+        public String execute(String input, QueensFarmGame game) {
+            return game.showBoard();
         }
     },
     /**
@@ -120,7 +130,8 @@ public enum Commands {
      * ends directly a turn without any other new actions
      */
     END_TURN("end turn") {
-        @Override public String execute(String input, QueensFarmGame game) {
+        @Override
+        public String execute(String input, QueensFarmGame game) {
             game.endTurn();
             return null;
         }
@@ -131,11 +142,17 @@ public enum Commands {
      */
     QUIT("quit") {
 
-        @Override public String execute(String input, QueensFarmGame game) {
+        @Override
+        public String execute(String input, QueensFarmGame game) {
             game.quit();
             return null;
         }
     };
+
+    /**
+     * the command if all vegetables will be sold from the barn
+     */
+    public static final String ALL_VEGETABLES = "all";
 
     /**
      * Regex that every input is allowed after a specific input command
@@ -189,7 +206,7 @@ public enum Commands {
                 return command.execute(input, game);
             }
         }
-        return COMMAND_NOT_FOUND;
+        return COMMAND_NOT_FOUND.concat(Shell.LINE_SEPARATOR);
     }
 
     /**
@@ -220,20 +237,20 @@ public enum Commands {
     private static void checksVegetableMatch(String vegetable) {
         if (!(vegetable.equals("mushroom") || vegetable.equals("carrot") || vegetable.equals("salad")
                 || vegetable.equals("tomato"))) {
-            throw new GameException("Error: This vegetable is invalid.");
+            throw new GameException(ExceptionMessages.INVALID_VEGETABLE.format());
         }
 
     }
 
     private static void checkOnlyOneVegetable(String[] vegetables) {
         if (vegetables.length != 1) {
-            throw new GameException("Error: You can only buy or plant one vegetable");
+            throw new GameException(ExceptionMessages.ONE_VEGETABLE_ALLOWED.format());
         }
     }
 
     private static void checkArgumentsLength(String[] inputList) {
         if (inputList.length != 3) {
-            throw new GameException("Error: Exact three arguments expected.");
+            throw new GameException(ExceptionMessages.THREE_EXPECTED_ARGUMENTS.format());
         }
     }
 }

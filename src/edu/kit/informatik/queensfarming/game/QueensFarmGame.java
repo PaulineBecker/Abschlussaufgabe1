@@ -39,11 +39,7 @@ public class QueensFarmGame {
     private static final int AREA_IS_NOT_BOUGHT = -1;
     private static final int START_PLAYER = 0;
     private static final int BARN_INDEX = 0;
-    public static final int VEGETABLE_SPOIL = 6;
     private static final int INDEX_OF_NEXT_PLAYER = 1;
-    private static final String CREATE_FLUSH_RIGHT1 = "%-";
-    private static final String CREATE_FLUSH_RIGHT2 = "s%";
-    private static final String CREATE_FLUSH_RIGHT3 = "d";
     private static final String MUSHROOM = "mushroom";
     private static final String CARROT = "carrot";
     private static final String SALAD = "salad";
@@ -100,9 +96,10 @@ public class QueensFarmGame {
         createPlayers();
         this.currentPlayer = playerList.get(START_PLAYER);
         shuffleCards();
-        if (this.goldToStart - this.goldToWin >= 0) {
-            this.executionState = ExecutionState.EXITED;
-        }
+    }
+
+    public String showBoard() {
+        return currentPlayer.boardToString();
     }
 
     public boolean isActive() {
@@ -123,7 +120,7 @@ public class QueensFarmGame {
      * @return String to visualize the market with the prizes of vegetables
      */
     public String showMarket() {
-        return marketToString(getFinalPrizeTable());
+        return mcMarket.marketToString(getFinalPrizeTable());
     }
 
     /**
@@ -147,7 +144,7 @@ public class QueensFarmGame {
         switch(input) {
             case (MUSHROOM) -> {
                 price = mcMarket.getCurrentMushroomPrice();
-                isVegetableBuyAllowed(price); //TODO try catch for each case
+                isVegetableBuyAllowed(price);
                 currentPlayer.setGold(currentPlayer.getGold() - mcMarket.getCurrentMushroomPrice());
                 veggie = MUSHROOM;
                 currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().add(new Mushroom());
@@ -175,7 +172,7 @@ public class QueensFarmGame {
             }
         }
         movesInTurn++;
-        return Messages.BOUGHT_OBJECT.format(veggie, price);
+        return Messages.BOUGHT_OBJECT.format(veggie, price).concat(Shell.LINE_SEPARATOR);
     }
 
     /**
@@ -215,7 +212,7 @@ public class QueensFarmGame {
         currentPlayer.getBoardGame().add(boughtTile);
         currentPlayer.setGold(currentPlayer.getGold() - prize);
         movesInTurn++;
-        return Messages.BOUGHT_OBJECT.format(boughtTile.getName(), prize);
+        return Messages.BOUGHT_OBJECT.format(boughtTile.getName(), prize).concat(Shell.LINE_SEPARATOR);
     }
 
     /**
@@ -224,19 +221,19 @@ public class QueensFarmGame {
      * @throws GameException the player wants to harvest on the barn, or if he tries to harvest more vegetables
      * than on the field or if he tries to harvest on a field that doesn't exist on his board or if the tile is empty.
      * @param input the given input command to harvest a tile
-     * @return the string how many vegetables where successfully harvested and which vegetable excactly
+     * @return the string how many vegetables where successfully harvested and which vegetable exactly
      */
     public String harvest(int[] input) {
         int xCoordinate = input[0];
         int yCoordinate = input[1];
         int numberOfVeggies = input[2];
-        int indexToHarvestOn = isTileBought(xCoordinate, yCoordinate); //TODO try catch
+        int indexToHarvestOn = isTileBought(xCoordinate, yCoordinate);
         Tile currentTile = currentPlayer.getBoardGame().get(indexToHarvestOn);
         if (currentPlayer.getBoardGame().get(indexToHarvestOn).getVegetablesList().size() < numberOfVeggies) {
-            throw new GameException(ExceptionMessages.TOO_MUCH_HARVESTING.format()); //TODO try catch
+            throw new GameException(ExceptionMessages.TOO_MUCH_HARVESTING.format());
         }
         String veggieName = currentTile.getVegetablesList().get(0).getName();
-        checksIllegalBarnMove(xCoordinate, yCoordinate); //TODO try catch
+        checksIllegalBarnMove(xCoordinate, yCoordinate);
         for (int i = 1; i <= numberOfVeggies; i++) {
             switch(veggieName) {
                 case(MUSHROOM) -> currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().add(new Mushroom());
@@ -261,7 +258,7 @@ public class QueensFarmGame {
             case(SALAD) -> veggieName = Vegetable.SALAT.format();
             case(CARROT) -> veggieName = Vegetable.CARROT.format();
         }
-        return Messages.HARVESTED_LAND.format(numberOfVeggies, veggieName);
+        return Messages.HARVESTED_LAND.format(numberOfVeggies, veggieName).concat(Shell.LINE_SEPARATOR);
     }
 
     /**
@@ -274,15 +271,15 @@ public class QueensFarmGame {
     public void plant(String[] input) {
         int xCoordinate = Integer.parseInt(input[0]);
         int yCoordinate = Integer.parseInt(input[1]);
-        int indexToPlantOn = isTileBought(xCoordinate, yCoordinate); //TODO Try and catch
+        int indexToPlantOn = isTileBought(xCoordinate, yCoordinate);
         String veggieToPlant = input[2];
-        checksIllegalBarnMove(xCoordinate, yCoordinate); //TODO try catch
+        checksIllegalBarnMove(xCoordinate, yCoordinate);
         if (!currentPlayer.getBoardGame().get(indexToPlantOn).getVegetablesList().isEmpty()) {
             throw new GameException("Error: The tile you want to plant on is not empty.");
         }
 
-        checkAllowedVeggies(veggieToPlant, indexToPlantOn); //TODO try catch
-        checkVeggiesInBarn(veggieToPlant); //TODO try catch
+        checkAllowedVeggies(veggieToPlant, indexToPlantOn);
+        checkVeggiesInBarn(veggieToPlant);
 
         switch(veggieToPlant) {
             case (MUSHROOM) -> currentPlayer.getBoardGame().get(indexToPlantOn).getVegetablesList().add(new Mushroom());
@@ -309,12 +306,12 @@ public class QueensFarmGame {
      * @return the String with the amount of sold vegetable and the gold prize a player gets for the vegetables
      */
 
-    public String sellVegetables(String[] input) { //TODO was tun wenn nur ein Teil der veggies vorhanden ist in Barn
+    public String sellVegetables(String[] input) {
         int goldBeforeMove = currentPlayer.getGold();
         int soldVeggies = 0;
         if (input.length == 0) {
             return Messages.SELL_VEGETABLES.format(0, VegetablesOccurence.VEGETABLES.format(), 0);
-        } else if (input[0].equals("all")) {
+        } else if (input[0].equals(Commands.ALL_VEGETABLES)) {
             for (int i = currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size() - 1; i >= 0; i--) {
                 sellOneVegetable(i);
                 soldVeggies++;
@@ -334,9 +331,11 @@ public class QueensFarmGame {
         resetCountdown();
         movesInTurn++;
         if (soldVeggies == 1) {
-            return Messages.SELL_VEGETABLES.format(soldVeggies, VegetablesOccurence.VEGETABLE.format(), newGold);
+            return Messages.SELL_VEGETABLES.format(soldVeggies, VegetablesOccurence.VEGETABLE.format(), newGold)
+                    .concat(Shell.LINE_SEPARATOR);
         }
-        return Messages.SELL_VEGETABLES.format(soldVeggies, VegetablesOccurence.VEGETABLES.format(), newGold);
+        return Messages.SELL_VEGETABLES.format(soldVeggies, VegetablesOccurence.VEGETABLES.format(), newGold)
+                .concat(Shell.LINE_SEPARATOR);
     }
 
     /**
@@ -381,19 +380,20 @@ public class QueensFarmGame {
 
     /**
      * introduce a new turn of the next player with its name and shows if vegetables have spoiled or grown
-     * @return the string to show who's turn is it and what happened during the last round
+     * @return the string to show whos turn is it and what happened during the last round
      */
 
     public String startTurn() {
         gameState = GameState.START_TURN;
         stringBuilder.append(Shell.LINE_SEPARATOR);
-        stringBuilder.append(Messages.TURN_OF_PLAYER.format(currentPlayer.getName())).append(Shell.LINE_SEPARATOR);
+        stringBuilder.append(Messages.TURN_OF_PLAYER.format(currentPlayer.getName()));
         if (currentPlayer.getGrownVegetables() == 1) {
-            stringBuilder.append(Messages.GROWN_VEGETABLE.format());
-        } else if (currentPlayer.getGrownVegetables() != Player.NO_GROWN_VEGETABLES)
-            stringBuilder.append(Messages.GROWN_VEGETABLES.format(currentPlayer.getGrownVegetables()));
-        if (VEGETABLE_SPOIL - currentPlayer.getBoardGame().get(BARN_INDEX).getCountdown() == 0) {
-            stringBuilder.append(Messages.SPOILED_VEGETABLES.format());
+            stringBuilder.append(Shell.LINE_SEPARATOR).append(Messages.GROWN_VEGETABLE.format());
+        } else if (currentPlayer.getGrownVegetables() != Player.NO_GROWN_VEGETABLES) {
+            stringBuilder.append(Shell.LINE_SEPARATOR).
+                    append(Messages.GROWN_VEGETABLES.format(currentPlayer.getGrownVegetables()));
+        } if (Player.VEGETABLE_SPOIL - currentPlayer.getBoardGame().get(BARN_INDEX).getCountdown() == 0) {
+            stringBuilder.append(Shell.LINE_SEPARATOR).append(Messages.SPOILED_VEGETABLES.format());
         }
         String startTurnPrint = stringBuilder.toString();
         stringBuilder.delete(0, stringBuilder.length());
@@ -462,7 +462,7 @@ public class QueensFarmGame {
             if (!player.getBoardGame().get(BARN_INDEX).getVegetablesList().isEmpty()) {
                 player.getBoardGame().get(BARN_INDEX).setCountdown(player.getBoardGame()
                         .get(BARN_INDEX).getCountdown() + 1);
-            } if (player.getBoardGame().get(BARN_INDEX).getCountdown() == VEGETABLE_SPOIL) {
+            } if (player.getBoardGame().get(BARN_INDEX).getCountdown() == Player.VEGETABLE_SPOIL) {
                 currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().clear();
                 resetCountdown();
             }
@@ -491,29 +491,6 @@ public class QueensFarmGame {
         finalPriceTable.addAll(mcMarket.createPrizeTable());
         finalPriceTable.addAll(tsMarket.createPrizeTable());
         return finalPriceTable;
-    }
-
-    private String marketToString(List<PriceRatio> finalVegetablePrizes) {
-        int lengthOfStringMax = 0;
-        int lengthOfIntMax = 0;
-
-        for (PriceRatio listValue : finalVegetablePrizes) {
-            if (listValue.getVegetable().length() > lengthOfStringMax) {
-                lengthOfStringMax = listValue.getVegetable().length();
-            }
-            int lengthOfPrize = String.valueOf(listValue.getNumber()).length();
-            if (lengthOfPrize > lengthOfIntMax) {
-                lengthOfIntMax = lengthOfPrize;
-            }
-        }
-        for (PriceRatio listValue : finalVegetablePrizes) {
-            stringBuilder.append(String.format(CREATE_FLUSH_RIGHT1 + lengthOfStringMax + CREATE_FLUSH_RIGHT2
-                    + lengthOfIntMax + CREATE_FLUSH_RIGHT3
-                    + Shell.LINE_SEPARATOR, listValue.getVegetable(), listValue.getNumber()));
-        }
-        String marketToString = stringBuilder.toString();
-        stringBuilder.delete(0, stringBuilder.length());
-        return marketToString;
     }
 
     private void createPlayers() {

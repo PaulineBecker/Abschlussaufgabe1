@@ -1,5 +1,7 @@
 package edu.kit.informatik.queensfarming.entity.market;
 
+import edu.kit.informatik.queensfarming.userinterface.Shell;
+
 import java.util.List;
 
 /**
@@ -10,7 +12,17 @@ import java.util.List;
  * @version 1.0
  */
 public abstract class Market {
+    private static final String CREATE_FLUSH_RIGHT1 = "%-";
+    private static final String CREATE_FLUSH_RIGHT2 = "s%";
+    private static final String CREATE_FLUSH_RIGHT3 = "d";
+    private StringBuilder stringBuilder = new StringBuilder();
 
+    /**
+     * instantiates the market with its priceTables and the currentPrizes
+     */
+    protected Market() {
+        this.priceTable = new int[5][2];
+    }
     /**
      * the price conversion to change prices on the market
      */
@@ -38,12 +50,9 @@ public abstract class Market {
      */
     protected final int[][] priceTable;
 
-    /**
-     * instantiates the market with its priceTables and the currentPrizes
-     */
-    protected Market() {
-        this.priceTable = new int[5][2];
-    }
+
+
+
 
     /**
      * sets the new price level after vegetables where sold on the different markets
@@ -74,5 +83,33 @@ public abstract class Market {
      */
 
     public abstract List<PriceRatio> createPrizeTable();
+
+    /**
+     * creates the representation of the market in the game with all the prizes and the vegetables
+     * @param finalVegetablePrizes a table with all the current prizes connect to the suitable vegetable
+     * @return the string representation of the markt with its current prizes
+     */
+    public String marketToString(List<PriceRatio> finalVegetablePrizes) {
+        int lengthOfStringMax = 0;
+        int lengthOfIntMax = 0;
+
+        for (PriceRatio listValue : finalVegetablePrizes) {
+            if (listValue.getVegetable().length() > lengthOfStringMax) {
+                lengthOfStringMax = listValue.getVegetable().length();
+            }
+            int lengthOfPrize = String.valueOf(listValue.getNumber()).length();
+            if (lengthOfPrize > lengthOfIntMax) {
+                lengthOfIntMax = lengthOfPrize;
+            }
+        }
+        for (PriceRatio listValue : finalVegetablePrizes) {
+            stringBuilder.append(String.format(CREATE_FLUSH_RIGHT1 + lengthOfStringMax + CREATE_FLUSH_RIGHT2
+                    + lengthOfIntMax + CREATE_FLUSH_RIGHT3
+                    + Shell.LINE_SEPARATOR, listValue.getVegetable(), listValue.getNumber()));
+        }
+        String marketToString = stringBuilder.toString();
+        stringBuilder.delete(0, stringBuilder.length());
+        return marketToString;
+    }
 
 }
