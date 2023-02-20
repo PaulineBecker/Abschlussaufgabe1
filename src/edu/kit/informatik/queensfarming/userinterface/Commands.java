@@ -10,9 +10,7 @@ import java.util.regex.Pattern;
 
 /**
  * List of available commands with their command line interaction expressions.
- *
- * @author Thomas Weber
- * @author Moritz Gstuer
+ * Copied from Thomas Weber and Moritz Gstuer and then modified from
  * @author uyxib
  * @version 1.0
  */

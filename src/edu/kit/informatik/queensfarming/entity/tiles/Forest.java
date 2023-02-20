@@ -23,7 +23,7 @@ public class Forest extends Tile {
      * @param coordinates coordinates where the forest is located on the game board of a player
      */
     public Forest(Coordinates coordinates) {
-        super(FOREST_ID, FOREST_NAME, FOREST_CAPACITY, COUNTDOWN_START, coordinates, FOREST_ABBREVIATION);
+        super(FOREST_ID, FOREST_NAME, FOREST_CAPACITY, NO_COUNTDOWN, coordinates, FOREST_ABBREVIATION);
         this.allowedVegetables.add(new Carrot());
         this.allowedVegetables.add(new Mushroom());
     }

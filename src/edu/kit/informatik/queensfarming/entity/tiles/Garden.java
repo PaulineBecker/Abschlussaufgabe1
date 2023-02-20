@@ -25,7 +25,7 @@ public class Garden extends Tile {
      */
 
     public Garden(Coordinates coordinates) {
-        super(GARDEN_ID, GARDEN_NAME, GARDEN_CAPACITY, COUNTDOWN_START, coordinates, GARDEN_ABBREVIATION);
+        super(GARDEN_ID, GARDEN_NAME, GARDEN_CAPACITY, NO_COUNTDOWN, coordinates, GARDEN_ABBREVIATION);
         this.allowedVegetables.add(new Carrot());
         this.allowedVegetables.add(new Salad());
         this.allowedVegetables.add(new Tomato());

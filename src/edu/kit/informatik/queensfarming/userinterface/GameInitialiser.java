@@ -1,13 +1,9 @@
 package edu.kit.informatik.queensfarming.userinterface;
 
-import edu.kit.informatik.queensfarming.entity.tiles.*;
 import edu.kit.informatik.queensfarming.exception.GameException;
-import edu.kit.informatik.queensfarming.utility.Coordinates;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+
 
 /**
  * represents the object to initialise the game
@@ -45,12 +41,13 @@ public class GameInitialiser {
 
     /**
      * checks if the entered number of players matches, if not throws Game Exception
+     * this regex allows all positive numbers > 0, leading zeros are also allowed.
      * @param input the input one of the players make to initialize the game
      * @return integer value with the number of players in the game session
      */
     public int enterNumberOfPlayers(String input) {
 
-        if (input.matches("[1-9][0-9]*")) {
+        if (input.matches("^(0*[1-9][0-9]*)$")) {
             return checkNumeric(input);
         } else throw new GameException(ExceptionMessages.NUMBER_OF_PLAYERS_INVALID.format());
     }
@@ -61,7 +58,7 @@ public class GameInitialiser {
      * @return integer value with the amount of gold to win the game
      */
     public int enterGoldToWin(String input) {
-        if (input.matches("[1-9][0-9]*")) {
+        if (input.matches("^(0*[1-9][0-9]*)$")) {
             return checkNumeric(input);
         } else throw new GameException(ExceptionMessages.GOLDWIN_INVALID.format());
     }

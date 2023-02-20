@@ -22,7 +22,7 @@ public class LargeForest extends Tile {
      * @param coordinates coordinates where the larger forest is located on the game board of a player
      */
     public LargeForest(Coordinates coordinates) {
-        super(LARGER_FOREST_ID, LARGE_FOREST_NAME, LARGE_FOREST_CAPACITY, COUNTDOWN_START, coordinates,
+        super(LARGER_FOREST_ID, LARGE_FOREST_NAME, LARGE_FOREST_CAPACITY, NO_COUNTDOWN, coordinates,
                 LARGE_FOREST_ABBREVIATION);
         this.allowedVegetables.add(new Carrot());
         this.allowedVegetables.add(new Mushroom());

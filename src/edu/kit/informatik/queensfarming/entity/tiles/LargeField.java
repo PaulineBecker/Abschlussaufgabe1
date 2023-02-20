@@ -23,7 +23,7 @@ public class LargeField extends Tile {
      * @param coordinates coordinates where the large filed is located on the game board of a player
      */
     public LargeField(Coordinates coordinates) {
-        super(LARGE_FIELD_ID, LARGE_FIELD_NAME, LARGE_FIELD_CAPACITY, COUNTDOWN_START,
+        super(LARGE_FIELD_ID, LARGE_FIELD_NAME, LARGE_FIELD_CAPACITY, NO_COUNTDOWN,
                 coordinates, LARGE_FIELD_ABBREVIATION);
         this.allowedVegetables.add(new Carrot());
         this.allowedVegetables.add(new Salad());

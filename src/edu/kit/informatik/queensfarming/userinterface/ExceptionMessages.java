@@ -68,6 +68,13 @@ public enum ExceptionMessages {
      * Error message if the player enters an invald vegetable
      */
     INVALID_VEGETABLE("Error: This vegetable is invalid."),
+    /**
+     * Error message if the player tries to harvest 0 vegetables
+     */
+    HARVEST_ZERO_VEGETABLES("Error: It is useless to harvest 0 vegetables. To skip your turn, enter 'end turn'"),
+    /**
+     * Error message if the players tries to harvest more vegetables than grown on a tile
+     */
     TOO_MUCH_HARVESTING("Error: You can't harvest more vegetables than grown on the tile.");
 
     private final String message;

@@ -22,7 +22,7 @@ public class Field extends Tile {
      * @param coordinates coordinates where the filed is located on the game board of a player
      */
     public Field(Coordinates coordinates) {
-        super(FIELD_ID, FIELD_NAME, FIELD_CAPACITY, COUNTDOWN_START, coordinates, FIELD_ABBREVIATION);
+        super(FIELD_ID, FIELD_NAME, FIELD_CAPACITY, NO_COUNTDOWN, coordinates, FIELD_ABBREVIATION);
         this.allowedVegetables.add(new Carrot());
         this.allowedVegetables.add(new Salad());
         this.allowedVegetables.add(new Tomato());

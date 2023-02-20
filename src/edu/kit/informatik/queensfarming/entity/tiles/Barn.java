@@ -26,7 +26,7 @@ public class Barn extends Tile {
      * and an abbreviation of the Barn.
      */
     public Barn() {
-        super(BARN_ID, BARN_NAME, START_CAPACITY, COUNTDOWN_START,
+        super(BARN_ID, BARN_NAME, START_CAPACITY, NO_COUNTDOWN,
                 new Coordinates(BARN_COORDINATES, BARN_COORDINATES), BARN_ABBREVIATION);
     }
 

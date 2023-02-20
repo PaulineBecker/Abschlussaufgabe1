@@ -14,8 +14,11 @@ import edu.kit.informatik.queensfarming.userinterface.Shell;
  * @author uyxib
  * @version 1.0
  */
-public class QueensFarmBoard {
-
+public class BoardWrapper {
+    /**
+     * the start of a countdown
+     */
+    public static final int COUNTDOWN_START = 0;
     private static final int AREA_IS_NOT_BOUGHT = -1;
     private static final int BARN_INDEX = 0;
     private static final String MUSHROOM = "mushroom";
@@ -23,7 +26,7 @@ public class QueensFarmBoard {
     private static final String SALAD = "salad";
     private static final String TOMATO = "tomato";
 
-    public QueensFarmBoard() {}
+    public BoardWrapper() {}
 
     /**
      * harvest the given tile on the game board of the current player and adds them to the barn
@@ -43,6 +46,9 @@ public class QueensFarmBoard {
         Tile currentTile = currentPlayer.getBoardGame().get(indexToHarvestOn);
         if (currentPlayer.getBoardGame().get(indexToHarvestOn).getVegetablesList().size() < numberOfVeggies) {
             throw new GameException(ExceptionMessages.TOO_MUCH_HARVESTING.format());
+        }
+        if (numberOfVeggies == 0) {
+            throw new GameException(ExceptionMessages.HARVEST_ZERO_VEGETABLES.format());
         }
         String veggieName = currentTile.getVegetablesList().get(0).getName();
         checksIllegalBarnMove(xCoordinate, yCoordinate);
@@ -131,6 +137,7 @@ public class QueensFarmBoard {
                 break;
             }
         }
+        currentPlayer.getBoardGame().get(indexToPlantOn).setCountdown(COUNTDOWN_START);
         return indexToPlantOn;
     }
 

@@ -73,7 +73,7 @@ public class QueensFarmGame {
     private int soldTomato = 0;
     private final List<String> nameList;
     private final List<Tile> unassignedTiles = new ArrayList<>();
-    private final QueensFarmBoard board = new QueensFarmBoard();
+    private final BoardWrapper board = new BoardWrapper();
 
     /**
      * instantiates a new Queens Farm Game with the start gold, gold to win, number of players, player names and seed
@@ -331,6 +331,7 @@ public class QueensFarmGame {
                             get(j).getName().equals(input[i])) {
                         sellOneVegetable(j);
                         soldVeggies++;
+                        break;
                     }
                 }
             }
@@ -348,17 +349,21 @@ public class QueensFarmGame {
 
     /**
      * calculates the winner if the game ended (quit or the gold to win is reached)
-     * @return the String to show the end of the game
+     * @return the String to show the end of the game (different format if 1, 2 or more than 2 players won)
      */
 
     public String endGame() {
         int maxGold = 0;
+        boolean existWinner = false;
         List<String> winnerList = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             String playerName = playerList.get(i).getName();
             int finalGold = playerList.get(i).getGold();
             stringBuilder.append(Messages.GOLD_AFTER_GAME.format(i + 1, playerName, finalGold))
                     .append(Shell.LINE_SEPARATOR);
+            if (finalGold >= goldToWin) {
+                existWinner = true;
+            }
             if (finalGold > maxGold) {
                 winnerList.clear();
                 winnerList.add(playerName);
@@ -366,19 +371,20 @@ public class QueensFarmGame {
             } else if (finalGold == maxGold) {
                 winnerList.add(playerName);
             }
-        }
-        if (winnerList.size() == 1) {
+        } if (existWinner) {
+            if (winnerList.size() == 1) {
             stringBuilder.append(Messages.PLAYER_WON.format(winnerList.get(0)));
-        } else if (winnerList.size() == 2) {
-            stringBuilder.append(Messages.TWO_PLAYER_WON.format(winnerList.get(0), winnerList.get(1)));
-        } else if (winnerList.size() > 2) {
-            String winners = Shell.EMPTY_STRING;
-            for (int i = 0; i < winnerList.size() - 1; i++) {
-                winners += winnerList.get(i).concat(", ");
+            }  else if (winnerList.size() == 2) {
+                stringBuilder.append(Messages.TWO_PLAYER_WON.format(winnerList.get(0), winnerList.get(1)));
+            }  else if (winnerList.size() > 2) {
+                String winners = Shell.EMPTY_STRING;
+                for (int i = 0; i < winnerList.size() - 1; i++) {
+                    winners += winnerList.get(i).concat(", ");
+                }
+                winners = winners.substring(0, winners.length() - 2);
+                stringBuilder.append(winners);
+                stringBuilder.append(Messages.MANY_PLAYER_WON.format(winnerList.get(winnerList.size() - 1)));
             }
-            winners = winners.substring(0, winners.length() - 2);
-            stringBuilder.append(winners);
-            stringBuilder.append(Messages.MANY_PLAYER_WON.format(winnerList.get(winnerList.size() - 1)));
         }
 
         String winnerPrint = stringBuilder.toString();
@@ -444,6 +450,7 @@ public class QueensFarmGame {
             Tile tile = tilesInCountdown.get(j);
             tile.setCountdown(tile.getCountdown() + 1);
             if (tile.getVegetablesList().get(0).getTimeToGrow() - tile.getCountdown() == 0) { //Zeit zum Wachsen
+                tile.setCountdown(BoardWrapper.COUNTDOWN_START);//Countdown auf 0 zurücksetzen
                 int currentAmountOfVeggies = tile.getVegetablesList().size();
                 for (int i = 0; i < currentAmountOfVeggies; i++) { //Gemüse verdoppelt sich
                     if (tile.getVegetablesList().size() < tile.getCapacity()) {
@@ -461,7 +468,8 @@ public class QueensFarmGame {
                     }
                 }
                 if (tile.getVegetablesList().size() == tile.getCapacity()) {
-                    tilesInCountdown.remove(tile); //remove tile from countdown list if tile is full
+                    tilesInCountdown.remove(tile);
+                    tile.setCountdown(Tile.NO_COUNTDOWN);//remove tile from countdown list if tile is full
                 }
             }
         }
@@ -486,7 +494,7 @@ public class QueensFarmGame {
      */
     public void resetCountdown() {
         if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().isEmpty()) {
-            currentPlayer.getBoardGame().get(BARN_INDEX).setCountdown(Tile.COUNTDOWN_START);
+            currentPlayer.getBoardGame().get(BARN_INDEX).setCountdown(Tile.NO_COUNTDOWN);
         }
     }
 

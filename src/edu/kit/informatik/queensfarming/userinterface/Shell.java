@@ -6,8 +6,7 @@ import java.util.Scanner;
 
 /**
  * represents the user Interface with the players and the game itself
- * @author Thomas Weber
- * @author Moritz Gstuer
+ * Copied from Thomas Weber and Moritz Gstuer and then modified from
  * @author uyxib
  * @version 1.0
  */

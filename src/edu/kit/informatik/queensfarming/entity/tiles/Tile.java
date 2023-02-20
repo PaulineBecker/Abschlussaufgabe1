@@ -19,7 +19,7 @@ public abstract class Tile {
     /**
      * the beginning of the countdown
      */
-    public static final int COUNTDOWN_START = 0;
+    public static final int NO_COUNTDOWN = -1;
 
     /**
      * id (int) of a specific tile

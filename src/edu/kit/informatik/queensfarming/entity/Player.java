@@ -189,7 +189,7 @@ public class Player {
         Tile barn = boardGame.get(INDEX_OF_BARN);
         if (barn.getVegetablesList().size() == 0) {
             return (barn.getName().concat(Shell.LINE_SEPARATOR)
-                    .concat(Messages.GOLD.format()).concat(String.valueOf(gold)));
+                    .concat(Messages.GOLD.format()).concat(String.valueOf(gold))).concat(Shell.LINE_SEPARATOR);
         } else {
             if (VEGETABLE_SPOIL - barn.getCountdown() == 1) {
                 stringBuilder.append(Messages.BARN_SPOILS_TOMORROW.format()).append(Shell.LINE_SEPARATOR);
@@ -389,8 +389,13 @@ public class Player {
         return lineString;
     }
 
+    /**
+     * checks if the give tile has an active countdown
+     * @param tile
+     * @return the countdown value, if no countdown exists return "*"
+     */
     private String checkActiveCountdown(Tile tile) {
-        if (tile.getCountdown() == 0) {
+        if (tile.getCountdown() == Tile.NO_COUNTDOWN) {
             return NO_COUNTDOWN;
         } else {
             return String.valueOf(tile.getVegetablesList().get(0).getTimeToGrow() - tile.getCountdown());
