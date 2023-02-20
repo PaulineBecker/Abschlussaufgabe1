@@ -6,6 +6,7 @@ import edu.kit.informatik.queensfarming.entity.tiles.Garden;
 import edu.kit.informatik.queensfarming.entity.tiles.Tile;
 import edu.kit.informatik.queensfarming.entity.tiles.Field;
 import edu.kit.informatik.queensfarming.entity.vegetables.*;
+import edu.kit.informatik.queensfarming.game.BoardWrapper;
 import edu.kit.informatik.queensfarming.userinterface.Messages;
 import edu.kit.informatik.queensfarming.userinterface.Shell;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
@@ -42,6 +43,7 @@ public class Player {
     private final String name;
     private List<Tile> boardGame = new ArrayList<>();
     private int grownVegetables = 0;
+    private boolean isBarnSpoiled;
     private final StringBuilder stringBuilder = new StringBuilder();
 
     /**
@@ -53,7 +55,9 @@ public class Player {
     public Player(int gold, String name) {
         this.gold = gold;
         this.name = name;
+        this.isBarnSpoiled = false;
         addStartTiles();
+        boardGame.get(INDEX_OF_BARN).setCountdown(BoardWrapper.COUNTDOWN_START);
     }
 
     private void addStartTiles() {
@@ -187,7 +191,7 @@ public class Player {
     public String barnToString() {
         List<PriceRatio> vegetablesInBarn = createVegetableList();
         Tile barn = boardGame.get(INDEX_OF_BARN);
-        if (barn.getVegetablesList().size() == 0) {
+        if (barn.getVegetablesList().isEmpty()) {
             return (barn.getName().concat(Shell.LINE_SEPARATOR)
                     .concat(Messages.GOLD.format()).concat(String.valueOf(gold))).concat(Shell.LINE_SEPARATOR);
         } else {
@@ -400,5 +404,21 @@ public class Player {
         } else {
             return String.valueOf(tile.getVegetablesList().get(0).getTimeToGrow() - tile.getCountdown());
         }
+    }
+
+    /**
+     * gets the truthful value of the barn if vegetables are spoiled in the last round or not
+     * @return true if vegetables are spoiled in the last round
+     */
+    public boolean isBarnSpoiled() {
+        return isBarnSpoiled;
+    }
+
+    /**
+     * sets the thruthful value if vegetables are spoiled in the last round
+     * @param barnSpoiled truthful value if vegetables are spoiled in the last round
+     */
+    public void setBarnSpoiled(boolean barnSpoiled) {
+        isBarnSpoiled = barnSpoiled;
     }
 }

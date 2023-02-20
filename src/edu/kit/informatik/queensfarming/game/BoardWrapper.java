@@ -61,14 +61,9 @@ public class BoardWrapper {
             }
             currentTile.getVegetablesList().remove(numberOfVeggies - i);
         }
-        /*if (currentTile.getVegetablesList().size() == 0) { //TODO vorher return statement problem???
-            tilesInCountdown.remove(currentTile);
-        } else if ((currentTile.getVegetablesList().size() + numberOfVeggies) == currentTile.getCapacity()) {
-            tilesInCountdown.add(currentTile);
-        }
-        movesInTurn++;*/
+        startsCountdown(currentPlayer);
         if (numberOfVeggies == 1) {
-            return Messages.HARVESTED_LAND.format(numberOfVeggies, veggieName);
+            return Messages.HARVESTED_LAND.format(numberOfVeggies, veggieName).concat(Shell.LINE_SEPARATOR);
         }
         switch(veggieName) {
             case(MUSHROOM) -> veggieName = Vegetable.MUSHROOM.format();
@@ -138,14 +133,15 @@ public class BoardWrapper {
             }
         }
         currentPlayer.getBoardGame().get(indexToPlantOn).setCountdown(COUNTDOWN_START);
+        resetCountdown(currentPlayer);
         return indexToPlantOn;
     }
 
     /**
-     * gets the index of the gameboard list where the give tile should be loacted
+     * gets the index of the game board list where the give tile should be located
      * @param xCoordinate x-Coordinate where the player wants to do something on the game board
      * @param yCoordinate y-Coordinate where the player wants to do something on the game board
-     * @return index of the gameboard list where the tile is located
+     * @return index of the game board list where the tile is located
      */
     private int getBoardGameIndexFromCoordinates(Player currentPlayer, int xCoordinate, int yCoordinate) {
         for (int i = 0; i < currentPlayer.getBoardGame().size(); i++) {
@@ -213,6 +209,24 @@ public class BoardWrapper {
         }
         if (!vegetableExistsInBarn) {
             throw new GameException(ExceptionMessages.VEGETABLE_NOT_IN_BARN.format(vegetable));
+        }
+    }
+
+    /**
+     * resets the countdown of the current player if the barn of the player is empty
+     */
+    public void resetCountdown(Player currentPlayer) {
+        if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().isEmpty()) {
+            currentPlayer.getBoardGame().get(BARN_INDEX).setCountdown(Tile.NO_COUNTDOWN);
+        }
+    }
+
+    /**
+     * starts the countdown of the current player if the barn was empty and is null not empty anymore
+     */
+    public void startsCountdown(Player currentPlayer) {
+        if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size() == 1) {
+            currentPlayer.getBoardGame().get(BARN_INDEX).setCountdown(BoardWrapper.COUNTDOWN_START);
         }
     }
 }
