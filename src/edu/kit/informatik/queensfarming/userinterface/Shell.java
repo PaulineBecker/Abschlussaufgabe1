@@ -1,7 +1,8 @@
 package edu.kit.informatik.queensfarming.userinterface;
 
 import edu.kit.informatik.queensfarming.exception.GameException;
-import edu.kit.informatik.queensfarming.game.QueensFarmGame;
+import edu.kit.informatik.queensfarming.game.QueensFarm;
+
 import java.util.Scanner;
 
 /**
@@ -61,7 +62,7 @@ public class Shell {
 
 
     /**
-     * create and initializes the QueensFarmGame when the game is started
+     * create and initializes the QueensFarm when the game is started
      * so children of the queen decided to play and started the main method.
      */
     public void startQueensFarmGame() {
@@ -73,7 +74,7 @@ public class Shell {
             return;
         }
 
-        QueensFarmGame game = new QueensFarmGame(gameInitialiser.getGoldToWin(), gameInitialiser.getGoldToStart(),
+        QueensFarm game = new QueensFarm(gameInitialiser.getGoldToWin(), gameInitialiser.getGoldToStart(),
                 gameInitialiser.getNumberOfPlayers(),
                 gameInitialiser.getSeed(), gameInitialiser.getPlayerNames());
 

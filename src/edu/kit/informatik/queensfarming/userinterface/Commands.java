@@ -1,7 +1,7 @@
 package edu.kit.informatik.queensfarming.userinterface;
 
 import edu.kit.informatik.queensfarming.exception.GameException;
-import edu.kit.informatik.queensfarming.game.QueensFarmGame;
+import edu.kit.informatik.queensfarming.game.QueensFarm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public enum Commands {
      */
     BUY_VEGETABLE("^buy vegetable " + Commands.ALL_INPUT) {
         @Override
-        public String execute(String input, QueensFarmGame game) {
+        public String execute(String input, QueensFarm game) {
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             Commands.checkOnlyOneVegetable(inputList);
             Commands.checksVegetableMatch(inputList[0]);
@@ -32,7 +32,7 @@ public enum Commands {
      */
     BUY_LAND("^buy land " + Commands.ALL_INPUT) {
         @Override
-        public String execute(String input, QueensFarmGame game) {
+        public String execute(String input, QueensFarm game) {
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             final List<Integer> coordinates = new ArrayList<>();
             for (String inputNumber : inputList) {
@@ -50,7 +50,7 @@ public enum Commands {
      */
     PLANT("^plant " + Commands.ALL_INPUT) {
         @Override
-        public String execute(String input, QueensFarmGame game) {
+        public String execute(String input, QueensFarm game) {
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             Commands.checkArgumentsLength(inputList);
             final List<Integer> coordinates = new ArrayList<>();
@@ -68,7 +68,7 @@ public enum Commands {
      */
     HARVEST("^harvest " + Commands.ALL_INPUT) {
         @Override
-        public String execute(String input, QueensFarmGame game) {
+        public String execute(String input, QueensFarm game) {
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             Commands.checkArgumentsLength(inputList);
             final int[] harvestArguments = new int[3];
@@ -84,7 +84,7 @@ public enum Commands {
      */
     SELL("^sell " + Commands.ALL_INPUT) {
         @Override
-        public String execute(String input, QueensFarmGame game) {
+        public String execute(String input, QueensFarm game) {
             String[] vegetablesList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             if (String.valueOf(input.charAt(input.length() - 1)).equals(Shell.COMMAND_SEPERATOR)) {
                 throw new GameException(COMMAND_NOT_FOUND);
@@ -103,7 +103,7 @@ public enum Commands {
      */
     SHOW_BARN("show barn") {
         @Override
-        public String execute(String input, QueensFarmGame game) {
+        public String execute(String input, QueensFarm game) {
             return game.showBarn();
         }
     },
@@ -112,7 +112,7 @@ public enum Commands {
      */
     SHOW_BOARD("show board") {
         @Override
-        public String execute(String input, QueensFarmGame game) {
+        public String execute(String input, QueensFarm game) {
             return game.showBoard();
         }
     },
@@ -120,7 +120,7 @@ public enum Commands {
      * shows the market with the current prizes
      */
     SHOW_MARKET("show market") {
-        @Override public String execute(String input, QueensFarmGame game) {
+        @Override public String execute(String input, QueensFarm game) {
             return game.showMarket();
         }
     },
@@ -129,7 +129,7 @@ public enum Commands {
      */
     END_TURN("end turn") {
         @Override
-        public String execute(String input, QueensFarmGame game) {
+        public String execute(String input, QueensFarm game) {
             game.endTurn();
             return null;
         }
@@ -141,7 +141,7 @@ public enum Commands {
     QUIT("quit") {
 
         @Override
-        public String execute(String input, QueensFarmGame game) {
+        public String execute(String input, QueensFarm game) {
             game.quit();
             return null;
         }
@@ -192,12 +192,12 @@ public enum Commands {
      * this input performed on the given playlist.
      *
      * @param input the line of input
-     * @param game the {@link QueensFarmGame} the command is executed on
+     * @param game the {@link QueensFarm} the command is executed on
      *
      * @return the result of the command execution, may contain error messages or be
      *         null if there is no output
      */
-    public static String executeCommand(final String input, final QueensFarmGame game) {
+    public static String executeCommand(final String input, final QueensFarm game) {
         for (final Commands command : Commands.values()) {
             final Matcher matcher = command.pattern.matcher(input);
             if (matcher.matches()) {
@@ -216,7 +216,7 @@ public enum Commands {
      * @return the result of the command execution, may contain error messages or be
      *         null if there is no output
      */
-    abstract String execute(String input, QueensFarmGame game);
+    abstract String execute(String input, QueensFarm game);
 
     private static String replaceAllInput(Commands command, String input) {
         return input.replaceAll(command.uiCommand.replace(ALL_INPUT, Shell.EMPTY_STRING), Shell.EMPTY_STRING);

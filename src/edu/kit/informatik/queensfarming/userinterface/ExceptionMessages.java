@@ -73,6 +73,26 @@ public enum ExceptionMessages {
      */
     HARVEST_ZERO_VEGETABLES("Error: It is useless to harvest 0 vegetables. To skip your turn, enter 'end turn'"),
     /**
+     * Error message if all tiles are already used and no player can buy land anymore
+     */
+    ALL_TILES_USED("Error: all Tiles are already used on the player's game board"),
+    /**
+     * Error messsage if the player tires to buy land that is not adjacent to his property
+     */
+    NOT_ADJACENT_LAND("Error: you are trying to buy a piece of land that is not adjacent to your property"),
+    /**
+     * Error message if the player has not enough gold to buy land
+     */
+    LAND_TO_EXPENSIVE("Error: you don't have enough gold to buy the tile of land."),
+    /**
+     * Error message if the player has not enough gold to buy the vegetable
+     */
+    VEGETABLE_TOO_EXPENSIVE("Error: you don't have enough gold to buy the vegetable."),
+    /**
+     * Error message if the tile of the board game is already bought
+     */
+    TILE_BOUGHT("Error: the field where you want to buy land is already bought"),
+    /**
      * Error message if the players tries to harvest more vegetables than grown on a tile
      */
     TOO_MUCH_HARVESTING("Error: You can't harvest more vegetables than grown on the tile.");

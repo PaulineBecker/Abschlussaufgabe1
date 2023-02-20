@@ -6,7 +6,6 @@ import edu.kit.informatik.queensfarming.entity.tiles.Garden;
 import edu.kit.informatik.queensfarming.entity.tiles.Tile;
 import edu.kit.informatik.queensfarming.entity.tiles.Field;
 import edu.kit.informatik.queensfarming.entity.vegetables.*;
-import edu.kit.informatik.queensfarming.game.BoardWrapper;
 import edu.kit.informatik.queensfarming.userinterface.Messages;
 import edu.kit.informatik.queensfarming.userinterface.Shell;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
@@ -41,7 +40,7 @@ public class Player {
     private static final String PIPE = "|";
     private int gold;
     private final String name;
-    private List<Tile> boardGame = new ArrayList<>();
+    private final List<Tile> boardGame = new ArrayList<>();
     private int grownVegetables = 0;
     private boolean isBarnSpoiled;
     private final StringBuilder stringBuilder = new StringBuilder();
@@ -57,7 +56,7 @@ public class Player {
         this.name = name;
         this.isBarnSpoiled = false;
         addStartTiles();
-        boardGame.get(INDEX_OF_BARN).setCountdown(BoardWrapper.COUNTDOWN_START);
+        boardGame.get(INDEX_OF_BARN).setCountdown(Tile.COUNTDOWN_START);
     }
 
     private void addStartTiles() {
@@ -395,7 +394,7 @@ public class Player {
 
     /**
      * checks if the give tile has an active countdown
-     * @param tile
+     * @param tile the current tile to check
      * @return the countdown value, if no countdown exists return "*"
      */
     private String checkActiveCountdown(Tile tile) {

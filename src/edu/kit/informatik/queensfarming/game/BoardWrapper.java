@@ -8,6 +8,9 @@ import edu.kit.informatik.queensfarming.userinterface.ExceptionMessages;
 import edu.kit.informatik.queensfarming.userinterface.Messages;
 import edu.kit.informatik.queensfarming.userinterface.Shell;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * this is the place where a player harvest and plant
  *
@@ -15,18 +18,18 @@ import edu.kit.informatik.queensfarming.userinterface.Shell;
  * @version 1.0
  */
 public class BoardWrapper {
-    /**
-     * the start of a countdown
-     */
-    public static final int COUNTDOWN_START = 0;
+
     private static final int AREA_IS_NOT_BOUGHT = -1;
     private static final int BARN_INDEX = 0;
     private static final String MUSHROOM = "mushroom";
     private static final String CARROT = "carrot";
     private static final String SALAD = "salad";
     private static final String TOMATO = "tomato";
+    private StringBuilder stringBuilder;
 
-    public BoardWrapper() {}
+    public BoardWrapper() {
+        this.stringBuilder = new StringBuilder();
+    }
 
     /**
      * harvest the given tile on the game board of the current player and adds them to the barn
@@ -132,7 +135,7 @@ public class BoardWrapper {
                 break;
             }
         }
-        currentPlayer.getBoardGame().get(indexToPlantOn).setCountdown(COUNTDOWN_START);
+        currentPlayer.getBoardGame().get(indexToPlantOn).setCountdown(Tile.COUNTDOWN_START);
         resetCountdown(currentPlayer);
         return indexToPlantOn;
     }
@@ -169,6 +172,52 @@ public class BoardWrapper {
         }
         return indexToPlantOn;
     }
+
+    /**
+     * calculates the winner if the game ended (quit or the gold to win is reached)
+     * @return the String to show the end of the game (different format if 1, 2 or more than 2 players won)
+     */
+
+    public String endGame(List<Player> playerList, int goldToWin, int numberOfPlayers) {
+        int maxGold = 0;
+        boolean existWinner = false;
+        List<String> winnerList = new ArrayList<>();
+        for (int i = 0; i < numberOfPlayers; i++) {
+            String playerName = playerList.get(i).getName();
+            int finalGold = playerList.get(i).getGold();
+            stringBuilder.append(Messages.GOLD_AFTER_GAME.format(i + 1, playerName, finalGold))
+                    .append(Shell.LINE_SEPARATOR);
+            if (finalGold >= goldToWin) {
+                existWinner = true;
+            }
+            if (finalGold > maxGold) {
+                winnerList.clear();
+                winnerList.add(playerName);
+                maxGold = finalGold;
+            } else if (finalGold == maxGold) {
+                winnerList.add(playerName);
+            }
+        } if (existWinner) {
+            if (winnerList.size() == 1) {
+                stringBuilder.append(Messages.PLAYER_WON.format(winnerList.get(0)));
+            }  else if (winnerList.size() == 2) {
+                stringBuilder.append(Messages.TWO_PLAYER_WON.format(winnerList.get(0), winnerList.get(1)));
+            }  else if (winnerList.size() > 2) {
+                String winners = Shell.EMPTY_STRING;
+                for (int i = 0; i < winnerList.size() - 1; i++) {
+                    winners += winnerList.get(i).concat(", ");
+                }
+                winners = winners.substring(0, winners.length() - 2);
+                stringBuilder.append(winners);
+                stringBuilder.append(Messages.MANY_PLAYER_WON.format(winnerList.get(winnerList.size() - 1)));
+            }
+        }
+
+        String winnerPrint = stringBuilder.toString();
+        stringBuilder.delete(0, stringBuilder.length());
+        return winnerPrint;
+    }
+
 
     private void checksIllegalBarnMove(int xCoordinate, int yCoordinate) {
         if (xCoordinate == BARN_INDEX && yCoordinate == BARN_INDEX) {
@@ -226,7 +275,7 @@ public class BoardWrapper {
      */
     public void startsCountdown(Player currentPlayer) {
         if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size() == 1) {
-            currentPlayer.getBoardGame().get(BARN_INDEX).setCountdown(BoardWrapper.COUNTDOWN_START);
+            currentPlayer.getBoardGame().get(BARN_INDEX).setCountdown(Tile.COUNTDOWN_START);
         }
     }
 }

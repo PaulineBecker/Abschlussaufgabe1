@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a17fd35d-4e83-47e6-bfca-6a1e879eb002" name="Changes" comment="fixed bugs: Countdown start und no countdown, 0 players, ausgabe am ende des Spiels">
+    <list default="true" id="a17fd35d-4e83-47e6-bfca-6a1e879eb002" name="Changes" comment="all countdown are working now">
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/Executable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/entity/tiles/Tile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/BoardWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/BoardWrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Commands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/ExceptionMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/ExceptionMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/userinterface/Shell.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +23,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -62,7 +69,7 @@
       <workItem from="1676374495433" duration="1890000" />
       <workItem from="1676387127046" duration="44468000" />
       <workItem from="1676475343188" duration="119236000" />
-      <workItem from="1676736827420" duration="70935000" />
+      <workItem from="1676736827420" duration="83684000" />
     </task>
     <task id="LOCAL-00001" summary="firstVersion">
       <created>1676475243431</created>
@@ -155,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676894441365</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="all countdown are working now">
+      <created>1676903052882</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1676903052882</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,22 +200,8 @@
     <MESSAGE value="first time beispielinteraktion läuft - game klasse noch verkleindern todo" />
     <MESSAGE value="game klasse verkleinert" />
     <MESSAGE value="fixed bugs: Countdown start und no countdown, 0 players, ausgabe am ende des Spiels" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs: Countdown start und no countdown, 0 players, ausgabe am ende des Spiels" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/edu/kit/informatik/queensfarming/game/QueensFarmGame.java</url>
-          <line>108</line>
-          <properties class="edu.kit.informatik.queensfarming.game.QueensFarmGame" method="quit">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="all countdown are working now" />
+    <option name="LAST_COMMIT_MESSAGE" value="all countdown are working now" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
