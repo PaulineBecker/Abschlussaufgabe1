@@ -36,7 +36,7 @@ public enum ExceptionMessages {
     /**
      * Error message if the player tries to plant on a negativ yCoordinate that is not part of the gameboard.
      */
-    NEGATIVE_COORDINATE("Error: The tile is not part of the game board."),
+    NEGATIVE_COORDINATE("Error: Negative number is here not allowed."),
     /**
      * Error message if the vegetable on the specific tile is not allowed to plant.
      */
@@ -92,6 +92,10 @@ public enum ExceptionMessages {
      * Error message if the tile of the board game is already bought
      */
     TILE_BOUGHT("Error: the field where you want to buy land is already bought"),
+    /**
+     * Error message if the player tries to sell vegetables that are not in the barn
+     */
+    VEGETABLES_SELL_IMPOSSIBLE("Error: The vegetables you want to sell are not in your barn."),
     /**
      * Error message if the players tries to harvest more vegetables than grown on a tile
      */

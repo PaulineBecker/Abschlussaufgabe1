@@ -10,10 +10,7 @@ import edu.kit.informatik.queensfarming.entity.tiles.LargeField;
 import edu.kit.informatik.queensfarming.entity.tiles.LargeForest;
 import edu.kit.informatik.queensfarming.entity.tiles.Forest;
 import edu.kit.informatik.queensfarming.entity.tiles.Tile;
-import edu.kit.informatik.queensfarming.entity.vegetables.Mushroom;
-import edu.kit.informatik.queensfarming.entity.vegetables.Tomato;
-import edu.kit.informatik.queensfarming.entity.vegetables.Carrot;
-import edu.kit.informatik.queensfarming.entity.vegetables.Salad;
+import edu.kit.informatik.queensfarming.entity.vegetables.*;
 import edu.kit.informatik.queensfarming.exception.GameException;
 import edu.kit.informatik.queensfarming.userinterface.ExceptionMessages;
 import edu.kit.informatik.queensfarming.userinterface.GameState;
@@ -171,7 +168,7 @@ public class QueensFarm implements QueensFarmGame {
             }
         }
         movesInTurn++;
-        boardWrapper.startsCountdown(currentPlayer);
+        boardWrapper.startsCountdown(currentPlayer, 1);
         return Messages.BOUGHT_OBJECT.format(veggie, price).concat(Shell.LINE_SEPARATOR);
     }
 
@@ -193,7 +190,8 @@ public class QueensFarm implements QueensFarmGame {
         }
         Tile boughtTile = unassignedTiles.get(0);
         for (Tile tile : currentPlayer.getBoardGame()) {
-            if (tile.getCoordinates().compareTo(new Coordinates(xCoordinate, yCoordinate)) == 1) {
+            if (tile.getCoordinates().compareTo(new Coordinates(xCoordinate, yCoordinate)) == 1
+            && tile.getCoordinates().getyCoordinate() - yCoordinate != 1) { //check ob illegal bauen von oben nach unten
                 buyable = true;
             }
         }
@@ -258,17 +256,20 @@ public class QueensFarm implements QueensFarmGame {
         int goldBeforeMove = currentPlayer.getGold();
         int soldVeggies = 0;
         if (input.length == 0) {
-            return Messages.SELL_VEGETABLES.format(0, VegetablesOccurence.VEGETABLES.format(), 0);
+            movesInTurn++;
+            return Messages.SELL_VEGETABLES.format(0, VegetablesOccurence.VEGETABLES.format(), 0)
+                    .concat(Shell.LINE_SEPARATOR);
         } else if (input[0].equals(Commands.ALL_VEGETABLES)) {
-            for (int i = currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size() - 1; i >= 0; i--) {
+            for (int i = currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size()- 1; i >= 0; i--) {
                 sellOneVegetable(i);
                 soldVeggies++;
             }
         } else {
-            for (String s : input) {
+            currentPlayer.checkVegetablesInBarn(input);
+            for (String vegetable : input) {
                 for (int j = currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size() - 1; j >= 0; j--) {
                     if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().
-                            get(j).getName().equals(s)) {
+                            get(j).getName().equals(vegetable)) {
                         sellOneVegetable(j);
                         soldVeggies++;
                         break;
@@ -305,7 +306,7 @@ public class QueensFarm implements QueensFarmGame {
      * @return the String to show the end of the game (different format if 1, 2 or more than 2 players won)
      */
     public String endGame() {
-        return boardWrapper.endGame(playerList, goldToWin, numberOfPlayers);
+        return boardWrapper.endGame(playerList, numberOfPlayers, goldToWin);
     }
 
     /**

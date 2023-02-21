@@ -6,6 +6,8 @@ import edu.kit.informatik.queensfarming.entity.tiles.Garden;
 import edu.kit.informatik.queensfarming.entity.tiles.Tile;
 import edu.kit.informatik.queensfarming.entity.tiles.Field;
 import edu.kit.informatik.queensfarming.entity.vegetables.*;
+import edu.kit.informatik.queensfarming.exception.GameException;
+import edu.kit.informatik.queensfarming.userinterface.ExceptionMessages;
 import edu.kit.informatik.queensfarming.userinterface.Messages;
 import edu.kit.informatik.queensfarming.userinterface.Shell;
 import edu.kit.informatik.queensfarming.utility.Coordinates;
@@ -419,5 +421,32 @@ public class Player {
      */
     public void setBarnSpoiled(boolean barnSpoiled) {
         isBarnSpoiled = barnSpoiled;
+    }
+
+    /**
+     * check if the requested vegetables are also available in the barn. If the demanded vegetable is found in barn
+     * add a new true value to the boolean list. If the size of the booleans list is equals the amount of
+     * requested vegetables return true
+     * @param input the given input of a player
+     * @return true if the requested vegetables are in the barn if not, return false
+     */
+    public void checkVegetablesInBarn(String[] input) {
+        List<String> copiedBarn = new ArrayList<>();
+        List<Boolean> areVeggiesInBarn = new ArrayList<>();
+        for (int i = 0; i < boardGame.get(INDEX_OF_BARN).getVegetablesList().size(); i++) {
+            copiedBarn.add(boardGame.get(INDEX_OF_BARN).getVegetablesList().get(i).getName());
+        }
+        for (String vegetable : input) {
+            for (int j = copiedBarn.size() -1; j >= 0; j--) {
+                if (copiedBarn.get(j).equals(vegetable)) {
+                    copiedBarn.remove(j);
+                    areVeggiesInBarn.add(true);
+                    break;
+                }
+            }
+        }
+        if (areVeggiesInBarn.size() != input.length) {
+            throw new GameException(ExceptionMessages.VEGETABLES_SELL_IMPOSSIBLE.format());
+        }
     }
 }

@@ -76,6 +76,7 @@ public enum Commands {
                 harvestArguments[i] = GameInitialiser.checkNumeric(inputList[i]);
             }
             Commands.checkNumberOnGameBoard(harvestArguments[1]);
+            Commands.checkNumberOnGameBoard(harvestArguments[2]);
             return game.harvest(harvestArguments);
         }
     },
@@ -95,6 +96,16 @@ public enum Commands {
             for (String vegetables : vegetablesList) {
                 Commands.checksVegetableMatch(vegetables);
             }
+            return game.sellVegetables(vegetablesList);
+        }
+    },
+    /**
+     * sell zero vegetables
+     */
+    SELL_NOTHING("sell") {
+        @Override
+        public String execute(String input, QueensFarm game) {
+            String[] vegetablesList = new String[0];
             return game.sellVegetables(vegetablesList);
         }
     },

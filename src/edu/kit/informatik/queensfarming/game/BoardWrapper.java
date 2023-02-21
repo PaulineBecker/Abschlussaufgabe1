@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * this is the place where a player harvest and plant
+ * this is a wrapper class for the queens farm game where a player harvest and plant
+ * and the result of the game will be calculated here
  *
  * @author uyxib
  * @version 1.0
@@ -21,12 +22,16 @@ public class BoardWrapper {
 
     private static final int AREA_IS_NOT_BOUGHT = -1;
     private static final int BARN_INDEX = 0;
+    private static final String DIVIDE_PLAYERS = ", ";
     private static final String MUSHROOM = "mushroom";
     private static final String CARROT = "carrot";
     private static final String SALAD = "salad";
     private static final String TOMATO = "tomato";
     private StringBuilder stringBuilder;
 
+    /**
+     * instantiates a new Board Wrapper object
+     */
     public BoardWrapper() {
         this.stringBuilder = new StringBuilder();
     }
@@ -64,7 +69,7 @@ public class BoardWrapper {
             }
             currentTile.getVegetablesList().remove(numberOfVeggies - i);
         }
-        startsCountdown(currentPlayer);
+        startsCountdown(currentPlayer, numberOfVeggies);
         if (numberOfVeggies == 1) {
             return Messages.HARVESTED_LAND.format(numberOfVeggies, veggieName).concat(Shell.LINE_SEPARATOR);
         }
@@ -175,21 +180,21 @@ public class BoardWrapper {
 
     /**
      * calculates the winner if the game ended (quit or the gold to win is reached)
+     * @param playerList the list of players in the Queens Farm game
+     * @param numberOfPlayers the number of players in the game
+     * @param goldToWin the amount of gold a player needs to win the game
      * @return the String to show the end of the game (different format if 1, 2 or more than 2 players won)
      */
 
-    public String endGame(List<Player> playerList, int goldToWin, int numberOfPlayers) {
+    public String endGame(List<Player> playerList, int numberOfPlayers, int goldToWin) {
         int maxGold = 0;
-        boolean existWinner = false;
+        List<String> playerReachedGoldToWin = new ArrayList<>();
         List<String> winnerList = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             String playerName = playerList.get(i).getName();
             int finalGold = playerList.get(i).getGold();
             stringBuilder.append(Messages.GOLD_AFTER_GAME.format(i + 1, playerName, finalGold))
                     .append(Shell.LINE_SEPARATOR);
-            if (finalGold >= goldToWin) {
-                existWinner = true;
-            }
             if (finalGold > maxGold) {
                 winnerList.clear();
                 winnerList.add(playerName);
@@ -197,28 +202,44 @@ public class BoardWrapper {
             } else if (finalGold == maxGold) {
                 winnerList.add(playerName);
             }
-        } if (existWinner) {
-            if (winnerList.size() == 1) {
-                stringBuilder.append(Messages.PLAYER_WON.format(winnerList.get(0)));
-            }  else if (winnerList.size() == 2) {
-                stringBuilder.append(Messages.TWO_PLAYER_WON.format(winnerList.get(0), winnerList.get(1)));
-            }  else if (winnerList.size() > 2) {
-                String winners = Shell.EMPTY_STRING;
-                for (int i = 0; i < winnerList.size() - 1; i++) {
-                    winners += winnerList.get(i).concat(", ");
-                }
-                winners = winners.substring(0, winners.length() - 2);
-                stringBuilder.append(winners);
-                stringBuilder.append(Messages.MANY_PLAYER_WON.format(winnerList.get(winnerList.size() - 1)));
+            if (finalGold >= goldToWin) {
+                playerReachedGoldToWin.add(playerName);
             }
         }
-
+        if (playerReachedGoldToWin.size() > 0) {
+            stringBuilder.append(createsWinnerOutput(playerReachedGoldToWin));
+        } else {
+            stringBuilder.append(createsWinnerOutput(winnerList));
+        }
         String winnerPrint = stringBuilder.toString();
         stringBuilder.delete(0, stringBuilder.length());
         return winnerPrint;
     }
 
+    /**
+     * creates the last output line at the end of a queens farm game
+     * @param winnerList the list with all players who have won the game
+     * @return the formatted string with the names of all players who have won the game
+     */
+    private String createsWinnerOutput(List<String> winnerList) {
+        if (winnerList.size() == 1) {
+             return Messages.PLAYER_WON.format(winnerList.get(0));
+        } else if (winnerList.size() == 2) {
+            return Messages.TWO_PLAYER_WON.format(winnerList.get(0), winnerList.get(1));
+        }
+        String winners = Shell.EMPTY_STRING;
+        for (int i = 0; i < winnerList.size() - 1; i++) {
+            winners += winnerList.get(i).concat(DIVIDE_PLAYERS);
+        }
+        winners = winners.substring(0, winners.length() - 2);
+        return winners.concat(Messages.MANY_PLAYER_WON.format(winnerList.get(winnerList.size() - 1)));
+    }
 
+    /**
+     * checks if a player tries to plant or harvest on the barn tile. The barn tile is only for storing the vegetables.
+     * @param xCoordinate the x-Coordinate of the tile where the player wants to do an action
+     * @param yCoordinate the y-Coordinate of the tile where the player wants to do an action
+     */
     private void checksIllegalBarnMove(int xCoordinate, int yCoordinate) {
         if (xCoordinate == BARN_INDEX && yCoordinate == BARN_INDEX) {
             throw new GameException(ExceptionMessages.ILLEGAL_PLANT_ON_BARN.format());
@@ -263,6 +284,7 @@ public class BoardWrapper {
 
     /**
      * resets the countdown of the current player if the barn of the player is empty
+     * @param currentPlayer the player whos turn it is currently
      */
     public void resetCountdown(Player currentPlayer) {
         if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().isEmpty()) {
@@ -272,9 +294,10 @@ public class BoardWrapper {
 
     /**
      * starts the countdown of the current player if the barn was empty and is null not empty anymore
+     * @param currentPlayer the player whos turn it is currently
      */
-    public void startsCountdown(Player currentPlayer) {
-        if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size() == 1) {
+    public void startsCountdown(Player currentPlayer, int numberOfNewVegetables) {
+        if (currentPlayer.getBoardGame().get(BARN_INDEX).getVegetablesList().size() == numberOfNewVegetables) {
             currentPlayer.getBoardGame().get(BARN_INDEX).setCountdown(Tile.COUNTDOWN_START);
         }
     }
