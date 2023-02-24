@@ -176,4 +176,10 @@ public class GameInitialiser {
     public List<String> getPlayerNames() {
         return playerNames;
     }
+
+    public String enterPlayerNames(String input) {
+        if (input.matches("[A-Za-z]+")) {
+            return input;
+        } else throw new GameException(ExceptionMessages.NAME_INVALID.format());
+    }
 }

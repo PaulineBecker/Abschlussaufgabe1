@@ -21,6 +21,7 @@ public enum Commands {
     BUY_VEGETABLE("^buy vegetable " + Commands.ALL_INPUT) {
         @Override
         public String execute(String input, QueensFarm game) {
+            Commands.checkSpaceAtEnd(input);
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             Commands.checkOnlyOneVegetable(inputList);
             Commands.checksVegetableMatch(inputList[0]);
@@ -33,6 +34,7 @@ public enum Commands {
     BUY_LAND("^buy land " + Commands.ALL_INPUT) {
         @Override
         public String execute(String input, QueensFarm game) {
+            Commands.checkSpaceAtEnd(input);
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             final List<Integer> coordinates = new ArrayList<>();
             for (String inputNumber : inputList) {
@@ -51,6 +53,7 @@ public enum Commands {
     PLANT("^plant " + Commands.ALL_INPUT) {
         @Override
         public String execute(String input, QueensFarm game) {
+            Commands.checkSpaceAtEnd(input);
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             Commands.checkArgumentsLength(inputList);
             final List<Integer> coordinates = new ArrayList<>();
@@ -69,6 +72,7 @@ public enum Commands {
     HARVEST("^harvest " + Commands.ALL_INPUT) {
         @Override
         public String execute(String input, QueensFarm game) {
+            Commands.checkSpaceAtEnd(input);
             String[] inputList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             Commands.checkArgumentsLength(inputList);
             final int[] harvestArguments = new int[3];
@@ -86,6 +90,7 @@ public enum Commands {
     SELL("^sell " + Commands.ALL_INPUT) {
         @Override
         public String execute(String input, QueensFarm game) {
+            Commands.checkSpaceAtEnd(input);
             String[] vegetablesList = Commands.getSplittedString(Commands.replaceAllInput(this, input));
             if (String.valueOf(input.charAt(input.length() - 1)).equals(Shell.COMMAND_SEPERATOR)) {
                 throw new GameException(COMMAND_NOT_FOUND);
@@ -260,6 +265,12 @@ public enum Commands {
     private static void checkArgumentsLength(String[] inputList) {
         if (inputList.length != 3) {
             throw new GameException(ExceptionMessages.THREE_EXPECTED_ARGUMENTS.format());
+        }
+    }
+
+    private static void checkSpaceAtEnd(String input) {
+        if (input.endsWith(Shell.COMMAND_SEPERATOR)) {
+            throw new GameException(ExceptionMessages.ILLEGAL_SPACE.format());
         }
     }
 }

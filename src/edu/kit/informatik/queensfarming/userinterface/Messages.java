@@ -9,17 +9,12 @@ package edu.kit.informatik.queensfarming.userinterface;
 public enum Messages {
 
     /**
-     * The message printed at the beginning to ask how many players are playing the game
-     */
-    NUMBER_OF_PLAYERS("How many players?"),
-
-    /**
      * The message printed to find out the names of the players
      * <p>
      * Expects one format argument:
      * The name of the player (string).
      */
-    NAME_OF_PLAYER("Enter the name of Player %s"),
+    NAME_OF_PLAYER("Enter the name of player %s:"),
 
     /**
      * The message printed if a runa gets an ability

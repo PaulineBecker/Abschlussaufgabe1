@@ -14,6 +14,14 @@ public enum ExceptionMessages {
      */
     NUMBER_OF_PLAYERS_INVALID("Error: Please enter the right number of players"),
     /**
+     * Error message in case of an illegal name
+     */
+    NAME_INVALID("Error: Please enter an valid name"),
+    /**
+     * Error message in case of a player tries to add a space at the end of his / her command
+     */
+    ILLEGAL_SPACE("Error: Adding a space at the end of your command is illegal."),
+    /**
      * Error message in case of the amount of gold is not a valid number.
      */
     GOLDWIN_INVALID("Error: Please enter the right number of gold that needs a player to win"),

@@ -18,11 +18,6 @@ public class Shell {
     public static final String LINE_SEPARATOR = System.lineSeparator();
 
     /**
-     * Error message in case of an illegal number of players.
-     */
-    public static final String ERROR_ILLEGAL_NUMBER_OF_PLAYERS = "number of players are not supported!";
-
-    /**
      * The separator between a command and the parameters.
      */
     public static final String COMMAND_SEPERATOR = " ";
@@ -32,17 +27,19 @@ public class Shell {
      */
     public static final String EMPTY_STRING = "";
     private static final int MAX_MOVES = 2;
-    private static final String PIXEL_ART = "                           _.-^-._    .--." + LINE_SEPARATOR
-            + "                        .-'   _   '-. |__|" + LINE_SEPARATOR
-            + "                       /     |_|     \\|  |" + LINE_SEPARATOR
-            + "                      /               \\  |" + LINE_SEPARATOR
-            + "                     /|     _____     |\\ |" + LINE_SEPARATOR
-            + "                      |    |==|==|    |  |" + LINE_SEPARATOR
-            + "  |---|---|---|---|---|    |--|--|    |  |" + LINE_SEPARATOR
-            + "  |---|---|---|---|---|    |==|==|    |  |" + LINE_SEPARATOR
+    private static final String QUIT_GAME = "quit";
+    private static final String PIXEL_ART = "                           _.-^-._    .--.    " + LINE_SEPARATOR
+            + "                        .-'   _   '-. |__|    " + LINE_SEPARATOR
+            + "                       /     |_|     \\|  |    " + LINE_SEPARATOR
+            + "                      /               \\  |    " + LINE_SEPARATOR
+            + "                     /|     _____     |\\ |    " + LINE_SEPARATOR
+            + "                      |    |==|==|    |  |    " + LINE_SEPARATOR
+            + "  |---|---|---|---|---|    |--|--|    |  |    " + LINE_SEPARATOR
+            + "  |---|---|---|---|---|    |==|==|    |  |    " + LINE_SEPARATOR
             + "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + LINE_SEPARATOR
             + "^^^^^^^^^^^^^^^ QUEENS FARMING ^^^^^^^^^^^^^^^" + LINE_SEPARATOR
-            + "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + LINE_SEPARATOR;
+            + "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + LINE_SEPARATOR
+            + "How many players?";
     private boolean isReading = true;
     private boolean rightPlayerInput = true;
     private boolean namesCheck = true;
@@ -68,7 +65,6 @@ public class Shell {
     public void startQueensFarmGame() {
 
         System.out.println(PIXEL_ART);
-        System.out.println(Messages.NUMBER_OF_PLAYERS.format());
         instantiatesGame();
         if (quitGame) {
             return;
@@ -98,12 +94,6 @@ public class Shell {
         System.out.println(game.endGame());
     }
 
-    private String enterPlayerNames(String input) {
-        if (input.matches("[A-Za-z]+")) {
-            return input;
-        } else throw new GameException("Please enter an valid name");
-    }
-
     private void instantiatesGame() {
         int countPlayers = 1;
 
@@ -112,7 +102,7 @@ public class Shell {
         while (namesCheck) {
             String input = inputScanner.nextLine();
             try {
-                if (input.matches("quit")) {
+                if (input.matches(QUIT_GAME)) {
                     quitGame = true;
                     return;
                 }
@@ -129,7 +119,7 @@ public class Shell {
             }
             String nameInput = inputScanner.nextLine();
             try {
-                gameInitialiser.getPlayerNames().add(enterPlayerNames(nameInput));
+                gameInitialiser.getPlayerNames().add(gameInitialiser.enterPlayerNames(nameInput));
                 rightPlayerInput = true;
                 countPlayers++;
             } catch (final GameException exception) {
@@ -142,7 +132,7 @@ public class Shell {
         while (isReading) {
             String input = inputScanner.nextLine();
             try {
-                if (input.matches("quit")) {
+                if (input.matches(QUIT_GAME)) {
                     quitGame = true;
                     return;
                 }
