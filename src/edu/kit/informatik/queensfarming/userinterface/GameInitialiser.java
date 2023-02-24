@@ -127,7 +127,7 @@ public class GameInitialiser {
 
     /**
      * sets the amount of gold to win a game
-     * @param goldToWin
+     * @param goldToWin the amount of gold that is neccesarry to win the game
      */
 
     public void setGoldToWin(int goldToWin) {

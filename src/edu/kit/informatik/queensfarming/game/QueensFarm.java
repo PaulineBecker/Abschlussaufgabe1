@@ -40,6 +40,7 @@ public class QueensFarm implements QueensFarmGame {
     private static final int START_PLAYER = 0;
     private static final int BARN_INDEX = 0;
     private static final int INDEX_OF_NEXT_PLAYER = 1;
+    private static final int DISTANCE = 1;
     private static final String MUSHROOM = "mushroom";
     private static final String CARROT = "carrot";
     private static final String SALAD = "salad";
@@ -177,7 +178,7 @@ public class QueensFarm implements QueensFarmGame {
      * calculates the prize of the land
      * the players gets the first tile of the shuffled cards and has to pay the prize for gold
      * @throws GameException if player doesn't have enough gold, if the place on the game board is already used or
-     * if there are no cards to buy left
+     * if there are no cards to buy left, if the player tries to build from top to botton
      * @param coordinates input from player that matches the buy command
      * @return the prize of the land and which tile the player has bought
      */
@@ -190,8 +191,8 @@ public class QueensFarm implements QueensFarmGame {
         }
         Tile boughtTile = unassignedTiles.get(0);
         for (Tile tile : currentPlayer.getBoardGame()) {
-            if (tile.getCoordinates().compareTo(new Coordinates(xCoordinate, yCoordinate)) == 1
-            && tile.getCoordinates().getyCoordinate() - yCoordinate != 1) { //check ob illegal bauen von oben nach unten
+            if (tile.getCoordinates().compareTo(new Coordinates(xCoordinate, yCoordinate)) == DISTANCE
+            && tile.getCoordinates().getyCoordinate() - yCoordinate != DISTANCE) {
                 buyable = true;
             }
         }

@@ -5,7 +5,12 @@ import edu.kit.informatik.queensfarming.entity.tiles.Barn;
 import edu.kit.informatik.queensfarming.entity.tiles.Garden;
 import edu.kit.informatik.queensfarming.entity.tiles.Tile;
 import edu.kit.informatik.queensfarming.entity.tiles.Field;
-import edu.kit.informatik.queensfarming.entity.vegetables.*;
+import edu.kit.informatik.queensfarming.entity.vegetables.Mushroom;
+import edu.kit.informatik.queensfarming.entity.vegetables.Tomato;
+import edu.kit.informatik.queensfarming.entity.vegetables.Carrot;
+import edu.kit.informatik.queensfarming.entity.vegetables.Salad;
+import edu.kit.informatik.queensfarming.entity.vegetables.Vegetables;
+import edu.kit.informatik.queensfarming.entity.vegetables.Vegetable;
 import edu.kit.informatik.queensfarming.exception.GameException;
 import edu.kit.informatik.queensfarming.userinterface.ExceptionMessages;
 import edu.kit.informatik.queensfarming.userinterface.Messages;
@@ -33,6 +38,10 @@ public class Player {
      */
 
     public static final int VEGETABLE_SPOIL = 6;
+    private static final int ABBREVIATION_LENGTH_ONE = 1;
+    private static final int ABBREVIATION_LENGTH_TWO = 2;
+    private static final int ABBREVIATION_LENGTH_THREE = 3;
+    private static final int LENGTH_OF_TILE = 5;
     private static final String CREATE_FLUSH_RIGHT1 = "%-";
     private static final String CREATE_FLUSH_RIGHT2 = "s%";
     private static final String CREATE_FLUSH_RIGHT3 = "d";
@@ -140,7 +149,7 @@ public class Player {
             stringBuilder.append(getLeftBoardSide(leftBoardCoordinate, y));
             for (int x = leftBoardCoordinate; x <= rightBoardCoordinate; x++) {
                 if (x == 0 && y == 0) {
-                    stringBuilder.append(Messages.SPACE.format().repeat(5)).append(PIPE);
+                    stringBuilder.append(Messages.SPACE.format().repeat(LENGTH_OF_TILE)).append(PIPE);
                 } else if (getCurrentTile(x, y) != null) {
                     stringBuilder.append(firstTileLine(getCurrentTile(x, y))).append(PIPE);
                 } else {
@@ -169,7 +178,7 @@ public class Player {
             stringBuilder.append(Shell.LINE_SEPARATOR).append(getLeftBoardSide(leftBoardCoordinate, y));
             for (int j = leftBoardCoordinate; j <= rightBoardCoordinate; j++) {
                 if (j == 0 && y == 0) {
-                    stringBuilder.append(Messages.SPACE.format().repeat(5)).append(PIPE);
+                    stringBuilder.append(Messages.SPACE.format().repeat(LENGTH_OF_TILE)).append(PIPE);
                 } else if (getCurrentTile(j, y) != null) {
                     stringBuilder.append(thirdTileLine(getCurrentTile(j, y))).append(PIPE);
                 } else {
@@ -297,13 +306,13 @@ public class Player {
 
     private String firstTileLine(Tile tile) {
         int lengthOfAbbreviation = tile.getAbbreviation().length();
-        if (lengthOfAbbreviation == 1) {
+        if (lengthOfAbbreviation == ABBREVIATION_LENGTH_ONE) {
             stringBuilder.append(Shell.COMMAND_SEPERATOR).append(tile.getAbbreviation())
                     .append(Shell.COMMAND_SEPERATOR).append(checkActiveCountdown(tile)).append(Shell.COMMAND_SEPERATOR);
         } else {
-            if (lengthOfAbbreviation == 3) {
+            if (lengthOfAbbreviation == ABBREVIATION_LENGTH_THREE) {
                 stringBuilder.append(tile.getAbbreviation());
-            } else if (lengthOfAbbreviation == 2) {
+            } else if (lengthOfAbbreviation == ABBREVIATION_LENGTH_TWO) {
                 stringBuilder.append(Shell.COMMAND_SEPERATOR).append(tile.getAbbreviation());
             }
             stringBuilder.append(Shell.COMMAND_SEPERATOR).append(checkActiveCountdown(tile));
@@ -321,7 +330,7 @@ public class Player {
      */
     private String secondTileLine(Tile tile) {
         if (tile.getVegetablesList().isEmpty()) {
-            stringBuilder.append(Messages.SPACE.format().repeat(5));
+            stringBuilder.append(Messages.SPACE.format().repeat(LENGTH_OF_TILE));
         }
         else {
             stringBuilder.append(Messages.SPACE.format().repeat(2))
@@ -385,7 +394,7 @@ public class Player {
      */
     private String notBoardTileToString(int xCoordinate, int yCoordinate) {
         if (getCurrentTile(xCoordinate + 1, yCoordinate) != null) {
-            stringBuilder.append(Messages.SPACE.format().repeat(5)).append(PIPE);
+            stringBuilder.append(Messages.SPACE.format().repeat(LENGTH_OF_TILE)).append(PIPE);
         } else {
             stringBuilder.append(Messages.SPACE.format().repeat(6));
         }
